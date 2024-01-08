@@ -4,6 +4,15 @@ module.exports = {
   theme: {
     colors: {
       
+      neutral:{
+         'black': '#263238',
+         'dark-grey': '#4D4D4D',
+         'gery': '#717171',
+         'large-grey': '#89939E',
+         'grey-blue': '#ABBED1',
+         'silver': '#F5F7FA',
+         'white': '#FFFFFF',
+      },
       shades: {
         '100': '#43A046',
         '200': '#388E3B',
@@ -12,12 +21,20 @@ module.exports = {
         '500': '#103E13',
       },
       tint: {
-        '100': '#66BB69'
+        '100': '#66BB69',
+        '200': '#81C784',
+        '300': '#A5D6A7',
+        '400': '#C8E6C9',
+        '500': '#E8F5E9',
+      },
+      action:{
+        'warning': '#FBC02D',
+        'error': '#E53835',
+        'success': '#2E7D31',
       }
      
       
     },
-    
     fontFamily: {
       sans: ['Graphik', 'sans-serif'],
       serif: ['monospace'],
