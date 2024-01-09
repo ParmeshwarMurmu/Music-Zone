@@ -1,15 +1,12 @@
 import React from 'react';
-
-// import './App.css';
 import { Main } from './Routes/Main';
 import { SignUp } from './Routes/SignUp';
-// import '../src/index.css'
-// bg-colorShades-shade2
+import { AllRoutes } from './Routes/AllRoutes';
+
 function App() {
   return (
-    <div className='bg-action-success font-serif'>
-     {/* <Main /> */}
-     <SignUp />
+    <div className='bg-shades-200'>
+     <Main />
     </div>
   );
 }
