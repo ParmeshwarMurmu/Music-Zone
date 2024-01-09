@@ -4,6 +4,7 @@ import { ImSearch } from "react-icons/im";
 import { MdLibraryMusic } from "react-icons/md";
 import { IoMdAdd } from "react-icons/io";
 import { Link } from 'react-router-dom';
+import { CreatePlaylist } from './CreatePlaylist';
 
 
 export const SideBar = () => {
@@ -45,7 +46,7 @@ export const SideBar = () => {
 
       <div className='flex justify-between w-full'>
         <div><Link to={'/'}>Your Library </Link></div>
-        <div><IoMdAdd fontSize={'20px'} color='' /></div>
+        <div className=''><CreatePlaylist /></div>
       </div>
       </div>
 
