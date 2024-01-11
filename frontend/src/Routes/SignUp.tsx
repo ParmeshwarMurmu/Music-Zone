@@ -4,6 +4,8 @@ import React, { useEffect } from 'react'
 export const SignUp = () => {
 
     return (
-        <div>SignUp</div>
+        <div>
+            Sign up to start listening
+        </div>
     )
 }
