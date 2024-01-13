@@ -7,6 +7,7 @@ export const Navbar = () => {
     <div className='pr-4 mb-2'>
       <Link to={'/login'} className='mr-4'>Login</Link>
       <Link to={'/signUp'}>Sign Up</Link>
+      <Link to={'/uploadMusic'}>Upload Music</Link>
     </div>
   )
 }
