@@ -3,12 +3,16 @@ const { connection } = require('./Config/db');
 require('dotenv').config()
 const cors = require('cors');
 const { UploadMusicRouter } = require('./Routes/UploadMusicRouter');
+const { MusicRouter } = require('./Routes/MusicRouter');
+const path = require('path');
+
 
 const app = express();
 app.use(express.json())
 app.use(cors())
 
 app.use('/admin', UploadMusicRouter)
+app.use('/home', express.static(path.join(__dirname, 'uploads/music')), MusicRouter)
 
 app.listen(process.env.PORT, async()=>{
     try {
