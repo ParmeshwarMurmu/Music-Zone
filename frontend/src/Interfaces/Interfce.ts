@@ -2,6 +2,7 @@
 import { ObjectId } from "mongodb";
 
 export interface allMusic {
+    filename: string,
     title: string,
     artist: string,
     album: string,

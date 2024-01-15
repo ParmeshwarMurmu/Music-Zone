@@ -45,9 +45,10 @@ export const Home = () => {
             <h3>{music.title}</h3>
             <p>Artist: {music.artist}</p>
             <p>Album: {music.album}</p>
-            {/* <img src={`${APP_URL}/home/music/cover/${music.picture}`} alt="Cover" /> */}
+            <img src={`data:image/jpeg;base64, ${music.picture}`} alt="Cover" />
+            {/* <img src={`${APP_URL}/home/music/cover/${music.filename}`} alt="Cover" /> */}
             <audio controls>
-              <source src={`${APP_URL}/home/music/${music.musicId}`} type="audio/mpeg" />
+              <source src={`${APP_URL}/home/music/${music.filename}`} type="audio/mpeg" />
               Your browser does not support the audio tag.
             </audio>
           </div>

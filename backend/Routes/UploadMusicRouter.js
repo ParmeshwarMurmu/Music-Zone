@@ -66,7 +66,15 @@ UploadMusicRouter.post('/uploadMusic', upload.single('music'), async (req, res) 
         const { filename, path } = req.file;
 
         const metadata = await mm.parseFile(path);
-        const { title, artist, album, picture } = metadata.common;
+        let { title, artist, album, picture } = metadata.common;
+        console.log(artist)
+        console.log(album)
+        title = title.split('-')[0]
+        album = album.split('-')[0]
+        artist = artist.split('-')[0]
+        console.log(title)
+        console.log(artist)
+        console.log(album)
         const releaseYear = metadata.common.year; // Extract the release year
         const durationInSeconds = metadata.format.duration;
         const durationInMinutes = Math.floor(durationInSeconds / 60);
@@ -78,7 +86,7 @@ UploadMusicRouter.post('/uploadMusic', upload.single('music'), async (req, res) 
 
         // Perform any additional processing or save the file details to your database
         // ...
-        const newMusic = MusicModel({ title, artist, album, picture: coverImage, releaseYear, durationInMinutes, musicId: musicId })
+        const newMusic = MusicModel({filename, title, artist, album, picture: coverImage, releaseYear, durationInMinutes, musicId: musicId })
         await newMusic.save()
         res.status(200).send({
             message: 'File uploaded successfully',

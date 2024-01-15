@@ -33,20 +33,41 @@ MusicRouter.get('/allMusic', async (req, res) => {
 
 
 // Serve music files /:musicId/:title
-MusicRouter.get('/music/:musicId', (req, res) => {
-    // const filename = req.params.title;
-    const musicId = req.params.musicId
-    console.log("musicId", musicId);
-    const filePath = path.join(__dirname, '../uploads/music', `${musicId}`);
-    console.log(filePath);
+MusicRouter.get('/music/:filename', (req, res) => {
+    const filename = req.params.filename;
+    // const musicId = req.params.musicId
+    // console.log(filename);
+    // console.log("musicId", musicId);
+    const filePath = path.join(__dirname, '../uploads/music', `${filename}`);
+    // console.log(filePath);
     res.sendFile(filePath);
 });
 
 // Serve cover images
-MusicRouter.get('/cover/:filename', (req, res) => {
-    const filename = req.params.filename;
-    // const filePath = path.join(__dirname, '../uploads/covers', filename);
-    res.sendFile({"loading": "msg"});
+MusicRouter.get('/music/cover/:filename', async(req, res) => {
+
+    // const filename = req.params.filename;
+    // // const { filename, path } = req.file;
+    // console.log("cover");
+    // console.log(filename);
+    // // const metadata = await mm.parseFile(path);
+    // const filePath = path.join(__dirname, '../uploads/music', filename);
+    // const metadata = await mm.parseFile(filePath);
+    // const { picture } = metadata.common;
+    // console.log(picture);
+    // res.sendFile(picture.toString());
+
+    try {
+        const filename = req.params.filename;
+        const filePath = path.join(__dirname, '../uploads/music', filename);
+        const metadata = await mm.parseFile(filePath);
+        const { picture } = metadata.common;
+
+        // Send the image data as a response
+        res.send({ coverImage: picture[0].data.toString('base64') });
+    } catch (error) {
+        res.status(500).send({ "err": error.message });
+    }
 });
 
 

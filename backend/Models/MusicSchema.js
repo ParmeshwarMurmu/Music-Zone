@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
 
 const musicSchema = mongoose.Schema({
+    filename: String,
     title: String,
     artist: String,
     album: String,
