@@ -4,6 +4,7 @@ import { Home } from './Home'
 import { Login } from './Login'
 import { SignUp } from './SignUp'
 import { UplodMusci } from '../Admin/UplodMusci'
+import { SingleMusicPage } from './SingleMusicPage'
 
 export const AllRoutes = () => {
   return (
@@ -13,6 +14,7 @@ export const AllRoutes = () => {
         <Route path='/login' element={<Login />} />
         <Route path='/signUp' element={<SignUp />} />
         <Route path='/uploadMusic' element={<UplodMusci />} />
+        <Route path='/singleMusic' element={<SingleMusicPage />} />
       </Routes>
     </div>
   )
