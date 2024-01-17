@@ -7,9 +7,12 @@ import axios from 'axios'
 import { APP_URL } from '../Endpoints/Endpoints'
 import { allMusic } from '../Interfaces/Interfce'
 import { appContent } from '../ContextApi/ContextApi'
-
+import { FaPlayCircle } from "react-icons/fa";
+import { useDisclosure } from '@chakra-ui/react'
 export const Home = () => {
-
+  
+  const { disclosure, setShowMusicPlyer } = useContext(appContent);
+  const { isOpen, onOpen } = disclosure;
   const [musicList, setMusicList] = useState<allMusic[]>([])
   const {currentTrack, setCurrentTrack} = useContext(appContent)
 
@@ -32,6 +35,9 @@ export const Home = () => {
 
   const setTrackHandler = (clickedMusic: allMusic)=>{
      setCurrentTrack(clickedMusic)
+    //  onOpen()
+     setShowMusicPlyer(true)
+     
   }
 
   console.log('Current Track',currentTrack)
@@ -45,20 +51,20 @@ export const Home = () => {
       </div> */}
 
       <div className='w-full flex flex-row-reverse'>
-        <Navbar />
-
+        <Navbar />Fa
 
         { musicList.map((music) => (
-          <Link to={'/singleMusic'} onClick={() => setTrackHandler(music)}  key={music._id.toString()}>
+          <Link to={''} onClick={() => setTrackHandler(music)}  key={music._id.toString()}>
             <h3>{music.title}</h3>
             <p>Artist: {music.artist}</p>
             <p>Album: {music.album}</p>
-            <img src={`data:image/jpeg;base64, ${music.picture}`} alt="Cover" />
+            <img className='h-28' src={`data:image/jpeg;base64, ${music.picture}`} alt="Cover" />
             {/* <img src={`${APP_URL}/home/music/cover/${music.filename}`} alt="Cover" /> */}
             <audio controls>
               <source src={`${APP_URL}/home/music/${music.filename}`} type="audio/mpeg" />
               Your browser does not support the audio tag.
             </audio>
+            <FaPlayCircle onClick={()=> setTrackHandler(music)} fontSize={'30px'} className='hover:text-sky-700' />
           </Link>
         ))}
 

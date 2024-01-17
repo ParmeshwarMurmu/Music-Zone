@@ -70,7 +70,18 @@ MusicRouter.get('/music/cover/:filename', async(req, res) => {
     }
 });
 
+// To get single Music
 
+MusicRouter.get('/singleMusic/:filename', (req, res) => {
+    const filename = req.params.filename;
+    // const musicId = req.params.musicId
+    // console.log(filename);
+    // console.log("musicId", musicId);
+    const filePath = path.join(__dirname, '../uploads/music', `${filename}`);
+    // console.log(filePath);
+    res.setHeader('Content-Type', 'audio/mpeg');
+    res.sendFile(filePath);
+});
 
 module.exports = {
     MusicRouter
