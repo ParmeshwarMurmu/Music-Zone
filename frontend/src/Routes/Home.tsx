@@ -54,16 +54,16 @@ export const Home = () => {
         <Navbar />Fa
 
         { musicList.map((music) => (
-          <Link to={''} onClick={() => setTrackHandler(music)}  key={music._id.toString()}>
+          <Link className='border-2 border-gray-950' to={''} onClick={() => setTrackHandler(music)}  key={music._id.toString()}>
             <h3>{music.title}</h3>
             <p>Artist: {music.artist}</p>
             <p>Album: {music.album}</p>
             <img className='h-28' src={`data:image/jpeg;base64, ${music.picture}`} alt="Cover" />
             {/* <img src={`${APP_URL}/home/music/cover/${music.filename}`} alt="Cover" /> */}
-            <audio controls>
+            {/* <audio controls>
               <source src={`${APP_URL}/home/music/${music.filename}`} type="audio/mpeg" />
               Your browser does not support the audio tag.
-            </audio>
+            </audio> */}
             <FaPlayCircle onClick={()=> setTrackHandler(music)} fontSize={'30px'} className='hover:text-sky-700' />
           </Link>
         ))}

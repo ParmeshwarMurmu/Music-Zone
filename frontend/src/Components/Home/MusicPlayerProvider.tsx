@@ -74,7 +74,7 @@ export const MusicPlayerProvider = () => {
 
     return (
 
-        <div className='flex justify-center justify-items-center'>
+        <div className=''>
 
             {/* {
                 currentTrack && <audio controls className='w-full'>
@@ -100,12 +100,36 @@ export const MusicPlayerProvider = () => {
                 <IoPlaySkipForwardSharp fontSize={'30px'} />
             </div> */}
 
+            {/* jsahjxsa */}
 
-            {currentTrack && (
-                <div className="w-1/6 flex justify-center justify-items-center pt-3">
+
+            {currentTrack && (<div>
+
+                <div className="flex justify-center items-center">
+                    <span>{formatTime(currentTime)}</span>
+                    <input className='w-11/12'
+                        type="range"
+                        min={0}
+                        max={duration}
+                        value={currentTime}
+                        onChange={handleSeek}
+                    />
+                    <span>{formatTime(duration)}</span>
+                </div>
+
+               <div className='relative flex'>
+
+                <div>
+                    <p className='text-lg font-bold'>{currentTrack.title}</p>
+                    <p className='text-sm'>{`${currentTrack.artist}`}</p>
+                    <p className='text-sm'>{`${currentTrack.album} - ${currentTrack.releaseYear} `}</p>
+                </div>
+
+
+                <div className="w-1/6 flex absolute top-2 left-1/2 transform -translate-x-1/2 justify-center items-center pt-3">
                     <audio ref={audioRef}
-                    onTimeUpdate={handleTimeUpdate}
-                    onEnded={() => setIsPlaying(false)}
+                        onTimeUpdate={handleTimeUpdate}
+                        onEnded={() => setIsPlaying(false)}
                     >
                         Your browser does not support the audio tag.
                     </audio>
@@ -120,18 +144,16 @@ export const MusicPlayerProvider = () => {
                         <IoPlaySkipForwardSharp fontSize={'30px'} />
                     </div>
 
-                    <div className="flex items-center mt-2">
-                        <span>{formatTime(currentTime)}</span>
-                        <input
-                            type="range"
-                            min={0}
-                            max={duration}
-                            value={currentTime}
-                            onChange={handleSeek}
-                        />
-                        <span>{formatTime(duration)}</span>
-                    </div>
+
                 </div>
+
+                </div>
+
+                
+
+            </div>
+
+
             )}
         </div>
 
