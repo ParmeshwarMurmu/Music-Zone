@@ -5,24 +5,11 @@ import { IoPlaySkipForwardSharp } from "react-icons/io5";
 import { appContent } from '../../ContextApi/ContextApi';
 import { APP_URL } from '../../Endpoints/Endpoints';
 import { FaPlayCircle } from "react-icons/fa";
+import { FaVolumeLow } from "react-icons/fa6";
 
 export const MusicPlayerProvider = () => {
 
-    // const { currentTrack, showMusicPlayer } = useContext(appContent)
-    // let [audioSrc, setAudioSrc] = useState<File>()
-    // const [audioKey, setAudioKey] = useState<number>(0);
-    // const audioRef = useRef<HTMLAudioElement>(null);
-
-
-    // useEffect(() => {
-
-    //     console.log("**");
-    //     if (currentTrack && audioRef.current) {
-    //         audioRef.current.src = `${APP_URL}/home/singleMusic/${currentTrack.filename}`;
-    //         audioRef.current.load(); // Reload the audio element
-    //     }
-
-    // }, [currentTrack])
+    
 
     const { currentTrack, showMusicPlayer } = useContext(appContent);
     const audioRef = useRef<HTMLAudioElement>(null);
@@ -76,34 +63,16 @@ export const MusicPlayerProvider = () => {
 
         <div className=''>
 
-            {/* {
-                currentTrack && <audio controls className='w-full'>
-
-                    <source src={`${APP_URL}/home/singleMusic/${currentTrack.filename}`} type="audio/mpeg" />
-                    Your browser does not support the audio tag.
-                </audio>
-            } */}
+            
 
 
-            {/* {currentTrack && (
-                <audio ref={audioRef} controls className="w-full">
-                    Your browser does not support the audio tag.
-                </audio>
-            )} */}
+            {currentTrack && (<div className='flex'>
 
+                <div className='w-24'>
+                    <img src={`data:image/jpeg;base64, ${currentTrack.picture}`} alt="" />
+                </div>
 
-            {/* 
-            <div className='flex'>
-                <FaRegPauseCircle fontSize={'30px'} />
-
-                <IoPlaySkipBackSharp fontSize={'30px'} />
-                <IoPlaySkipForwardSharp fontSize={'30px'} />
-            </div> */}
-
-            {/* jsahjxsa */}
-
-
-            {currentTrack && (<div>
+                <div className='w-full'>
 
                 <div className="flex justify-center items-center">
                     <span>{formatTime(currentTime)}</span>
@@ -117,7 +86,7 @@ export const MusicPlayerProvider = () => {
                     <span>{formatTime(duration)}</span>
                 </div>
 
-               <div className='relative flex'>
+               <div className='relative flex pl-5'>
 
                 <div>
                     <p className='text-lg font-bold'>{currentTrack.title}</p>
@@ -144,6 +113,8 @@ export const MusicPlayerProvider = () => {
                         <IoPlaySkipForwardSharp fontSize={'30px'} />
                     </div>
 
+
+                </div>
 
                 </div>
 
