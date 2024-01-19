@@ -6,6 +6,7 @@ import { Navbar } from './Navbar'
 import { MusicPlayerProvider } from '../Components/Home/MusicPlayerProvider'
 import { appContent } from '../ContextApi/ContextApi'
 
+
 export const Main = () => {
 
   const { showMusicPlayer } = useContext(appContent)
@@ -13,7 +14,7 @@ export const Main = () => {
   
 
   return (
-    <div className='bg-red-300 h-screen relative'>
+    <div className='h-screen relative'>
 
 
 
