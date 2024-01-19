@@ -6,7 +6,7 @@ import { Navbar } from './Routes/Navbar';
 
 function App() {
   return (
-    <div className=''>
+    <div className='box-border'>
       <Main />
     </div>
   );

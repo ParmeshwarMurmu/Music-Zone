@@ -22,13 +22,13 @@ export const Main = () => {
 
 
         {/* Side Bar */}
-        <div className='w-1/5'>
+        <div className='w-1/6'>
           <SideBar />
         </div>
 
 
         {/* All Routes */}
-        <div className='w-full'>
+        <div className='w-4/5'>
 
           <div>
 
