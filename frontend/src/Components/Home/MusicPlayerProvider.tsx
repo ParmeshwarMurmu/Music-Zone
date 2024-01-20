@@ -97,7 +97,7 @@ export const MusicPlayerProvider = () => {
                     
                     <div className="flex justify-center items-center">
                         <span>{formatTime(currentTime)}</span>
-                        <input className='w-11/12'
+                        <input className='w-11/12 h-0.5 text-neutral-info'
                             type="range"
                             min={0}
                             max={duration}

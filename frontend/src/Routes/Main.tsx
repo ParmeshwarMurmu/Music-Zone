@@ -39,7 +39,7 @@ export const Main = () => {
       </div>
 
       {
-        showMusicPlayer && <div className='bg-gray-300  absolute bottom-0 left-0 right-0'>
+        showMusicPlayer && <div className='bg-neutral-silver absolute bottom-0 left-0 right-0 shadow-2xl opacity-100 p-2'>
           <MusicPlayerProvider />
         </div>
       }

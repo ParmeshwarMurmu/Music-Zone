@@ -149,7 +149,7 @@ export const Home = () => {
         <Navbar />
       </div>
 
-      <div className='relative border-4'>
+      <div className='relative'>
 
 
 

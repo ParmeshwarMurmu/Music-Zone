@@ -25,6 +25,8 @@ export const ContextApi: React.FC<ContextApiProps> = ({ children }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [showMusicPlayer, setShowMusicPlyer]= useState<boolean>(false)
   const [currentTrack, setCurrentTrack] = useState<AppContextProps['currentTrack'] | null>(null);
+  const [createPlaylist, setCreatePlaylist] = useState<boolean>(false)
+
   const disclosure: UseDisclosureReturn = {
     isOpen, onOpen, onClose,
     onToggle: () => { }, // Add a dummy function if you don't need this functionality
@@ -38,7 +40,9 @@ export const ContextApi: React.FC<ContextApiProps> = ({ children }) => {
     setCurrentTrack,
     disclosure,
     showMusicPlayer,
-    setShowMusicPlyer
+    setShowMusicPlyer,
+    setCreatePlaylist,
+    createPlaylist
     
     // Add other properties as needed
   };

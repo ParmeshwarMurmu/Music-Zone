@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
     Menu,
     MenuButton,
@@ -8,7 +8,13 @@ import {
 } from '@chakra-ui/react'
 import { IoMdAdd } from "react-icons/io";
 
+
+
+
 export const CreatePlaylist = () => {
+
+    
+
     return (
         <div>
 
@@ -16,7 +22,7 @@ export const CreatePlaylist = () => {
                 <MenuButton><IoMdAdd fontSize={'20px'} /></MenuButton>
                 <Portal>
                     <MenuList>
-                        <MenuItem>Menu 1</MenuItem>
+                        <MenuItem>New Playlist</MenuItem>
                         <MenuItem>New Window</MenuItem>
                         <MenuItem>Open Closed Tab</MenuItem>
                         <MenuItem>Open File</MenuItem>

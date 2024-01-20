@@ -25,7 +25,9 @@ export interface AppContextProps {
   setCurrentTrack: Dispatch<SetStateAction<allMusic | null>>;
   disclosure: UseDisclosureReturn;
   showMusicPlayer : boolean,
-  setShowMusicPlyer:Dispatch<SetStateAction<boolean>>
+  setShowMusicPlyer:Dispatch<SetStateAction<boolean>>;
+  createPlaylist: boolean;
+  setCreatePlaylist : Dispatch<SetStateAction<boolean>>;
 
 }
 

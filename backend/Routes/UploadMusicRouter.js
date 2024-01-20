@@ -66,6 +66,7 @@ UploadMusicRouter.post('/uploadMusic', upload.single('music'), async (req, res) 
         const { filename, path } = req.file;
 
         const metadata = await mm.parseFile(path);
+        console.log(metadata);
         let { title, artist, album, picture } = metadata.common;
         console.log(artist)
         console.log(album)
