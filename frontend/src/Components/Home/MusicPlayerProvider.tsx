@@ -6,12 +6,14 @@ import { appContent } from '../../ContextApi/ContextApi';
 import { APP_URL } from '../../Endpoints/Endpoints';
 import { FaPlayCircle } from "react-icons/fa";
 import { FaVolumeLow } from "react-icons/fa6";
+import { RxCross2 } from "react-icons/rx";
+
 
 export const MusicPlayerProvider = () => {
 
 
 
-    const { currentTrack, showMusicPlayer } = useContext(appContent);
+    const { currentTrack, showMusicPlayer, setCurrentTrack, setShowMusicPlyer } = useContext(appContent);
     const audioRef = useRef<HTMLAudioElement>(null);
     const [isPlaying, setIsPlaying] = useState(false);
     const [currentTime, setCurrentTime] = useState(0);
@@ -79,6 +81,23 @@ export const MusicPlayerProvider = () => {
         setIsVolumeControlVisible(false);
     };
 
+    const closeMusicPlayer = ()=>{
+
+        if (audioRef.current) {
+            try {
+                audioRef.current.pause();
+                audioRef.current.currentTime = 0;
+            } catch (error) {
+                console.error("Error while closing music player:", error);
+            }
+        }
+        
+        setIsPlaying(false)
+        setCurrentTrack(null)
+        setShowMusicPlyer(false)
+
+    }
+
     return (
 
         <div className=''>
@@ -86,15 +105,20 @@ export const MusicPlayerProvider = () => {
 
 
 
-            {currentTrack && (<div className='flex'>
+            {currentTrack && (<div className='flex relative'>
+
+
+                {/* Music Thumbnail */}
 
                 <div className='w-24'>
                     <img src={`data:image/jpeg;base64, ${currentTrack.picture}`} alt="" />
                 </div>
 
+                {/* Music Details */}
                 <div className='w-full'>
-                    
-                    
+
+
+                    {/* Music Duration */}
                     <div className="flex justify-center items-center">
                         <span>{formatTime(currentTime)}</span>
                         <input className='w-11/12 h-0.5 text-neutral-info'
@@ -108,6 +132,7 @@ export const MusicPlayerProvider = () => {
                     </div>
 
 
+                    {/* Music Details title, artists etc */}
 
                     <div className='relative flex pl-6 justify-between'>
 
@@ -125,6 +150,8 @@ export const MusicPlayerProvider = () => {
                             >
                                 Your browser does not support the audio tag.
                             </audio>
+
+                            {/* Music Pause next prevoius Btns */}
                             <div className="flex justify-center items-center">
                                 <IoPlaySkipBackSharp fontSize={'20px'} className='mr-2' />
                                 {isPlaying ? (
@@ -140,32 +167,37 @@ export const MusicPlayerProvider = () => {
 
                         </div>
 
+                        {/* Music Volume Controller */}
                         <div className='flex justify-center items-center pr-5'>
-                        <FaVolumeLow
-                            className='mr-4'
-                            fontSize={'20px'}
-                        
-                        />
+                            <FaVolumeLow
+                                className='mr-4'
+                                fontSize={'20px'}
 
-                        <input
-                        className='border-4'
-                            type="range"
-                            min={0}
-                            max={1}
-                            step={0.01}
-                            value={volume}
-                            onChange={handleVolumeChange}
-                        />
-                        {/* {isVolumeControlVisible && (
-                                   
-                                )} */}
-                    </div>
+                            />
+
+                            <input
+                                className='border-4'
+                                type="range"
+                                min={0}
+                                max={1}
+                                step={0.01}
+                                value={volume}
+                                onChange={handleVolumeChange}
+                            />
+
+                        </div>
 
                     </div>
-                    
 
-                    
+                </div>
+               
 
+               {/* Cross Button */}
+
+                <div className='absolute top-0 right-0 '>
+                    <RxCross2 className='hover:cursor-pointer' 
+                    onClick={closeMusicPlayer}
+                     />
                 </div>
 
 

@@ -11,23 +11,23 @@ export const Main = () => {
 
   const { showMusicPlayer } = useContext(appContent)
   console.log("showMusicPLayer", showMusicPlayer);
-  
+
 
   return (
     <div className='h-screen relative'>
 
 
 
-      <div className='flex'>
+      {/* <div className='flex'>
 
 
-        {/* Side Bar */}
+        
         <div className='w-1/6'>
           <SideBar />
         </div>
 
 
-        {/* All Routes */}
+        
         <div className='w-4/5'>
 
           <div>
@@ -36,6 +36,11 @@ export const Main = () => {
           </div>
 
         </div>
+      </div> */}
+
+      <div>
+
+        <AllRoutes />
       </div>
 
       {
@@ -43,6 +48,7 @@ export const Main = () => {
           <MusicPlayerProvider />
         </div>
       }
+
 
     </div>
   )

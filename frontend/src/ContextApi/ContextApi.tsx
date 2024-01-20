@@ -15,7 +15,9 @@ export const appContent = createContext<AppContextProps>({ // Provide an initial
     getDisclosureProps: () => ({}),
   },
   showMusicPlayer: false,
-  setShowMusicPlyer: ()=>{}
+  setShowMusicPlyer: ()=>{},
+  createPlaylist: false,
+  setCreatePlaylist: ()=>{}
   
   
 });

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import {
     Menu,
     MenuButton,
@@ -7,12 +7,14 @@ import {
     Portal,
 } from '@chakra-ui/react'
 import { IoMdAdd } from "react-icons/io";
+import { appContent } from '../../ContextApi/ContextApi';
 
 
 
 
 export const CreatePlaylist = () => {
-
+   
+    const { createPlaylist, setCreatePlaylist } = useContext(appContent)
     
 
     return (
@@ -22,7 +24,7 @@ export const CreatePlaylist = () => {
                 <MenuButton><IoMdAdd fontSize={'20px'} /></MenuButton>
                 <Portal>
                     <MenuList>
-                        <MenuItem>New Playlist</MenuItem>
+                        <MenuItem onClick={()=> setCreatePlaylist(true)}>New Playlist</MenuItem>
                         <MenuItem>New Window</MenuItem>
                         <MenuItem>Open Closed Tab</MenuItem>
                         <MenuItem>Open File</MenuItem>

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useContext, useEffect, useRef } from 'react'
 import { IoHomeSharp } from "react-icons/io5";
 import { ImSearch } from "react-icons/im";
 import { MdLibraryMusic } from "react-icons/md";
@@ -10,18 +10,20 @@ import { TiTick } from "react-icons/ti";
 import { RxCross2 } from "react-icons/rx";
 import { ImCross } from "react-icons/im";
 import { Input } from '@chakra-ui/react';
+import { appContent } from '../../ContextApi/ContextApi';
 
 
 export const SideBar = () => {
 
   const inputRef = useRef<HTMLInputElement | null>(null);
+  const { createPlaylist, setCreatePlaylist } = useContext(appContent)
 
   useEffect(() => {
     // Step 2: Focus on the input element when the component mounts
-    if (inputRef.current) {
+    if (createPlaylist && inputRef.current) {
       inputRef.current.focus();
     }
-  }, []);
+  }, [createPlaylist]);
 
 
   return (
@@ -68,11 +70,13 @@ export const SideBar = () => {
           </div>
 
           {
-            <div className='flex justify-center items-center'>
+            createPlaylist && <div className='flex justify-center items-center'>
 
               <div className='mr-2'>
                 <FaFolderOpen fontSize={'20px'} />
               </div>
+
+
               <div>
                 
                 <Input  type='text'
@@ -85,8 +89,15 @@ export const SideBar = () => {
               </div>
 
               <div className='flex'>
-                <TiTick fontSize={'20px'} className='mr-2' />
-                <RxCross2 fontSize={'20px'} />
+                <TiTick fontSize={'20px'} 
+                className='mr-2 hover:cursor-pointer' 
+                />
+
+                <RxCross2 fontSize={'20px'}
+                className='mr-2 hover:cursor-pointer' 
+
+                 />
+
 
               </div>
 

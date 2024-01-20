@@ -34,3 +34,13 @@ export interface AppContextProps {
 export interface ContextApiProps {
   children: ReactNode;
 }
+
+export interface WithSidebarLayoutProps {
+  children: ReactNode;
+}
+
+
+
+export interface WithoutSidebarLayoutProps {
+  children: ReactNode;
+}
