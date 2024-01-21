@@ -8,6 +8,7 @@ export const UplodMusci = () => {
 
   const [file, setFile] = useState<File | null>(null);
   const [url, setUrl] = useState<string | null>(null);
+  const [uploaded, setUploaded] = useState<boolean>(false)
 
   const fileHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFile = e.target.files && e.target.files[0];
@@ -20,6 +21,7 @@ export const UplodMusci = () => {
 
   const submitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setUploaded(true)
     let formData = new FormData()
 
     try {
@@ -29,6 +31,7 @@ export const UplodMusci = () => {
         formData.append('music', file);
         const response = await axios.post(`${APP_URL}/admin/uploadMusic`, formData);
         console.log(response.data)
+        setUploaded(false)
       }
     } catch (error) {
 
@@ -40,7 +43,16 @@ export const UplodMusci = () => {
     <div>
       <form onSubmit={submitHandler}>
         <Input type="file" onChange={fileHandler} accept=".mp3" />
-        <input type="submit" value={'Submit'} />
+        {/* <input type="submit" value={'Submit'} /> */}
+        <Button colorScheme='teal' size='md'
+        isLoading={uploaded}
+        loadingText='Submitting'
+        type="submit" 
+        value={'Submit'}
+
+        >
+          Submit
+        </Button>
       </form>
     </div>
   );

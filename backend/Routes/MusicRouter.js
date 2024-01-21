@@ -23,7 +23,7 @@ const MusicRouter = express.Router()
 
 MusicRouter.get('/allMusic', async (req, res) => {
     try {
-        const allMusic = await MusicModel.find();
+        const allMusic = await MusicModel.find().sort({_id: -1});
         res.status(200).send({ "allMusic": allMusic })
 
     } catch (error) {
