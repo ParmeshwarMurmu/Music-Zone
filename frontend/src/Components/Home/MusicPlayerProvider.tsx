@@ -7,7 +7,8 @@ import { APP_URL } from '../../Endpoints/Endpoints';
 import { FaPlayCircle } from "react-icons/fa";
 import { FaVolumeLow } from "react-icons/fa6";
 import { RxCross2 } from "react-icons/rx";
-
+import { MdOutlineRepeat } from "react-icons/md";
+import { MdOutlineRepeatOne } from "react-icons/md";
 
 export const MusicPlayerProvider = () => {
 
@@ -20,6 +21,7 @@ export const MusicPlayerProvider = () => {
     const [duration, setDuration] = useState(0);
     const [volume, setVolume] = useState<number>(1);
     const [isVolumeControlVisible, setIsVolumeControlVisible] = useState<boolean>(false);
+    const [repeat, setRepeat] = useState<boolean>(false)
 
     useEffect(() => {
         if (currentTrack && audioRef.current) {
@@ -81,7 +83,7 @@ export const MusicPlayerProvider = () => {
         setIsVolumeControlVisible(false);
     };
 
-    const closeMusicPlayer = ()=>{
+    const closeMusicPlayer = () => {
 
         if (audioRef.current) {
             try {
@@ -91,12 +93,40 @@ export const MusicPlayerProvider = () => {
                 console.error("Error while closing music player:", error);
             }
         }
-        
+
         setIsPlaying(false)
         setCurrentTrack(null)
         setShowMusicPlyer(false)
 
     }
+
+    useEffect(() => {
+        // ... (other useEffect logic)
+
+        const handleEnded = () => {
+            if (audioRef.current) {
+                if (repeat) {
+                    // If repeat is true, reset current time and play again
+                    audioRef.current.currentTime = 0;
+                    audioRef.current.play();
+                } else {
+                    // If repeat is false, stop playing
+                    setIsPlaying(false);
+                }
+            }
+        };
+
+        if (audioRef.current) {
+            audioRef.current.addEventListener('ended', handleEnded);
+        }
+
+        // Cleanup event listener on component unmount
+        return () => {
+            if (audioRef.current) {
+                audioRef.current.removeEventListener('ended', handleEnded);
+            }
+        };
+    }, [currentTrack, repeat]);
 
     return (
 
@@ -153,6 +183,19 @@ export const MusicPlayerProvider = () => {
 
                             {/* Music Pause next prevoius Btns */}
                             <div className="flex justify-center items-center">
+
+                                {
+                                    repeat ? (
+                                        <MdOutlineRepeatOne fontSize={'20px'} className='mr-2 hover:cursor-pointer'
+                                        onClick={()=>{setRepeat(false)}}
+                                         />
+                                    ) : (
+                                        <MdOutlineRepeat fontSize={'20px'} className='mr-2 hover:cursor-pointer'
+                                         onClick={()=>{setRepeat(true)}}
+                                         />
+                                    )
+                                }
+
                                 <IoPlaySkipBackSharp fontSize={'20px'} className='mr-2' />
                                 {isPlaying ? (
                                     <FaRegPauseCircle onClick={handlePlayPause} fontSize={'40px'} className='hover:text-sky-700 mr-2' />
@@ -190,14 +233,14 @@ export const MusicPlayerProvider = () => {
                     </div>
 
                 </div>
-               
 
-               {/* Cross Button */}
+
+                {/* Cross Button */}
 
                 <div className='absolute top-0 right-0 '>
-                    <RxCross2 className='hover:cursor-pointer' 
-                    onClick={closeMusicPlayer}
-                     />
+                    <RxCross2 className='hover:cursor-pointer'
+                        onClick={closeMusicPlayer}
+                    />
                 </div>
 
 
