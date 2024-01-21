@@ -38,7 +38,8 @@ module.exports = {
     },
 
     screens: {
-      'sm': '640px',
+      // 'mobiles': '640px',
+      'mobiles-max': { max: '500px' },
       // => @media (min-width: 640px) { ... }
 
       'md': '768px',

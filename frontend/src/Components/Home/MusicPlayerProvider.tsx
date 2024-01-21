@@ -109,6 +109,7 @@ export const MusicPlayerProvider = () => {
                     // If repeat is true, reset current time and play again
                     audioRef.current.currentTime = 0;
                     audioRef.current.play();
+                    setIsPlaying(true)
                 } else {
                     // If repeat is false, stop playing
                     setIsPlaying(false);
