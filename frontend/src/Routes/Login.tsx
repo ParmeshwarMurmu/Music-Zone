@@ -14,9 +14,9 @@ export const Login = () => {
     <div className='flex justify-center items-center'>
      
 
-     <div className='w-full hidden md:block lg:block md:w-4/12 md:h-screen border-4
-      border-shades-100'>
-      <img className='w-full border-4 border-shades-300 md:h-full lg:h-full' src={LoginCover} alt="Login Cover" />
+     <div className='w-full hidden md:block lg:block md:w-6/12 lg:w-4/12 md:h-screen 
+     '>
+      <img className='w-full md:h-full lg:h-full' src={LoginCover} alt="Login Cover" />
      </div>
 
 
@@ -36,7 +36,7 @@ export const Login = () => {
 
      
 
-        <div className='p-2 border-2 '>
+        <div className='p-2'>
 
           <Heading className='mb-4' as='h2' size='xl'>
             Login to Music Zone

@@ -6,7 +6,7 @@ import { FcGoogle } from "react-icons/fc";
 import { ImFacebook2 } from "react-icons/im";
 import { FcPhoneAndroid } from "react-icons/fc";
 import { Link } from 'react-router-dom';
-import SignUpCover from '../Assets/SignUpCover.png'
+import SignUpCover from '../Assets/SignUpCover.jpg'
 export const SignUp = () => {
 
     return (
@@ -24,8 +24,8 @@ export const SignUp = () => {
                 </Wrap>
             </div> */}
             
-            <div className='w-2/5 pt-2' >
-                <img  src={SignUpCover} alt="SignUpCover" />
+            <div className='w-full hidden md:block lg:block md:w-6/12 lg:w-4/12 md:h-screen' >
+                <img className='w-full md:h-full lg:h-full'  src={SignUpCover} alt="SignUpCover" />
             </div>
 
             <div className='p-2 '>
