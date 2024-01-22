@@ -10,3 +10,6 @@ declare module 'jsmediatags' {
     // Add any other functions or types used in your component
   }
   
+  interface Window {
+    confirmationResult: firebase.auth.ConfirmationResult | undefined;
+}

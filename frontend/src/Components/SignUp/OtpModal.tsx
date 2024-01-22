@@ -1,8 +1,17 @@
+
 import { Button, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, useDisclosure } from '@chakra-ui/react'
 import React, { useState } from 'react'
 import { FcPhoneAndroid } from "react-icons/fc";
 import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/style.css'
+import { RecaptchaVerifier, signInWithPhoneNumber } from 'firebase/auth';
+import { auth } from '../../fireBase/Config';
+
+
+interface CustomWindow extends Window {
+    recaptchaVerifier?: RecaptchaVerifier;
+}
+
 
 export const OtpModal = () => {
     const { isOpen, onOpen, onClose } = useDisclosure();
@@ -12,6 +21,33 @@ export const OtpModal = () => {
     const handlePhoneChange = (value: string) => {
         setPhone(value);
     };
+
+    const onCaptchaVerify = () => {
+        const recaptchaVerifier = new RecaptchaVerifier(auth, 'recaptcha-container', {
+            'callback': () => {
+                // reCAPTCHA solved, allow signInWithPhoneNumber.
+                setGetOTP(true);
+                signInWithOTP(recaptchaVerifier)
+            }
+        },);
+        recaptchaVerifier.render()
+
+    }
+
+    const signInWithOTP = (appVerifier: RecaptchaVerifier) => {
+        signInWithPhoneNumber(auth, `+${phone}`, appVerifier)
+            .then((confirmationResult) => {
+                // SMS sent. Prompt user to type the code from the message, then sign the
+                // user in with confirmationResult.confirm(code).
+                alert('otpsent')
+                // window.confirmationResult = confirmationResult;
+                // ...
+            }).catch((error) => {
+                // Error; SMS not sent
+                // ...
+            });
+
+    }
 
     return (
         <div>
@@ -27,11 +63,12 @@ export const OtpModal = () => {
                     <ModalOverlay />
                     <ModalContent>
                         <ModalHeader>Modal Title</ModalHeader>
-                        <ModalCloseButton onClick={()=>{setGetOTP(false); setPhone('')}} />
+                        <ModalCloseButton onClick={() => { setGetOTP(false); setPhone('') }} />
                         <ModalBody>
                             {
                                 getOTP ? (
                                     <div>
+
                                         <p>OTP Verification</p>
                                         <p>{`Enter the code from the SMS we sent to + ${phone}`}</p>
 
@@ -44,12 +81,14 @@ export const OtpModal = () => {
                                     <div>
                                         <p>Verify Your Phone Number</p>
                                         <PhoneInput
-                                            country={'us'}
+                                            country={'in'}
                                             value={phone} onChange={handlePhoneChange}
                                         />
 
+
+                                        <div id='recaptcha-container'></div>
                                         <Button colorScheme='teal' size='md'
-                                            onClick={() => { setGetOTP(true) }}
+                                            onClick={onCaptchaVerify}
                                         >
                                             Get OTP
                                         </Button>
