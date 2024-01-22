@@ -7,6 +7,7 @@ import { ImFacebook2 } from "react-icons/im";
 import { FcPhoneAndroid } from "react-icons/fc";
 import { Link } from 'react-router-dom';
 import SignUpCover from '../Assets/SignUpCover.jpg'
+import { OtpModal } from '../Components/SignUp/OtpModal';
 export const SignUp = () => {
 
     return (
@@ -60,11 +61,7 @@ export const SignUp = () => {
                 </div>
 
                 <div>
-                    <Button colorScheme='' size='md' className='w-full mb-4 p-2 outline border-2 hover:border-indigo-300'
-                    // isLoading
-                    >
-                        <FcPhoneAndroid className='mr-5 text-blue-500' fontSize={'30px'} /> <span className='text-black'>Sign up Using   OTP</span>
-                    </Button>
+                    <OtpModal />
                 </div>
 
                 <div>
