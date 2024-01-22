@@ -15,7 +15,7 @@
     "@types/react": "^18.2.47",
     "@types/react-dom": "^18.2.18",
     "axios": "^1.6.5",
-    "firebase": "^10.7.1",
+    "firebase": "^10.7.2",
     "framer-motion": "^10.17.9",
     "jsmediatags": "^3.9.7",
     "mongodb": "^6.3.0",

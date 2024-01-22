@@ -9,15 +9,20 @@ import { Link } from 'react-router-dom';
 import LoginCover from '../Assets/LoginCover.jpg'
 
 
+
+
 export const Login = () => {
+
+  
+
   return (
     <div className='flex justify-center items-center'>
-     
 
-     <div className='w-full hidden md:block lg:block md:w-6/12 lg:w-4/12 md:h-screen 
+
+      <div className='w-full hidden md:block lg:block md:w-6/12 lg:w-4/12 md:h-screen 
      '>
-      <img className='w-full md:h-full lg:h-full' src={LoginCover} alt="Login Cover" />
-     </div>
+        <img className='w-full md:h-full lg:h-full' src={LoginCover} alt="Login Cover" />
+      </div>
 
 
       <div>
@@ -34,7 +39,7 @@ export const Login = () => {
     </Wrap>
 </div> */}
 
-     
+
 
         <div className='p-2'>
 
