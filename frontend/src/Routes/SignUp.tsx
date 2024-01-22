@@ -6,11 +6,11 @@ import { FcGoogle } from "react-icons/fc";
 import { ImFacebook2 } from "react-icons/im";
 import { FcPhoneAndroid } from "react-icons/fc";
 import { Link } from 'react-router-dom';
-
+import SignUpCover from '../Assets/SignUpCover.png'
 export const SignUp = () => {
 
     return (
-        <div>
+        <div className='flex justify-center items-center'>
 
             {/* <div>
                 <Wrap>
@@ -23,8 +23,12 @@ export const SignUp = () => {
                     </WrapItem>
                 </Wrap>
             </div> */}
+            
+            <div className='w-2/5 pt-2' >
+                <img  src={SignUpCover} alt="SignUpCover" />
+            </div>
 
-            <div className='w-full md:w-1/5 lg:w-1/4 m-auto p-2 border-2 '>
+            <div className='p-2 '>
 
                 <Heading className='mb-4' as='h2' size='xl'>
                     Sign up to start listening
