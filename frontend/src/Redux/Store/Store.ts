@@ -1,45 +1,35 @@
-import { applyMiddleware, combineReducers, Middleware, Reducer, StoreEnhancer} from "redux";
+import { applyMiddleware, combineReducers,createStore,  Middleware, Reducer, StoreEnhancer} from "redux";
 import { ThunkMiddleware, thunk } from "redux-thunk";
-import { reducer as SignUpReducer, signUp } from "../SignUpReducer/reducer";
+// import { reducer as SignUpReducer } from "../SignUpReducer/reducer";
 import { userEmailActionType, userNameActionType, userPasswordActionType } from "../SignUpReducer/action";
+import { configureStore } from "@reduxjs/toolkit";
 
 
-// Define the root state type
-export interface RootState {
-    SignUpReducer: RootAction
-    // Add other reducers and their states if needed
-}
+export const store = configureStore({
+    reducer: {
+    //   signUp: SignUpReducer,
+    }
+  })
+
+// Infer the `RootState` and `AppDispatch` types from the store itself
+export type RootState = ReturnType<typeof store.getState>
+// Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
+export type AppDispatch = typeof store.dispatch
 
 
-// Define the root action type
-export type RootAction =
-    | userNameActionType
-    | userPasswordActionType
-    | userEmailActionType
-// Add other action types if needed
+// // Define the root state type
+// export interface RootState {
+//     SignUpReducer: signUp;
+//     // Add other reducers and their states if needed
+// }
 
-// const rootReducer: Reducer<RootState, RootAction> = combineReducers({
-//     SignUpReducer
+// // Define the root action type
+// export type RootAction =
+//     | userNameActionType
+//     | userPasswordActionType
+//     | userEmailActionType;
+// // Add other action types if needed
 
-// })
-
-const rootReducer: Reducer<RootState, RootAction> = combineReducers({
-    SignUpReducer: SignUpReducer as Reducer<signUp, RootAction>,
-});
-
-// Define thunk middleware type
-const thunkMiddleware: ThunkMiddleware<RootState, RootAction> = thunk;
-
-// Define other middlewares if needed
-const middlewares: Middleware[] = [thunkMiddleware];
-
-const enhancers: StoreEnhancer<{}, {}>[] = [];
-
-export const store = createStore(rootReducer, {}, applyMiddleware(...middlewares, thunk), ...enhancers)
-
-
-
-
-
-
-
+// const rootReducer = combineReducers({
+//     SignUpReducer,
+// });
