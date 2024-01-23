@@ -8,6 +8,10 @@ import { FcPhoneAndroid } from "react-icons/fc";
 import { Link } from 'react-router-dom';
 import SignUpCover from '../Assets/SignUpCover.jpg'
 import { OtpModal } from '../Components/SignUp/OtpModal';
+import GoogleButton from 'react-google-button'
+
+
+
 export const SignUp = () => {
 
     return (
@@ -24,9 +28,9 @@ export const SignUp = () => {
                     </WrapItem>
                 </Wrap>
             </div> */}
-            
+
             <div className='w-full hidden md:block lg:block md:w-6/12 lg:w-4/12 md:h-screen' >
-                <img className='w-full md:h-full lg:h-full'  src={SignUpCover} alt="SignUpCover" />
+                <img className='w-full md:h-full lg:h-full' src={SignUpCover} alt="SignUpCover" />
             </div>
 
             <div className='p-2 '>
@@ -64,12 +68,22 @@ export const SignUp = () => {
                     <OtpModal />
                 </div>
 
-                <div>
-                    <Button colorScheme='' size='md' className='w-full mb-4 p-2 outline border-2 hover:border-indigo-300'
-                    // isLoading
+                <div className='flex justify-center items-center'>
+
+                    <GoogleButton
+                     
+                        onClick={() => { console.log('Google button clicked') }}
+                    />
+
+                    {/* <Button colorScheme='teal' size='lg'>
+                        Button
+                    </Button> */}
+
+                    {/* <Button colorScheme='' size='md' className='w-full mb-4 p-2 outline border-2 hover:border-indigo-300'
+                  
                     >
                         <FcGoogle className='mr-5' fontSize={'30px'} /> <span className='text-black'>Sign up with Google</span>
-                    </Button>
+                    </Button> */}
                 </div>
 
                 <div className='mb-6'>

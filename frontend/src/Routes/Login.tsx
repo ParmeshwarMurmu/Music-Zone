@@ -7,7 +7,7 @@ import { ImFacebook2 } from "react-icons/im";
 import { FcPhoneAndroid } from "react-icons/fc";
 import { Link } from 'react-router-dom';
 import LoginCover from '../Assets/LoginCover.jpg'
-
+import GoogleButton from 'react-google-button'
 
 
 
@@ -80,12 +80,17 @@ export const Login = () => {
             </Button>
           </div>
 
-          <div>
-            <Button colorScheme='' size='md' className='w-full mb-4 p-2 outline border-2 hover:border-indigo-300'
+          <div  className='flex justify-center items-center'>
+
+          <GoogleButton
+                        label='Login with Google'
+                        onClick={() => { console.log('Google button clicked') }}
+                    />
+            {/* <Button colorScheme='' size='md' className='w-full mb-4 p-2 outline border-2 hover:border-indigo-300'
             // isLoading
             >
               <FcGoogle className='mr-5' fontSize={'30px'} /> <span className='text-black'>Continue with Google</span>
-            </Button>
+            </Button> */}
           </div>
 
           <div className='mb-6'>
@@ -99,7 +104,7 @@ export const Login = () => {
           <hr className='mb-4'></hr>
 
           <div className='flex justify-center items-center mb-6'>
-            <p>Don't have an account ? <Link to={'/signUp'}><span className='text-blue-600 underline decoration-solid'>Signup for Music Zone.</span></Link></p>
+            <p>Don't have an account ? <Link to={'/signUp'}><span className='text-blue-600 underline decoration-solid'>Sign Up</span></Link></p>
           </div>
 
 
