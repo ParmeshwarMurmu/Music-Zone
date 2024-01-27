@@ -5,7 +5,7 @@ import counterReducer from "../SignUpReducer/reducer";
 
 export const store = configureStore({
     reducer: {
-      counter: counterReducer
+      
     }
   })
 
