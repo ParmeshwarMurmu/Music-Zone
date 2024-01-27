@@ -1,10 +1,11 @@
 
 import { configureStore } from "@reduxjs/toolkit";
+import counterReducer from "../SignUpReducer/reducer";
 
 
 export const store = configureStore({
     reducer: {
-    //   signUp: SignUpReducer,
+      counter: counterReducer
     }
   })
 

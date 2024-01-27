@@ -1,37 +1,39 @@
-// import { USER_EMAIL, USER_NAME, USER_PASSWORD, userEmailActionType, userNameActionType, userPasswordActionType } from "./action"
-
-// export interface signUp {
-//     userName: string,
-//     userEmail: string,
-//     userPassword: string
-// }
-
-// const initialState: signUp = {
-//     userName: '',
-//     userEmail: '',
-//     userPassword: ''
-// }
-
-// type ActionTypes = 
-//   | userNameActionType
-//   | userEmailActionType
-//   | userPasswordActionType
-// //                                                          ({ type: string, payload: string })
-// export const reducer = (state: signUp = initialState, action: ActionTypes): signUp => {
-//     switch (action.type) {
-
-//         case USER_NAME:
-//             return { ...state, userName: action.payload }
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import type { RootState } from '../Store/Store'
 
 
-//         case USER_EMAIL:
-//             return { ...state, userEmail: action.payload }
 
-//         case USER_PASSWORD:
-//             return { ...state, userPassword: action.payload }
+// Define a type for the slice state
+interface CounterState {
+    value: number
+}
 
-            
-//         default:
-//             return {...state}
-//     }
-// }
+// Define the initial state using that type
+const initialState: CounterState = {
+    value: 0
+}
+
+export const counterSlice = createSlice({
+    name: 'counter',
+
+    initialState,
+
+    reducers:{
+        increment: state => {
+            state.value += 1
+          },
+          decrement: state => {
+            state.value -= 1
+          },
+          // Use the PayloadAction type to declare the contents of `action.payload`
+          incrementByAmount: (state, action: PayloadAction<number>) => {
+            state.value += action.payload
+          }
+    }
+})
+
+
+export const { increment, decrement, incrementByAmount } = counterSlice.actions
+export const selectCount = (state: RootState) => state.counter.value
+
+export default counterSlice.reducer
