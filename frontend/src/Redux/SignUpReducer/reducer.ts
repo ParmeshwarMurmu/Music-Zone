@@ -3,19 +3,21 @@ import type { RootState } from '../Store/Store'
 
 
 
-// Define a type for the slice state
-interface CounterState {
-    value: number
+// Defined type for the slice state
+interface SignUpState {
+    email: string,
+    password: string
 }
 
-// Define the initial state using that type
-const initialState: CounterState = {
-    value: 0
+// Defined the initial state using above interface
+
+const initialState: SignUpState = {
+    email: '',
+    password: ''
 }
 
-export const counterSlice = createSlice({
-    name: 'counter',
-
+export const signUpSlice = createSlice({
+    name: 'signUp',
     initialState,
 
     reducers:{
