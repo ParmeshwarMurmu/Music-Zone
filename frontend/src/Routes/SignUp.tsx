@@ -9,10 +9,29 @@ import { Link } from 'react-router-dom';
 import SignUpCover from '../Assets/SignUpCover.jpg'
 import { OtpModal } from '../Components/SignUp/OtpModal';
 import GoogleButton from 'react-google-button'
+import { useAppDispatch, useAppSelector } from '../Redux/Store/Hook';
+import { setEmailAction, setPasswordAction, updatedEmailValueFromRduxStore, updatedPasswordValueFromRduxStore } from '../Redux/SignUpReducer/reducer';
 
 
 
 export const SignUp = () => {
+
+    const dispatch = useAppDispatch();
+    const userEmail = useAppSelector(updatedEmailValueFromRduxStore)
+    const userPassword = useAppSelector(updatedPasswordValueFromRduxStore)
+    
+
+    const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement> )=>{
+        dispatch(setEmailAction(e.target.value))
+    }
+
+
+    const handlePasswordChange = (e:React.ChangeEvent<HTMLInputElement>)=>{
+        dispatch(setPasswordAction(e.target.value))
+
+    }
+
+    console.log(userEmail, userPassword)
 
     return (
         <div className='flex justify-center items-center'>
@@ -42,12 +61,14 @@ export const SignUp = () => {
                 <div className='mb-4'>
                     <p className='mb-2'>Email Address</p>
                     <Input placeholder='name@gmail.com'
-                        type='text'
+                        type='email'
+                        onChange={handleEmailChange}
                     />
 
                     <p className='mb-2'>Password</p>
                     <Input placeholder='Password'
                         type='password'
+                        onChange={handlePasswordChange}
                     />
                 </div>
 

@@ -35,6 +35,6 @@ export const signUpSlice = createSlice({
 
 export const {setEmailAction, setPasswordAction } = signUpSlice.actions
 export const updatedEmailValueFromRduxStore = (state: RootState) => state.signUp.email;
-export const updatedPasswordValueFromRduxStore = (state: RootState) => state.password.email;
+export const updatedPasswordValueFromRduxStore = (state: RootState) => state.signUp.password;
 
 export default signUpSlice.reducer

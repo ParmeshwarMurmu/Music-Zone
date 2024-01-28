@@ -6,6 +6,8 @@ import reportWebVitals from './reportWebVitals';
 import { ChakraProvider } from '@chakra-ui/react';
 import { BrowserRouter } from 'react-router-dom';
 import { ContextApi } from './ContextApi/ContextApi';
+import { Provider } from 'react-redux';
+import { store } from './Redux/Store/Store';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -14,7 +16,9 @@ root.render(
   <ChakraProvider>
     <BrowserRouter>
       <ContextApi>
-        <App />
+        <Provider store={store}>
+          <App />
+        </Provider>
       </ContextApi>
     </BrowserRouter>
   </ChakraProvider>
