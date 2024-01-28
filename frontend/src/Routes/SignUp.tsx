@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import MusicZoneLogo from '../Assets/Music Zone .jpg'
 import MusicZone from '../Assets/Music Zone Logo.jpg'
-import { AbsoluteCenter, Avatar, Box, Button, Divider, Heading, Input, Wrap, WrapItem } from '@chakra-ui/react'
+import { AbsoluteCenter, InputGroup, Avatar, Box, Button, Divider, Heading, Input, InputRightElement, Wrap, WrapItem, Tooltip, IconButton, FormControl, FormLabel } from '@chakra-ui/react'
 import { FcGoogle } from "react-icons/fc";
 import { ImFacebook2 } from "react-icons/im";
 import { FcPhoneAndroid } from "react-icons/fc";
@@ -11,27 +11,68 @@ import { OtpModal } from '../Components/SignUp/OtpModal';
 import GoogleButton from 'react-google-button'
 import { useAppDispatch, useAppSelector } from '../Redux/Store/Hook';
 import { setEmailAction, setPasswordAction, updatedEmailValueFromRduxStore, updatedPasswordValueFromRduxStore } from '../Redux/SignUpReducer/reducer';
-
+import { IoMdEyeOff, IoMdEye } from "react-icons/io";
 
 
 export const SignUp = () => {
 
-    const dispatch = useAppDispatch();
-    const userEmail = useAppSelector(updatedEmailValueFromRduxStore)
-    const userPassword = useAppSelector(updatedPasswordValueFromRduxStore)
-    
+    const [showPassword, setShowPassword] = useState<boolean>(false);
+    const [passwordStrengthMessage, setPasswordStrengthMessage] = useState<string>('')
 
-    const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement> )=>{
+    const dispatch = useAppDispatch();
+    const userEmail = useAppSelector(updatedEmailValueFromRduxStore);
+    const userPassword = useAppSelector(updatedPasswordValueFromRduxStore);
+
+
+
+
+    const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         dispatch(setEmailAction(e.target.value))
+
+        
     }
 
 
-    const handlePasswordChange = (e:React.ChangeEvent<HTMLInputElement>)=>{
+    const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         dispatch(setPasswordAction(e.target.value))
-
+        const passwordFeedback = checkPasswordStrength(e.target.value);
+        setPasswordStrengthMessage(passwordFeedback)
     }
 
     console.log(userEmail, userPassword)
+
+    const checkPasswordStrength = (password: string) => {
+        console.log("inside strength", password);
+        
+        const lowerCaseRegexs = /[a-z]/;
+        const upperCaseRegex = /[A-Z]/;
+        const numberRegex = /\d/;
+        const specialCharRegex = /[!@#$%^&*(),.?":{}|<>]/;
+
+        const isLowerCasePresent = lowerCaseRegexs.test(password);
+        const isUpperCasePresent = upperCaseRegex.test(password);
+        const isNumberPresent = numberRegex.test(password);
+        const isSpecialCharPresent = specialCharRegex.test(password);
+
+        let feedback = '';
+        if (!isLowerCasePresent) {
+            return "Password should contain at least one lowercase letter. ";
+          }
+      
+          if (!isUpperCasePresent) {
+            return "Password should contain at least one uppercase letter. ";
+          }
+      
+          if (!isNumberPresent) {
+            return "Password should contain at least one number. ";
+          }
+      
+          if (!isSpecialCharPresent) {
+            return "Password should contain at least one special character. ";
+          }
+      
+          return 'Strong Password'
+    }
 
     return (
         <div className='flex justify-center items-center'>
@@ -58,18 +99,72 @@ export const SignUp = () => {
                     Sign up to start listening
                 </Heading>
 
-                <div className='mb-4'>
-                    <p className='mb-2'>Email Address</p>
-                    <Input placeholder='name@gmail.com'
-                        type='email'
-                        onChange={handleEmailChange}
-                    />
 
-                    <p className='mb-2'>Password</p>
-                    <Input placeholder='Password'
-                        type='password'
-                        onChange={handlePasswordChange}
-                    />
+                <div className='mb-4'>
+                    <form>
+                        <FormControl mt={1}>
+                            <FormLabel>Email</FormLabel>
+                            <Input type='text' placeholder='example@gmail.com' value={userEmail}
+                                onChange={handleEmailChange}
+                            />
+                        </FormControl>
+
+
+
+                        <InputGroup>
+                            <FormControl mt={1}>
+                                <FormLabel>Password</FormLabel>
+
+                                <InputGroup>
+                                    <Input type={showPassword ? 'text' : 'password'}
+                                        placeholder='Password' value={userPassword}
+                                        onChange={handlePasswordChange}
+                                    />
+
+                                    <InputRightElement width="4.5rem">
+
+                                        {
+                                            showPassword ? <Tooltip hasArrow label='hide password' bg='gray.300' color='black'>
+                                                <IconButton
+                                                    variant={'none'}
+                                                    h="1.75rem"
+                                                    size="md"
+                                                    aria-label=''
+                                                    icon={<IoMdEye />}
+                                                    onClick={() => { setShowPassword(false) }}
+                                                />
+                                            </Tooltip> : <Tooltip hasArrow label='show password' bg='gray.300' color='black'>
+                                                <IconButton
+                                                    variant={'none'}
+                                                    h="1.75rem"
+                                                    size="md"
+                                                    aria-label=''
+                                                    icon={<IoMdEyeOff />}
+                                                    onClick={() => { setShowPassword(true) }}
+                                                />
+                                            </Tooltip>
+                                        }
+
+
+
+                                    </InputRightElement>
+                                </InputGroup>
+
+                                <div>
+                                    {
+                                        passwordStrengthMessage === 'Strong Password' ?  <p className='text-green-500 text-xs'>{passwordStrengthMessage}</p> :  <p className='text-red-600 text-xs'>{passwordStrengthMessage}</p>
+                                    }
+                                   
+                                </div>
+
+
+                            </FormControl>
+
+
+                        </InputGroup>
+
+
+                    </form>
                 </div>
 
                 <Button colorScheme='teal' size='md' className='w-full mb-4'
@@ -92,7 +187,7 @@ export const SignUp = () => {
                 <div className='flex justify-center items-center'>
 
                     <GoogleButton
-                     
+
                         onClick={() => { console.log('Google button clicked') }}
                     />
 
