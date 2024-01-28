@@ -22,19 +22,19 @@ export const signUpSlice = createSlice({
 
     reducers:{
         
-        setEmailAction: (state, action: PayloadAction<string>)=>{
+        signUpEmailAction: (state, action: PayloadAction<string>)=>{
             state.email = action.payload
         },
 
-        setPasswordAction: (state, action: PayloadAction<string>)=>{
+        signUpPasswordAction: (state, action: PayloadAction<string>)=>{
             state.password = action.payload
         }
     }
 })
 
 
-export const {setEmailAction, setPasswordAction } = signUpSlice.actions
-export const updatedEmailValueFromRduxStore = (state: RootState) => state.signUp.email;
-export const updatedPasswordValueFromRduxStore = (state: RootState) => state.signUp.password;
+export const {signUpEmailAction, signUpPasswordAction} = signUpSlice.actions
+export const signUpEmailValueFromRduxStore = (state: RootState) => state.signUp.email;
+export const signUpPasswordValueFromRduxStore = (state: RootState) => state.signUp.password;
 
 export default signUpSlice.reducer

@@ -10,8 +10,9 @@ import SignUpCover from '../Assets/SignUpCover.jpg'
 import { OtpModal } from '../Components/SignUp/OtpModal';
 import GoogleButton from 'react-google-button'
 import { useAppDispatch, useAppSelector } from '../Redux/Store/Hook';
-import { setEmailAction, setPasswordAction, updatedEmailValueFromRduxStore, updatedPasswordValueFromRduxStore } from '../Redux/SignUpReducer/reducer';
+
 import { IoMdEyeOff, IoMdEye } from "react-icons/io";
+import { signUpEmailAction, signUpEmailValueFromRduxStore, signUpPasswordAction, signUpPasswordValueFromRduxStore } from '../Redux/SignUpReducer/reducer';
 
 
 export const SignUp = () => {
@@ -20,26 +21,26 @@ export const SignUp = () => {
     const [passwordStrengthMessage, setPasswordStrengthMessage] = useState<string>('')
 
     const dispatch = useAppDispatch();
-    const userEmail = useAppSelector(updatedEmailValueFromRduxStore);
-    const userPassword = useAppSelector(updatedPasswordValueFromRduxStore);
+    const userSignUpEmail = useAppSelector(signUpEmailValueFromRduxStore);
+    const userSignUpPassword = useAppSelector(signUpPasswordValueFromRduxStore);
 
 
 
 
     const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        dispatch(setEmailAction(e.target.value))
+        dispatch(signUpEmailAction(e.target.value))
 
         
     }
 
 
     const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        dispatch(setPasswordAction(e.target.value))
+        dispatch(signUpPasswordAction(e.target.value))
         const passwordFeedback = checkPasswordStrength(e.target.value);
         setPasswordStrengthMessage(passwordFeedback)
     }
 
-    console.log(userEmail, userPassword)
+    
 
     const checkPasswordStrength = (password: string) => {
         console.log("inside strength", password);
@@ -104,7 +105,7 @@ export const SignUp = () => {
                     <form>
                         <FormControl mt={1}>
                             <FormLabel>Email</FormLabel>
-                            <Input type='text' placeholder='example@gmail.com' value={userEmail}
+                            <Input type='text' placeholder='example@gmail.com' value={userSignUpEmail}
                                 onChange={handleEmailChange}
                             />
                         </FormControl>
@@ -117,7 +118,7 @@ export const SignUp = () => {
 
                                 <InputGroup>
                                     <Input type={showPassword ? 'text' : 'password'}
-                                        placeholder='Password' value={userPassword}
+                                        placeholder='Password' value={userSignUpPassword}
                                         onChange={handlePasswordChange}
                                     />
 
@@ -152,7 +153,7 @@ export const SignUp = () => {
 
                                 <div>
                                     {
-                                        passwordStrengthMessage === 'Strong Password' ?  <p className='text-green-500 text-xs'>{passwordStrengthMessage}</p> :  <p className='text-red-600 text-xs'>{passwordStrengthMessage}</p>
+                                        passwordStrengthMessage === 'Strong Password' ?  <p className='text-green-800 text-xs'>{passwordStrengthMessage}</p> :  <p className='text-red-600 text-xs'>{passwordStrengthMessage}</p>
                                     }
                                    
                                 </div>
