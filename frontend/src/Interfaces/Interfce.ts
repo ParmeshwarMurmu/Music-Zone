@@ -17,6 +17,10 @@ export interface allMusic {
 
 }
 
+export interface signUpNewUser {
+  email: string,
+  password: string
+}
 
 export interface AppContextProps {
   // Add the properties you need in your context

@@ -12,7 +12,9 @@ import GoogleButton from 'react-google-button'
 import { useAppDispatch, useAppSelector } from '../Redux/Store/Hook';
 
 import { IoMdEyeOff, IoMdEye } from "react-icons/io";
-import { signUpEmailAction, signUpEmailValueFromRduxStore, signUpPasswordAction, signUpPasswordValueFromRduxStore } from '../Redux/SignUpReducer/reducer';
+import { signUpEmailAction, signUpEmailValueFromRduxStore,  signUpPasswordAction, signUpPasswordValueFromRduxStore } from '../Redux/SignUpReducer/reducer';
+import axios from 'axios';
+import { APP_URL } from '../Endpoints/Endpoints';
 
 
 export const SignUp = () => {
@@ -30,7 +32,7 @@ export const SignUp = () => {
     const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         dispatch(signUpEmailAction(e.target.value))
 
-        
+
     }
 
 
@@ -40,11 +42,11 @@ export const SignUp = () => {
         setPasswordStrengthMessage(passwordFeedback)
     }
 
-    
+
 
     const checkPasswordStrength = (password: string) => {
         console.log("inside strength", password);
-        
+
         const lowerCaseRegexs = /[a-z]/;
         const upperCaseRegex = /[A-Z]/;
         const numberRegex = /\d/;
@@ -55,24 +57,46 @@ export const SignUp = () => {
         const isNumberPresent = numberRegex.test(password);
         const isSpecialCharPresent = specialCharRegex.test(password);
 
-        let feedback = '';
+
         if (!isLowerCasePresent) {
             return "Password should contain at least one lowercase letter. ";
-          }
-      
-          if (!isUpperCasePresent) {
+        }
+
+        if (!isUpperCasePresent) {
             return "Password should contain at least one uppercase letter. ";
-          }
-      
-          if (!isNumberPresent) {
+        }
+
+        if (!isNumberPresent) {
             return "Password should contain at least one number. ";
-          }
-      
-          if (!isSpecialCharPresent) {
+        }
+
+        if (!isSpecialCharPresent) {
             return "Password should contain at least one special character. ";
-          }
-      
-          return 'Strong Password'
+        }
+
+        return 'Strong Password'
+    }
+
+    const handleSignUpSubmitForm = (e: React.FormEvent<HTMLFormElement>)=>{
+        e.preventDefault();
+        let userData = {
+            email :userSignUpEmail,
+            password: userSignUpPassword
+        }
+
+        axios.post(`${APP_URL}/user/signUp`, userData)
+        .then((res)=>{
+            console.log(res.data.message);
+            
+        })
+        .catch((err)=>{
+            console.log(err);
+            console.log(err.data.message);
+            
+        })
+        
+
+
     }
 
     return (
@@ -102,7 +126,7 @@ export const SignUp = () => {
 
 
                 <div className='mb-4'>
-                    <form>
+                    <form onSubmit={handleSignUpSubmitForm}>
                         <FormControl mt={1}>
                             <FormLabel>Email</FormLabel>
                             <Input type='text' placeholder='example@gmail.com' value={userSignUpEmail}
@@ -153,9 +177,9 @@ export const SignUp = () => {
 
                                 <div>
                                     {
-                                        passwordStrengthMessage === 'Strong Password' ?  <p className='text-green-800 text-xs'>{passwordStrengthMessage}</p> :  <p className='text-red-600 text-xs'>{passwordStrengthMessage}</p>
+                                        passwordStrengthMessage === 'Strong Password' ? <p className='text-green-800 text-xs'>{passwordStrengthMessage}</p> : <p className='text-red-600 text-xs'>{passwordStrengthMessage}</p>
                                     }
-                                   
+
                                 </div>
 
 
@@ -164,15 +188,23 @@ export const SignUp = () => {
 
                         </InputGroup>
 
+                        <Button
+                            type='submit'
+                            colorScheme='teal'
+                            size='md'
+                            className='w-full mb-4 mt-4'
+                            // isLoading={isLoading}
+                        >
+                            Next
+                        </Button>
+
 
                     </form>
+
+
                 </div>
 
-                <Button colorScheme='teal' size='md' className='w-full mb-4'
-                // isLoading
-                >
-                    Next
-                </Button>
+
 
 
                 <div className='flex items-center justify-center mb-4'>

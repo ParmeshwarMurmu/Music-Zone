@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 import { FcPhoneAndroid } from "react-icons/fc";
 import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/style.css'
-import { RecaptchaVerifier, signInWithPhoneNumber, ConfirmationResult } from 'firebase/auth';
+import { RecaptchaVerifier, signInWithPhoneNumber, ConfirmationResult, PhoneAuthProvider } from 'firebase/auth';
 import { auth } from '../../fireBase/Config';
 
 
@@ -25,7 +25,7 @@ export const OtpModal = () => {
         setPhone(value);
     };
 
-    const onCaptchaVerify = async() => {
+    const onCaptchaVerify = async () => {
         setGetOtpLoading(true)
         const recaptchaVerifier = new RecaptchaVerifier(auth, 'recaptcha-container', {
             'callback': () => {
@@ -45,7 +45,7 @@ export const OtpModal = () => {
                 // SMS sent. Prompt user to type the code from the message, then sign the
                 // user in with confirmationResult.confirm(code).
                 setConfirmationResult(confirmationResult)
-                
+
                 // window.confirmationResult = confirmationResult;
 
                 // ...
@@ -63,17 +63,21 @@ export const OtpModal = () => {
     const verifyOTP = () => {
         console.log(OTP);
         if (OTP != null && confirmationResult) {
+
+
             confirmationResult.confirm(OTP).then((result: any) => {
                 // User signed in successfully.
+                alert("signUP sUCCESSFULL")
+
                 const user = result.user;
                 console.log(result);
-                
+
                 // ...
             }).catch((error: any) => {
                 // User couldn't sign in (bad verification code?)
                 // ...
                 console.log(error);
-                
+
             });
 
         }
@@ -88,7 +92,7 @@ export const OtpModal = () => {
                 >
                     <FcPhoneAndroid className='mr-5 text-blue-500' fontSize={'30px'} /> <span className='text-black'>Sign up Using   OTP</span>
                 </Button>
-                
+
 
                 <Modal isOpen={isOpen} onClose={onClose}>
                     <ModalOverlay />
