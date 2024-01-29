@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import MusicZoneLogo from '../Assets/Music Zone .jpg'
 import MusicZone from '../Assets/Music Zone Logo.jpg'
-import { AbsoluteCenter, InputGroup, Avatar, Box, Button, Divider, Heading, Input, InputRightElement, Wrap, WrapItem, Tooltip, IconButton, FormControl, FormLabel } from '@chakra-ui/react'
+import { AbsoluteCenter, useToast, InputGroup, Avatar, Box, Button, Divider, Heading, Input, InputRightElement, Wrap, WrapItem, Tooltip, IconButton, FormControl, FormLabel } from '@chakra-ui/react'
 import { FcGoogle } from "react-icons/fc";
 import { ImFacebook2 } from "react-icons/im";
 import { FcPhoneAndroid } from "react-icons/fc";
@@ -12,9 +12,12 @@ import GoogleButton from 'react-google-button'
 import { useAppDispatch, useAppSelector } from '../Redux/Store/Hook';
 
 import { IoMdEyeOff, IoMdEye } from "react-icons/io";
-import { signUpEmailAction, signUpEmailValueFromRduxStore,  signUpPasswordAction, signUpPasswordValueFromRduxStore } from '../Redux/SignUpReducer/reducer';
+import { signUpEmailAction, sigUpIsLoadingAction,signUpResetAction, sigUpIsEorrAction, signUpEmailValueFromRduxStore, signUpErrorValueFromReduxStore, signUpLoadingValueFromReduxStore, signUpPasswordAction, signUpPasswordValueFromRduxStore } from '../Redux/SignUpReducer/reducer';
 import axios from 'axios';
 import { APP_URL } from '../Endpoints/Endpoints';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 
 export const SignUp = () => {
@@ -25,8 +28,11 @@ export const SignUp = () => {
     const dispatch = useAppDispatch();
     const userSignUpEmail = useAppSelector(signUpEmailValueFromRduxStore);
     const userSignUpPassword = useAppSelector(signUpPasswordValueFromRduxStore);
+    const userSignUpLoading = useAppSelector(signUpLoadingValueFromReduxStore);
+    const userSignUpError = useAppSelector(signUpErrorValueFromReduxStore);
 
 
+    const toast = useToast()
 
 
     const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -77,24 +83,42 @@ export const SignUp = () => {
         return 'Strong Password'
     }
 
-    const handleSignUpSubmitForm = (e: React.FormEvent<HTMLFormElement>)=>{
+    const handleSignUpSubmitForm = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         let userData = {
-            email :userSignUpEmail,
+            email: userSignUpEmail,
             password: userSignUpPassword
         }
-
+        dispatch(sigUpIsLoadingAction(true))
         axios.post(`${APP_URL}/user/signUp`, userData)
-        .then((res)=>{
-            console.log(res.data.message);
-            
-        })
-        .catch((err)=>{
-            console.log(err);
-            console.log(err.data.message);
-            
-        })
-        
+            .then((res) => {
+                console.log(res.data.message);
+                // toast(`${res.data.message}`);
+                dispatch(sigUpIsLoadingAction(false))
+                toast({
+                    title: `${res.data.message}`,
+                    position: 'top-right',
+                    status: 'success',
+                    isClosable: true,
+                    duration: 3000,
+                })
+                dispatch(signUpResetAction())
+
+            })
+            .catch((err) => {
+                console.log(err);
+                console.log(err.data.message);
+                dispatch(sigUpIsEorrAction(false))
+                toast({
+                    title: `${err.data.message}`,
+                    position: 'top-right',
+                    status: 'error',
+                    isClosable: true,
+                    duration: 3000,
+                })
+
+            })
+
 
 
     }
@@ -126,24 +150,27 @@ export const SignUp = () => {
 
 
                 <div className='mb-4'>
+
+
+
                     <form onSubmit={handleSignUpSubmitForm}>
-                        <FormControl mt={1}>
+                        <FormControl isRequired mt={1}>
                             <FormLabel>Email</FormLabel>
-                            <Input type='text' placeholder='example@gmail.com' value={userSignUpEmail}
-                                onChange={handleEmailChange}
+                            <Input type='email' placeholder='example@gmail.com' value={userSignUpEmail}
+                                onChange={handleEmailChange} required
                             />
                         </FormControl>
 
 
 
                         <InputGroup>
-                            <FormControl mt={1}>
+                            <FormControl isRequired mt={1}>
                                 <FormLabel>Password</FormLabel>
 
                                 <InputGroup>
                                     <Input type={showPassword ? 'text' : 'password'}
                                         placeholder='Password' value={userSignUpPassword}
-                                        onChange={handlePasswordChange}
+                                        onChange={handlePasswordChange} required
                                     />
 
                                     <InputRightElement width="4.5rem">
@@ -193,7 +220,7 @@ export const SignUp = () => {
                             colorScheme='teal'
                             size='md'
                             className='w-full mb-4 mt-4'
-                            // isLoading={isLoading}
+                            isLoading={userSignUpLoading}
                         >
                             Next
                         </Button>

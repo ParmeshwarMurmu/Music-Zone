@@ -45,12 +45,16 @@ export const signUpSlice = createSlice({
 
         signUpPasswordAction: (state, action: PayloadAction<string>)=>{
             state.password = action.payload;
+        },
+
+        signUpResetAction: (state) => {
+            return initialState;
         }
     }
 })
 
 
-export const {signUpEmailAction, signUpPasswordAction, sigUpIsLoadingAction, sigUpIsEorrAction} = signUpSlice.actions
+export const {signUpEmailAction, signUpPasswordAction, sigUpIsLoadingAction, sigUpIsEorrAction, signUpResetAction} = signUpSlice.actions
 export const signUpEmailValueFromRduxStore = (state: RootState) => state.signUp.email;
 export const signUpPasswordValueFromRduxStore = (state: RootState) => state.signUp.password;
 export const signUpLoadingValueFromReduxStore = (state: RootState) => state.signUp.isLoading;
