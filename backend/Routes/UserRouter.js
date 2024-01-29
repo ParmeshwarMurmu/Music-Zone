@@ -2,7 +2,7 @@ const express = require('express');
 const { UserModel } = require('../Models/UserSchema');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken')
-require()
+require('dotenv').config()
 
 const userRouter = express.Router();
 
@@ -50,27 +50,17 @@ userRouter.post('/login', async (req, res) => {
         if (existingUser) {
 
             // Comparing the user pssword and existing user password
-            bcrypt.compare(myPlaintextPassword, hash, function(err, result) {
+            bcrypt.compare(password, existingUser.password, function(err, result) {
                 // result == true
                 if(err){
                     res.status(200).send({ "message": "Wrong Password" })
                 }
 
-                const token = jwt.sign({userId: existingUser._id, userEmail: existingUser.email}, 'shhhhh');
+                const token = jwt.sign({userId: existingUser._id, userEmail: existingUser.email}, process.env.SECRET_KEY);
+                res.status(200).send({"message": "Login Success", "token": token})
 
 
             });
-            console.log(password === existingUser.password);
-            console.log(typeof password, typeof existingUser.password);
-            if (password === existingUser.password) {
-                res.status(200).send({ "message": "Login Success" })
-
-            }
-            else {
-               
-
-            }
-
         }
         else {
             res.status(200).send({ "message": "Email does not Exists" });

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import MusicZoneLogo from '../Assets/Music Zone .jpg'
 import MusicZone from '../Assets/Music Zone Logo.jpg'
-import { AbsoluteCenter,useToast, Avatar, Box, Button, Divider, FormControl, FormLabel, Heading, IconButton, Input, InputGroup, InputRightElement, Tooltip, Wrap, WrapItem } from '@chakra-ui/react'
+import { AbsoluteCenter, useToast, Avatar, Box, Button, Divider, FormControl, FormLabel, Heading, IconButton, Input, InputGroup, InputRightElement, Tooltip, Wrap, WrapItem } from '@chakra-ui/react'
 import { FcGoogle } from "react-icons/fc";
 import { ImFacebook2 } from "react-icons/im";
 import { FcPhoneAndroid } from "react-icons/fc";
@@ -16,7 +16,7 @@ import { APP_URL, USER_LOGIN_ENDPOINT } from '../Endpoints/Endpoints';
 
 
 export const Login = () => {
-  
+
   // state to handle hide password and show password
   const [showPassword, setShowPassword] = useState<boolean>(false);
 
@@ -33,22 +33,22 @@ export const Login = () => {
   const loginIsLoading = useAppSelector(loginIsLoadingValueFromReduxStore);
   const loginIsError = useAppSelector(loginIsErrorValueFromReduxStore);
 
-  
+
   // Function To Handle User Email Input
-  const handleLoginEmailChange = (e:React.ChangeEvent<HTMLInputElement> )=>{
+  const handleLoginEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(loginEmailAction(e.target.value))
 
   }
 
   // Function To Handle User Password Input
-  const handleLoginPasswordChange = (e:React.ChangeEvent<HTMLInputElement>)=>{
+  const handleLoginPasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(loginPasswordAction(e.target.value))
 
   }
 
-  
+
   // Fucntion To Handle when User Submit Login Form
-  const handleLoginSubmitForm = (e:React.FormEvent<HTMLFormElement>)=>{
+  const handleLoginSubmitForm = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     let loginCredentials = {
       email: userLoginEmail,
@@ -57,47 +57,47 @@ export const Login = () => {
 
     dispatch(loginIsLoadingAction(true))
     axios.post(`${APP_URL}${USER_LOGIN_ENDPOINT}`, loginCredentials)
-    .then((res)=>{
-      console.log(res);
-      dispatch(loginIsLoadingAction(false))
-      if(res.data.message === 'Login Success'){
+      .then((res) => {
+        console.log(res);
+        dispatch(loginIsLoadingAction(false))
+        if (res.data.message === 'Login Success') {
 
+          toast({
+            title: `${res.data.message}`,
+            position: 'top-right',
+            status: 'success',
+            isClosable: true,
+            duration: 3000,
+          })
+        } else {
+          toast({
+            title: `${res.data.message}`,
+            position: 'top-right',
+            status: 'warning',
+            isClosable: true,
+            duration: 3000,
+          })
+        }
+        dispatch(loginResetAction())
+
+      })
+      .catch((err) => {
+        console.log(err);
         toast({
-          title: `${res.data.message}`,
+          title: `${err.code}`,
           position: 'top-right',
-          status: 'success',
+          status: 'error',
           isClosable: true,
           duration: 3000,
         })
-      }else{
-        toast({
-          title: `${res.data.message}`,
-          position: 'top-right',
-          status: 'warning',
-          isClosable: true,
-          duration: 3000,
-        })
-      }
-      dispatch(loginResetAction())
-      
-    })
-    .catch((err)=>{
-      console.log(err);
-      toast({
-        title: `${err.data.message}`,
-        position: 'top-right',
-        status: 'error',
-        isClosable: true,
-        duration: 3000,
-    })
-    dispatch(loginIsLoadingAction(false))
-      dispatch(loginIsErrorAction(true))
-      
-      
-    })
-    
+        dispatch(loginIsLoadingAction(false))
+        dispatch(loginIsErrorAction(true))
+
+
+      })
+
   }
-  
+
 
   return (
     <div className='flex justify-center items-center'>
@@ -127,84 +127,84 @@ export const Login = () => {
 
         <div className='p-2'>
 
-        <Heading className='mb-4' as='h2' size='xl'>
-                    Login up to start listening
-                </Heading>
+          <Heading className='mb-4' as='h2' size='xl'>
+            Login up to start listening
+          </Heading>
 
 
-                <div className='mb-4'>
-
-
-
-                    <form onSubmit={handleLoginSubmitForm}>
-                        <FormControl isRequired mt={1}>
-                            <FormLabel>Email</FormLabel>
-                            <Input type='email' placeholder='example@gmail.com' value={userLoginEmail}
-                                onChange={handleLoginEmailChange} required
-                            />
-                        </FormControl>
+          <div className='mb-4'>
 
 
 
-                        <InputGroup>
-                            <FormControl isRequired mt={1}>
-                                <FormLabel>Password</FormLabel>
-
-                                <InputGroup>
-                                    <Input type={showPassword ? 'text' : 'password'}
-                                        placeholder='Password' value={userLoginPassword}
-                                        onChange={handleLoginPasswordChange} required
-                                    />
-
-                                    <InputRightElement width="4.5rem">
-
-                                        {
-                                            showPassword ? <Tooltip hasArrow label='hide password' bg='gray.300' color='black'>
-                                                <IconButton
-                                                    variant={'none'}
-                                                    h="1.75rem"
-                                                    size="md"
-                                                    aria-label=''
-                                                    icon={<IoMdEye />}
-                                                    onClick={() => { setShowPassword(false) }}
-                                                />
-                                            </Tooltip> : <Tooltip hasArrow label='show password' bg='gray.300' color='black'>
-                                                <IconButton
-                                                    variant={'none'}
-                                                    h="1.75rem"
-                                                    size="md"
-                                                    aria-label=''
-                                                    icon={<IoMdEyeOff />}
-                                                    onClick={() => { setShowPassword(true) }}
-                                                />
-                                            </Tooltip>
-                                        }
+            <form onSubmit={handleLoginSubmitForm}>
+              <FormControl isRequired mt={1}>
+                <FormLabel>Email</FormLabel>
+                <Input type='email' placeholder='example@gmail.com' value={userLoginEmail}
+                  onChange={handleLoginEmailChange} required
+                />
+              </FormControl>
 
 
 
-                                    </InputRightElement>
-                                </InputGroup>
+              <InputGroup>
+                <FormControl isRequired mt={1}>
+                  <FormLabel>Password</FormLabel>
 
-                            </FormControl>
+                  <InputGroup>
+                    <Input type={showPassword ? 'text' : 'password'}
+                      placeholder='Password' value={userLoginPassword}
+                      onChange={handleLoginPasswordChange} required
+                    />
+
+                    <InputRightElement width="4.5rem">
+
+                      {
+                        showPassword ? <Tooltip hasArrow label='hide password' bg='gray.300' color='black'>
+                          <IconButton
+                            variant={'none'}
+                            h="1.75rem"
+                            size="md"
+                            aria-label=''
+                            icon={<IoMdEye />}
+                            onClick={() => { setShowPassword(false) }}
+                          />
+                        </Tooltip> : <Tooltip hasArrow label='show password' bg='gray.300' color='black'>
+                          <IconButton
+                            variant={'none'}
+                            h="1.75rem"
+                            size="md"
+                            aria-label=''
+                            icon={<IoMdEyeOff />}
+                            onClick={() => { setShowPassword(true) }}
+                          />
+                        </Tooltip>
+                      }
 
 
-                        </InputGroup>
 
-                        <Button
-                            type='submit'
-                            colorScheme='teal'
-                            size='md'
-                            className='w-full mb-4 mt-4'
-                            isLoading={loginIsLoading}
-                        >
-                            Next
-                        </Button>
+                    </InputRightElement>
+                  </InputGroup>
+
+                </FormControl>
 
 
-                    </form>
+              </InputGroup>
+
+              <Button
+                type='submit'
+                colorScheme='teal'
+                size='md'
+                className='w-full mb-4 mt-4'
+                isLoading={loginIsLoading}
+              >
+                Next
+              </Button>
 
 
-                </div>
+            </form>
+
+
+          </div>
 
 
 
@@ -222,12 +222,12 @@ export const Login = () => {
             </Button>
           </div>
 
-          <div  className='flex justify-center items-center'>
+          <div className='flex justify-center items-center'>
 
-          <GoogleButton
-                        label='Login with Google'
-                        onClick={() => { console.log('Google button clicked') }}
-                    />
+            <GoogleButton
+              label='Login with Google'
+              onClick={() => { console.log('Google button clicked') }}
+            />
             {/* <Button colorScheme='' size='md' className='w-full mb-4 p-2 outline border-2 hover:border-indigo-300'
             // isLoading
             >

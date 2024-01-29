@@ -114,9 +114,10 @@ export const SignUp = () => {
             .catch((err) => {
                 console.log(err);
                 console.log(err.data.message);
+                
                 dispatch(sigUpIsEorrAction(false))
                 toast({
-                    title: `${err.data.message}`,
+                    title: `${err.code}`,
                     position: 'top-right',
                     status: 'error',
                     isClosable: true,
@@ -280,7 +281,7 @@ export const SignUp = () => {
                 <hr className='mb-4'></hr>
 
                 <div className='flex justify-center items-center mb-6'>
-                    <p>Already have an account ? <Link to={'/login'}><span className='text-blue-600 underline decoration-solid'>Login here</span></Link></p>
+                    <p>Already have an account ? <Link to={'/login'}><span className='text-blue-600 underline decoration-solid'>Login</span></Link></p>
                 </div>
 
 
