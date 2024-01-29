@@ -14,7 +14,7 @@ import { useAppDispatch, useAppSelector } from '../Redux/Store/Hook';
 import { IoMdEyeOff, IoMdEye } from "react-icons/io";
 import { signUpEmailAction, sigUpIsLoadingAction,signUpResetAction, sigUpIsEorrAction, signUpEmailValueFromRduxStore, signUpErrorValueFromReduxStore, signUpLoadingValueFromReduxStore, signUpPasswordAction, signUpPasswordValueFromRduxStore } from '../Redux/SignUpReducer/reducer';
 import axios from 'axios';
-import { APP_URL } from '../Endpoints/Endpoints';
+import { APP_URL, USER_SIGNUP_ENDPOINT } from '../Endpoints/Endpoints';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -90,7 +90,7 @@ export const SignUp = () => {
             password: userSignUpPassword
         }
         dispatch(sigUpIsLoadingAction(true))
-        axios.post(`${APP_URL}/user/signUp`, userData)
+        axios.post(`${APP_URL}${USER_SIGNUP_ENDPOINT}`, userData)
             .then((res) => {
                 console.log(res.data.message);
                 // toast(`${res.data.message}`);

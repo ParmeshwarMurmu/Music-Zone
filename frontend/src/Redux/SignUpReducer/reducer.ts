@@ -1,12 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import type { RootState } from '../Store/Store'
-import axios from 'axios'
-import { APP_URL } from '../../Endpoints/Endpoints'
-import { signUpNewUser } from '../../Interfaces/Interfce'
 
 
 
-// Defined type for the slice state
+// Defined type for the slice state for Sign Up 
 interface SignUpState {
     email: string,
     password: string,
@@ -22,6 +19,8 @@ const initialState: SignUpState = {
     isLoading: false,
     isError: false
 }
+
+// Function to SignUp Create Slice
 
 export const signUpSlice = createSlice({
     name: 'signUp',

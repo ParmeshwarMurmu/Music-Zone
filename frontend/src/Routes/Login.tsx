@@ -1,18 +1,73 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import MusicZoneLogo from '../Assets/Music Zone .jpg'
 import MusicZone from '../Assets/Music Zone Logo.jpg'
-import { AbsoluteCenter, Avatar, Box, Button, Divider, Heading, Input, Wrap, WrapItem } from '@chakra-ui/react'
+import { AbsoluteCenter, Avatar, Box, Button, Divider, FormControl, FormLabel, Heading, IconButton, Input, InputGroup, InputRightElement, Tooltip, Wrap, WrapItem } from '@chakra-ui/react'
 import { FcGoogle } from "react-icons/fc";
 import { ImFacebook2 } from "react-icons/im";
 import { FcPhoneAndroid } from "react-icons/fc";
 import { Link } from 'react-router-dom';
 import LoginCover from '../Assets/LoginCover.jpg'
 import GoogleButton from 'react-google-button'
-
+import { useAppDispatch, useAppSelector } from '../Redux/Store/Hook';
+import { loginEmailAction, loginEmailValueFromReduxStore, loginIsErrorAction, loginIsErrorValueFromReduxStore, loginIsLoadingAction, loginIsLoadingValueFromReduxStore, loginPasswordAction, loginPasswordValueFromReduxStore, loginResetAction } from '../Redux/LoginReducer/reducer';
+import { IoMdEyeOff, IoMdEye } from "react-icons/io";
+import axios from 'axios';
+import { APP_URL, USER_LOGIN_ENDPOINT } from '../Endpoints/Endpoints';
 
 
 export const Login = () => {
+  
+  // state to handle hide password and show password
+  const [showPassword, setShowPassword] = useState<boolean>(false);
 
+
+  // Taking out useAppDisptch From Hook.ts
+  const dispatch = useAppDispatch()
+
+  // Taking Out all the values from Redux stroe login Reducer
+
+  const userLoginEmail = useAppSelector(loginEmailValueFromReduxStore);
+  const userLoginPassword = useAppSelector(loginPasswordValueFromReduxStore);
+  const loginIsLoading = useAppSelector(loginIsLoadingValueFromReduxStore);
+  const loginIsError = useAppSelector(loginIsErrorValueFromReduxStore);
+
+  
+  // Function To Handle User Email Input
+  const handleLoginEmailChange = (e:React.ChangeEvent<HTMLInputElement> )=>{
+    dispatch(loginEmailAction(e.target.value))
+
+  }
+
+  // Function To Handle User Password Input
+  const handleLoginPasswordChange = (e:React.ChangeEvent<HTMLInputElement>)=>{
+    dispatch(loginPasswordAction(e.target.value))
+
+  }
+
+  
+  // Fucntion To Handle when User Submit Login Form
+  const handleLoginSubmitForm = (e:React.FormEvent<HTMLFormElement>)=>{
+    e.preventDefault();
+    let loginCredentials = {
+      email: userLoginEmail,
+      passwoord: userLoginPassword
+    }
+
+    dispatch(loginIsLoadingAction(true))
+    axios.post(`${APP_URL}${USER_LOGIN_ENDPOINT}`, loginCredentials)
+    .then((res)=>{
+      console.log(res);
+      dispatch(loginIsLoadingAction(false))
+      dispatch(loginResetAction())
+      
+    })
+    .catch((err)=>{
+      console.log(err);
+      dispatch(loginIsErrorAction(true))
+      
+    })
+    
+  }
   
 
   return (
@@ -43,27 +98,85 @@ export const Login = () => {
 
         <div className='p-2'>
 
-          <Heading className='mb-4' as='h2' size='xl'>
-            Login to Music Zone
-          </Heading>
+        <Heading className='mb-4' as='h2' size='xl'>
+                    Sign up to start listening
+                </Heading>
 
-          <div className='mb-4'>
-            <p className='mb-2'>Email Address</p>
-            <Input placeholder='name@gmail.com'
-              type='text'
-            />
 
-            <p className='mb-2'>Password</p>
-            <Input placeholder='Password'
-              type='password'
-            />
-          </div>
+                <div className='mb-4'>
 
-          <Button colorScheme='teal' size='md' className='w-full mb-4'
-          // isLoading
-          >
-            Login
-          </Button>
+
+
+                    <form onSubmit={handleLoginSubmitForm}>
+                        <FormControl isRequired mt={1}>
+                            <FormLabel>Email</FormLabel>
+                            <Input type='email' placeholder='example@gmail.com' value={userLoginEmail}
+                                onChange={handleLoginEmailChange} required
+                            />
+                        </FormControl>
+
+
+
+                        <InputGroup>
+                            <FormControl isRequired mt={1}>
+                                <FormLabel>Password</FormLabel>
+
+                                <InputGroup>
+                                    <Input type={showPassword ? 'text' : 'password'}
+                                        placeholder='Password' value={userLoginPassword}
+                                        onChange={handleLoginPasswordChange} required
+                                    />
+
+                                    <InputRightElement width="4.5rem">
+
+                                        {
+                                            showPassword ? <Tooltip hasArrow label='hide password' bg='gray.300' color='black'>
+                                                <IconButton
+                                                    variant={'none'}
+                                                    h="1.75rem"
+                                                    size="md"
+                                                    aria-label=''
+                                                    icon={<IoMdEye />}
+                                                    onClick={() => { setShowPassword(false) }}
+                                                />
+                                            </Tooltip> : <Tooltip hasArrow label='show password' bg='gray.300' color='black'>
+                                                <IconButton
+                                                    variant={'none'}
+                                                    h="1.75rem"
+                                                    size="md"
+                                                    aria-label=''
+                                                    icon={<IoMdEyeOff />}
+                                                    onClick={() => { setShowPassword(true) }}
+                                                />
+                                            </Tooltip>
+                                        }
+
+
+
+                                    </InputRightElement>
+                                </InputGroup>
+
+                            </FormControl>
+
+
+                        </InputGroup>
+
+                        <Button
+                            type='submit'
+                            colorScheme='teal'
+                            size='md'
+                            className='w-full mb-4 mt-4'
+                            isLoading={loginIsLoading}
+                        >
+                            Next
+                        </Button>
+
+
+                    </form>
+
+
+                </div>
+
 
 
           <div className='flex items-center justify-center mb-4'>
