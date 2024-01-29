@@ -1,5 +1,5 @@
 
-import { Button, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, useDisclosure } from '@chakra-ui/react'
+import { Button, HStack, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, PinInput, PinInputField, useDisclosure } from '@chakra-ui/react'
 import React, { useState } from 'react'
 import { FcPhoneAndroid } from "react-icons/fc";
 import PhoneInput from 'react-phone-input-2'
@@ -17,7 +17,7 @@ export const OtpModal = () => {
     const { isOpen, onOpen, onClose } = useDisclosure();
     const [phone, setPhone] = useState<string>('');
     const [getOTP, setGetOTP] = useState<boolean>(false)
-    const [OTP, setOTP] = useState<number | null>()
+    const [OTP, setOTP] = useState<string>('')
     const [confirmationResult, setConfirmationResult] = useState<any>(null);
     const [getOtpLoding, setGetOtpLoading] = useState<boolean>(false)
 
@@ -56,9 +56,14 @@ export const OtpModal = () => {
 
     }
 
-    const handleVerifyOTP = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setOTP(+e.target.value)
+    const handleVerifyOTPInput = (value: string, index: number) => {
+        const updatedOtp = OTP.split('');
+        updatedOtp[index] = value;
+        setOTP(updatedOtp.join(''));
     }
+
+    console.log("UserInput Otp", OTP);
+
 
     const verifyOTP = () => {
         console.log(OTP);
@@ -97,40 +102,62 @@ export const OtpModal = () => {
                 <Modal isOpen={isOpen} onClose={onClose}>
                     <ModalOverlay />
                     <ModalContent>
-                        <ModalHeader>Modal Title</ModalHeader>
+                        <ModalHeader className='text-center'>Mobile Verification</ModalHeader>
                         <ModalCloseButton onClick={() => { setGetOTP(false); setPhone('') }} />
-                        <ModalBody>
+                        <ModalBody className='flex justify-center items-center'>
                             {
                                 getOTP ? (
-                                    <div>
+                                    <div >
 
-                                        <p>OTP Verification</p>
-                                        <p>{`Enter the code from the SMS we sent to + ${phone}`}</p>
+                                        <p className='mb-3 text-center'>OTP Verification</p>
+                                        <p className='mb-3 text-center'>{`Enter the code from the SMS we sent to + ${phone}`}</p>
 
-                                        <Input placeholder='Enter OTP'
-                                            onChange={handleVerifyOTP}
-                                        />
-                                        <Button colorScheme='teal' size='md'
-                                            onClick={verifyOTP}
-                                        >
-                                            Verify OTP
-                                        </Button>
+                                        <HStack className='mb-3 flex justify-center items-center'>
+                                            <PinInput size='md'>
+                                                {[0, 1, 2, 3, 4, 5].map((index) => (
+                                                    <PinInputField
+                                                    borderColor='grey' 
+                                                        key={index}
+                                                        onChange={(e) => handleVerifyOTPInput(e.target.value, index)}
+                                                    />
+                                                ))}
+                                            </PinInput>
+                                        </HStack>
+
+                                        {/* <Input placeholder='Enter OTP'
+                                            onChange={handleVerifyOTPInput}
+                                        /> */}
+                                        <div className='mb-3 mt-3 flex justify-center items-center'>
+                                            <Button colorScheme='teal' size='md'
+
+                                                onClick={verifyOTP}
+                                            >
+                                                Verify OTP
+                                            </Button>
+
+                                        </div>
                                     </div>
                                 ) : (
                                     <div>
-                                        <p>Verify Your Phone Number</p>
+                                        <p className='mb-3'>Verify Your Phone Number</p>
                                         <PhoneInput
                                             country={'in'}
                                             value={phone} onChange={handlePhoneChange}
+
                                         />
 
 
-                                        <div id='recaptcha-container'></div>
-                                        <Button colorScheme='teal' size='md'
-                                            onClick={onCaptchaVerify}
-                                        >
-                                            Send OTP
-                                        </Button>
+                                        <div id='recaptcha-container' className='mb-3 mt-3'></div>
+
+                                        <div className='flex justify-center items-center'>
+
+                                            <Button colorScheme='teal' size='md'
+                                                onClick={onCaptchaVerify}
+                                                isDisabled={(phone === '' || phone.length <= 10) ? true : false}
+                                            >
+                                                Send OTP
+                                            </Button>
+                                        </div>
                                     </div>
                                 )
                             }
