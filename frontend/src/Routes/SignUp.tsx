@@ -24,6 +24,8 @@ export const SignUp = () => {
 
     const [showPassword, setShowPassword] = useState<boolean>(false);
     const [passwordStrengthMessage, setPasswordStrengthMessage] = useState<string>('')
+    const [isPasswordStrength, setIsPasswordStrength] = useState<boolean>(false)
+
 
     const dispatch = useAppDispatch();
     const userSignUpEmail = useAppSelector(signUpEmailValueFromRduxStore);
@@ -46,6 +48,9 @@ export const SignUp = () => {
         dispatch(signUpPasswordAction(e.target.value))
         const passwordFeedback = checkPasswordStrength(e.target.value);
         setPasswordStrengthMessage(passwordFeedback)
+        if(passwordFeedback === 'Strong Password'){
+            setIsPasswordStrength(true)
+        }
     }
 
 
@@ -103,6 +108,7 @@ export const SignUp = () => {
                     duration: 3000,
                 })
                 dispatch(signUpResetAction())
+                setIsPasswordStrength(false)
 
             })
             .catch((err) => {
@@ -221,6 +227,7 @@ export const SignUp = () => {
                             size='md'
                             className='w-full mb-4 mt-4'
                             isLoading={userSignUpLoading}
+                            isDisabled={!isPasswordStrength}
                         >
                             Next
                         </Button>

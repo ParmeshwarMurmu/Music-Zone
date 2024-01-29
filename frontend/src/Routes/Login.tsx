@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import MusicZoneLogo from '../Assets/Music Zone .jpg'
 import MusicZone from '../Assets/Music Zone Logo.jpg'
-import { AbsoluteCenter, Avatar, Box, Button, Divider, FormControl, FormLabel, Heading, IconButton, Input, InputGroup, InputRightElement, Tooltip, Wrap, WrapItem } from '@chakra-ui/react'
+import { AbsoluteCenter,useToast, Avatar, Box, Button, Divider, FormControl, FormLabel, Heading, IconButton, Input, InputGroup, InputRightElement, Tooltip, Wrap, WrapItem } from '@chakra-ui/react'
 import { FcGoogle } from "react-icons/fc";
 import { ImFacebook2 } from "react-icons/im";
 import { FcPhoneAndroid } from "react-icons/fc";
@@ -22,7 +22,9 @@ export const Login = () => {
 
 
   // Taking out useAppDisptch From Hook.ts
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
+
+  const toast = useToast()
 
   // Taking Out all the values from Redux stroe login Reducer
 
@@ -50,7 +52,7 @@ export const Login = () => {
     e.preventDefault();
     let loginCredentials = {
       email: userLoginEmail,
-      passwoord: userLoginPassword
+      password: userLoginPassword
     }
 
     dispatch(loginIsLoadingAction(true))
@@ -58,12 +60,39 @@ export const Login = () => {
     .then((res)=>{
       console.log(res);
       dispatch(loginIsLoadingAction(false))
+      if(res.data.message === 'Login Success'){
+
+        toast({
+          title: `${res.data.message}`,
+          position: 'top-right',
+          status: 'success',
+          isClosable: true,
+          duration: 3000,
+        })
+      }else{
+        toast({
+          title: `${res.data.message}`,
+          position: 'top-right',
+          status: 'warning',
+          isClosable: true,
+          duration: 3000,
+        })
+      }
       dispatch(loginResetAction())
       
     })
     .catch((err)=>{
       console.log(err);
+      toast({
+        title: `${err.data.message}`,
+        position: 'top-right',
+        status: 'error',
+        isClosable: true,
+        duration: 3000,
+    })
+    dispatch(loginIsLoadingAction(false))
       dispatch(loginIsErrorAction(true))
+      
       
     })
     
@@ -99,7 +128,7 @@ export const Login = () => {
         <div className='p-2'>
 
         <Heading className='mb-4' as='h2' size='xl'>
-                    Sign up to start listening
+                    Login up to start listening
                 </Heading>
 
 
