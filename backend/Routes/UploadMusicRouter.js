@@ -18,34 +18,7 @@ const storage = multer.diskStorage({
         cb(null, uniqueFileName);
 
         
-        // try {
-        //     // fs.writeFileSync(filePath, file.buffer);
-        //     await fs.writeFile(filePath, file.buffer);
-        //     // You can also use the same musicId as part of the metadata
-        //     const metadata = await mm.parseFile(filePath);
-        //     const { title, artist, album, picture } = metadata.common;
-        //     const releaseYear = metadata.common.year;
-        //     const durationInSeconds = metadata.format.duration;
-        //     const durationInMinutes = Math.floor(durationInSeconds / 60);
-        //     const coverImage = picture && picture.length > 0 ? picture[0].data.toString('base64') : null;
-
-        //     const newMusic = MusicModel({
-        //         title,
-        //         artist,
-        //         album,
-        //         picture: coverImage,
-        //         releaseYear,
-        //         durationInMinutes,
-        //         musicId: uuidv4(),
-        //     });
-            
-        //     console.log(title);
-        //     await newMusic.save();
-        //     cb(null, uniqueFileName);
-        // } catch (error) {
-        //     console.error(error);
-        //     cb(error);
-        // }
+       
     },
 });
 
@@ -73,9 +46,7 @@ UploadMusicRouter.post('/uploadMusic', upload.single('music'), async (req, res) 
         title = title.split('-')[0]
         album = album.split('-')[0]
         artist = artist.split('-')[0]
-        console.log(title)
-        console.log(artist)
-        console.log(album)
+        
         const releaseYear = metadata.common.year; // Extract the release year
         const durationInSeconds = metadata.format.duration;
         const durationInMinutes = Math.floor(durationInSeconds / 60);
