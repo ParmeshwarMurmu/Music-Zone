@@ -1,3 +1,3 @@
 # Music-Zone In Progress
 
-## Tech Stack :- Type Script, React, Chakra UI, Tailwind CSS
+## Tech Stack :- Type Script, React, Redux, Chakra UI, Tailwind CSS
