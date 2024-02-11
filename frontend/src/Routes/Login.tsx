@@ -235,13 +235,7 @@ export const Login = () => {
             </Button> */}
           </div>
 
-          <div className='mb-6'>
-            <Button colorScheme='' size='md' className='w-full p-2 outline border-2 hover:border-indigo-300'
-            // isLoading
-            >
-              <ImFacebook2 className='mr-5 text-blue-500' fontSize={'30px'} /> <span className='text-black'>Continue with Facebook</span>
-            </Button>
-          </div>
+          
 
           <hr className='mb-4'></hr>
 
