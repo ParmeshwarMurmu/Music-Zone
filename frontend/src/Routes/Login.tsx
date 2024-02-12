@@ -13,13 +13,16 @@ import { loginEmailAction, loginEmailValueFromReduxStore, loginIsErrorAction, lo
 import { IoMdEyeOff, IoMdEye } from "react-icons/io";
 import axios from 'axios';
 import { APP_URL, USER_LOGIN_ENDPOINT } from '../Endpoints/Endpoints';
-
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { auth } from '../fireBase/Config'
 
 export const Login = () => {
 
   // state to handle hide password and show password
   const [showPassword, setShowPassword] = useState<boolean>(false);
 
+  //  an instance of the Google provider object
+  const provider = new GoogleAuthProvider();
 
   // Taking out useAppDisptch From Hook.ts
   const dispatch = useAppDispatch();
@@ -95,6 +98,33 @@ export const Login = () => {
 
 
       })
+
+  }
+
+  // Function to handle login using google Account
+
+  const googleLoginHandler = () => {
+    
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        // This gives you a Google Access Token. You can use it to access the Google API.
+        const credential = GoogleAuthProvider.credentialFromResult(result);
+        // const token = credential.accessToken;
+        // The signed-in user info.
+        const user = result.user;
+        console.log(user)
+        // IdP data available using getAdditionalUserInfo(result)
+        // ...
+      }).catch((error) => {
+        // Handle Errors here.
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // The email of the user's account used.
+        const email = error.customData.email;
+        // The AuthCredential type that was used.
+        const credential = GoogleAuthProvider.credentialFromError(error);
+        // ...
+      });
 
   }
 
@@ -226,7 +256,7 @@ export const Login = () => {
 
             <GoogleButton
               label='Login with Google'
-              onClick={() => { console.log('Google button clicked') }}
+              onClick={googleLoginHandler}
             />
             {/* <Button colorScheme='' size='md' className='w-full mb-4 p-2 outline border-2 hover:border-indigo-300'
             // isLoading
@@ -235,7 +265,7 @@ export const Login = () => {
             </Button> */}
           </div>
 
-          
+
 
           <hr className='mb-4'></hr>
 
