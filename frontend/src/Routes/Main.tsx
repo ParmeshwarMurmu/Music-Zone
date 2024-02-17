@@ -5,6 +5,7 @@ import { AllRoutes } from './AllRoutes'
 import { Navbar } from './Navbar'
 import { MusicPlayerProvider } from '../Components/Home/MusicPlayerProvider'
 import { appContent } from '../ContextApi/ContextApi'
+import { Footer } from '../Components/Footer/Footer'
 
 
 export const Main = () => {
@@ -48,6 +49,10 @@ export const Main = () => {
           <MusicPlayerProvider />
         </div>
       }
+
+      <div className='border-4 '>
+        <Footer />
+      </div>
 
 
     </div>
