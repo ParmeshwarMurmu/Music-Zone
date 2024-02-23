@@ -50,7 +50,7 @@ export const Main = () => {
         </div>
       }
 
-      <div className='border-4 '>
+      <div className='border-4 mt-6 '>
         <Footer />
       </div>
 

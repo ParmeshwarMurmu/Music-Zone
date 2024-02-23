@@ -12,15 +12,18 @@ import GoogleButton from 'react-google-button'
 import { useAppDispatch, useAppSelector } from '../Redux/Store/Hook';
 
 import { IoMdEyeOff, IoMdEye } from "react-icons/io";
-import { signUpEmailAction, sigUpIsLoadingAction,signUpResetAction, sigUpIsEorrAction, signUpEmailValueFromRduxStore, signUpErrorValueFromReduxStore, signUpLoadingValueFromReduxStore, signUpPasswordAction, signUpPasswordValueFromRduxStore } from '../Redux/SignUpReducer/reducer';
+import { signUpEmailAction, sigUpIsLoadingAction, signUpResetAction, sigUpIsEorrAction, signUpEmailValueFromRduxStore, signUpErrorValueFromReduxStore, signUpLoadingValueFromReduxStore, signUpPasswordAction, signUpPasswordValueFromRduxStore } from '../Redux/SignUpReducer/reducer';
 import axios from 'axios';
 import { APP_URL, USER_SIGNUP_ENDPOINT } from '../Endpoints/Endpoints';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { GoogleAuthProvider, getRedirectResult, signInWithPopup, signInWithRedirect } from 'firebase/auth';
+import { auth } from '../fireBase/Config';
 
 
 
 export const SignUp = () => {
+    const provider = new GoogleAuthProvider();
 
     const [showPassword, setShowPassword] = useState<boolean>(false);
     const [passwordStrengthMessage, setPasswordStrengthMessage] = useState<string>('')
@@ -48,7 +51,7 @@ export const SignUp = () => {
         dispatch(signUpPasswordAction(e.target.value))
         const passwordFeedback = checkPasswordStrength(e.target.value);
         setPasswordStrengthMessage(passwordFeedback)
-        if(passwordFeedback === 'Strong Password'){
+        if (passwordFeedback === 'Strong Password') {
             setIsPasswordStrength(true)
         }
     }
@@ -114,7 +117,7 @@ export const SignUp = () => {
             .catch((err) => {
                 console.log(err);
                 console.log(err.data.message);
-                
+
                 dispatch(sigUpIsEorrAction(false))
                 toast({
                     title: `${err.code}`,
@@ -127,6 +130,42 @@ export const SignUp = () => {
             })
 
 
+
+    }
+
+    // Function to handle signup with google account
+
+    const signUpWithGoogleAccount = () => {
+        signInWithRedirect(auth, provider);
+        getRedirectResult(auth)
+            .then((result) => {
+
+                if(result){
+
+                
+                // This gives you a Google Access Token. You can use it to access Google APIs.
+                const credential = GoogleAuthProvider.credentialFromResult(result);
+                const token = credential ? credential.accessToken : null;
+                console.log(credential);
+                
+                // The signed-in user info.
+                const user = result ? result.user : null;
+                console.log(user);
+                
+                // IdP data available using getAdditionalUserInfo(result)
+                // ...
+
+                }
+            }).catch((error) => {
+                // Handle Errors here.
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                // The email of the user's account used.
+                const email = error.customData.email;
+                // The AuthCredential type that was used.
+                const credential = GoogleAuthProvider.credentialFromError(error);
+                // ...
+            });
 
     }
 
@@ -256,7 +295,7 @@ export const SignUp = () => {
 
                     <GoogleButton
 
-                        onClick={() => { console.log('Google button clicked') }}
+                        onClick={signUpWithGoogleAccount}
                     />
 
                     {/* <Button colorScheme='teal' size='lg'>

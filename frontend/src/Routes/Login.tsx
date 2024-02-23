@@ -104,32 +104,31 @@ export const Login = () => {
   // Function to handle login using google Account
 
   const googleLoginHandler = async () => {
-
     signInWithPopup(auth, provider)
-      .then((result) => {
-        // This gives you a Google Access Token. You can use it to access the Google API.
-        const credential = GoogleAuthProvider.credentialFromResult(result);
-        console.log(credential);
-        
-        // const token = credential.accessToken;
-        // The signed-in user info.
-        const user = result.user;
-        console.log(user)
-        // IdP data available using getAdditionalUserInfo(result)
-        // ...
-      }).catch((error) => {
-        // Handle Errors here.
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        // The email of the user's account used.
-        const email = error.customData.email;
-        // The AuthCredential type that was used.
-        const credential = GoogleAuthProvider.credentialFromError(error);
-        // ...
-      });
-
-
-
+  .then((result) => {
+    if(result){
+    // This gives you a Google Access Token. You can use it to access the Google API.
+    const credential = GoogleAuthProvider.credentialFromResult(result);
+    const token = credential ? credential.accessToken : null;
+    // The signed-in user info.
+    const user = result.user;
+    console.log(user);
+    console.log(credential);
+    
+    
+    // IdP data available using getAdditionalUserInfo(result)
+    // ...
+    }
+  }).catch((error) => {
+    // Handle Errors here.
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    // The email of the user's account used.
+    const email = error.customData.email;
+    // The AuthCredential type that was used.
+    const credential = GoogleAuthProvider.credentialFromError(error);
+    // ...
+  });
   }
 
 
