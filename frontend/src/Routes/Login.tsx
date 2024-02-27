@@ -5,7 +5,7 @@ import { AbsoluteCenter, useToast, Avatar, Box, Button, Divider, FormControl, Fo
 import { FcGoogle } from "react-icons/fc";
 import { ImFacebook2 } from "react-icons/im";
 import { FcPhoneAndroid } from "react-icons/fc";
-import { Link } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import LoginCover from '../Assets/LoginCover.jpg'
 import GoogleButton from 'react-google-button'
 import { useAppDispatch, useAppSelector } from '../Redux/Store/Hook';
@@ -15,6 +15,7 @@ import axios from 'axios';
 import { APP_URL, USER_LOGIN_ENDPOINT } from '../Endpoints/Endpoints';
 import { GoogleAuthProvider, signInWithPopup, signInWithRedirect, getRedirectResult } from "firebase/auth";
 import { auth } from '../fireBase/Config'
+import { isAuthAction, isAuthResetAction, isAuthValueFromReduxStore } from '../Redux/isAuthReducer/reducer';
 
 export const Login = () => {
 
@@ -26,7 +27,7 @@ export const Login = () => {
 
   // Taking out useAppDisptch From Hook.ts
   const dispatch = useAppDispatch();
-
+  const navigate = useNavigate()
   const toast = useToast()
 
   // Taking Out all the values from Redux stroe login Reducer
@@ -35,7 +36,8 @@ export const Login = () => {
   const userLoginPassword = useAppSelector(loginPasswordValueFromReduxStore);
   const loginIsLoading = useAppSelector(loginIsLoadingValueFromReduxStore);
   const loginIsError = useAppSelector(loginIsErrorValueFromReduxStore);
-
+  
+  const isAuth = useAppSelector(isAuthValueFromReduxStore);
 
   // Function To Handle User Email Input
   const handleLoginEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -70,15 +72,19 @@ export const Login = () => {
             position: 'top-right',
             status: 'success',
             isClosable: true,
-            duration: 3000,
+            duration: 2000,
           })
+          dispatch(isAuthResetAction())
+          dispatch(isAuthAction(true));
+          navigate('/')
+
         } else {
           toast({
             title: `${res.data.message}`,
             position: 'top-right',
             status: 'warning',
             isClosable: true,
-            duration: 3000,
+            duration: 2000,
           })
         }
         dispatch(loginResetAction())

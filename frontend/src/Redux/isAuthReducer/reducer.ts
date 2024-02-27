@@ -3,49 +3,44 @@ import type { RootState } from "../Store/Store";
 
 
 
-// Defined type for the slice state for Login
+// Defined type for the slice state for isAuthState
 
-interface LoginState {
-    email: string,
-    password: string,
+interface isAuthState {
+    isAuth: boolean,
     isLoading: boolean,
     isError: boolean
 }
 
-// Defined the initial state using above LoginState interface
+// Defined the initial state using above isAuthState interface
 
-const initialState: LoginState ={
-    email: '',
-    password: '',
+const initialState: isAuthState ={
+    isAuth: false,
     isLoading: false,
     isError: false
 }
 
-// Function to Login Create Slice
+// Function to isAuthState Create Slice
 
-export const loginSlice = createSlice({
-    name: 'login',
+export const isAuthSlice = createSlice({
+    name: 'isAuth',
     initialState,
 
     reducers: {
-        loginIsLoadingAction: (state, action: PayloadAction<boolean>)=>{
+        isAuthIsLoadingAction: (state, action: PayloadAction<boolean>)=>{
             state.isLoading = action.payload;
         },
 
-        loginIsErrorAction: (state, action: PayloadAction<boolean>)=>{
+        isAuthErrorAction: (state, action: PayloadAction<boolean>)=>{
             state.isError = action.payload;
 
         },
 
-        loginEmailAction: (state, action: PayloadAction<string>)=>{
-            state.email = action.payload;
+        isAuthAction: (state, action: PayloadAction<boolean>)=>{
+            state.isAuth = action.payload;
         },
 
-        loginPasswordAction: (state, action: PayloadAction<string>)=>{
-            state.password = action.payload;
-        },
 
-        loginResetAction: (state) => {
+        isAuthResetAction: (state) => {
             return initialState;
         }
 
@@ -53,12 +48,11 @@ export const loginSlice = createSlice({
 })
 
 
-export const { loginIsLoadingAction, loginIsErrorAction, loginEmailAction, loginPasswordAction, loginResetAction} = loginSlice.actions;
-export const loginIsLoadingValueFromReduxStore = (state: RootState)=> state.login.isLoading;
-export const loginIsErrorValueFromReduxStore = (state: RootState)=> state.login.isError;
-export const loginEmailValueFromReduxStore = (state: RootState)=> state.login.email;
-export const loginPasswordValueFromReduxStore = (state: RootState)=> state.login.password;
+export const { isAuthIsLoadingAction, isAuthErrorAction, isAuthAction, isAuthResetAction} = isAuthSlice.actions;
+export const isAuthIsLoadingValueFromReduxStore = (state: RootState)=> state.isAuth.isLoading;
+export const isAuthIsErrorValueFromReduxStore = (state: RootState)=> state.isAuth.isError;
+export const isAuthValueFromReduxStore = (state: RootState)=> state.isAuth.isAuth;
 
 
 
-export default loginSlice.reducer;
+export default isAuthSlice.reducer;
