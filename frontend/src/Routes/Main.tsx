@@ -44,15 +44,17 @@ export const Main = () => {
         <AllRoutes />
       </div>
 
+      <div className='border-4 mt-6 '>
+        <Footer />
+      </div>
+
       {
         showMusicPlayer && <div className='bg-neutral-silver absolute bottom-0 left-0 right-0 shadow-2xl opacity-100 p-2'>
           <MusicPlayerProvider />
         </div>
       }
 
-      <div className='border-4 mt-6 '>
-        <Footer />
-      </div>
+      
 
 
     </div>

@@ -15,6 +15,7 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { FaAngleLeft } from "react-icons/fa";
 import { FaAngleRight } from "react-icons/fa";
+import { Footer } from '../Components/Footer/Footer'
 
 
 
@@ -145,7 +146,7 @@ export const Home = () => {
 
   return (
     <DIV className=''>
-      <div className='flex flex-row-reverse'>
+      <div className='flex flex-row-reverse border-4'>
         <Navbar />
       </div>
 
@@ -159,12 +160,13 @@ export const Home = () => {
           {musicList &&
             musicList.map((music, index) => (
 
-              <div key={index} className='h-auto p-2 hover:scale-95 '
+              <div key={index} id='musicContainer' className='h-auto p-2 hover:scale-95 '
               
               >
                 <Link
                   id='musicCont'
-                  className='m-2 shadow-2xl p-1 hover:brightness-50'
+                  // hover:brightness-50
+                  className='m-2 p-1 hover: shadow-inner'
                   to={''}
                 >
                   
@@ -178,9 +180,11 @@ export const Home = () => {
                   <FaPlayCircle
                     id='playBtn'
                     onClick={() => setTrackHandler(music)}
-                    fontSize={'30px'}
-                    className={`text-shades-100  hover:text-sky-700 absolute bottom-0 right-0 z-50`}
+                    fontSize={'50px'}
+                    className={`text-neutral-white top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 absolute  z-50 hover:scale-125`}
                   />
+
+                  
                   </div>
                 </Link>
               </div>
@@ -214,6 +218,9 @@ export const Home = () => {
         />
 
 
+
+
+
       </div>
     </DIV>
   );
@@ -223,5 +230,12 @@ export const Home = () => {
 
 
 const DIV = styled.div`
+#playBtn{
+  display: none;
+}
+
+#musicContainer:hover #playBtn {
+  display: block;
+}
 
 `

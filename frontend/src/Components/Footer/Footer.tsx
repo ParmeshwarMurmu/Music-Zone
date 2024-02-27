@@ -15,32 +15,32 @@ export const Footer = () => {
         <FaLinkedin className='m-4 size-6 cursor-pointer hover:scale-125' />
       </div>
 
-      <div>
+      <div className='flex justify-evenly'>
         <div>
-          <Heading as='h6'>
+          <p className='text-lg mb-4'>
             Community
-          </Heading>
-          <p>Blogs</p>
-          <p>Community</p>
-          <p>Developers</p>
+          </p>
+          <p className='text-sm mb-2 cursor-pointer'>Blogs</p>
+          <p className='text-sm mb-2 cursor-pointer'>Community</p>
+          <p className='text-sm mb-2 cursor-pointer'>Developers</p>
         </div>
 
         <div>
-          <Heading as='h6'>
+          <p className='text-lg mb-4'>
             Company
-          </Heading>
-          <p>About Us</p>
-          <p>Team</p>
-          <p>Media</p>
-          <p>Our Commitments</p>
+          </p>
+          <p className='text-sm mb-2 cursor-pointer'>About Us</p>
+          <p className='text-sm mb-2 cursor-pointer'>Team</p>
+          <p className='text-sm mb-2 cursor-pointer'>Media</p>
+          <p className='text-sm mb-2 cursor-pointer'>Our Commitments</p>
         </div>
 
         <div>
-          <Heading as='h6'>
+          <p className='text-lg mb-4'>
             Useful Links
-          </Heading>
-          <p>Terms & Services</p>
-          <p>Policy & Privacy</p>
+          </p>
+          <p className='text-sm mb-2 cursor-pointer'>Terms & Services</p>
+          <p className='text-sm mb-2 cursor-pointer'>Policy & Privacy</p>
          
         </div>
       </div>
