@@ -22,6 +22,23 @@ export interface signUpNewUser {
   password: string
 }
 
+export interface userData{
+  email: string,
+  password: string,
+  _id: string,
+  name: string,
+  mobile: number
+
+}
+
+export const initialUserData: userData ={
+  _id: '',
+  email: '',
+  password: '',
+  name: '',
+  mobile: 0,
+}
+
 export interface AppContextProps {
   // Add the properties you need in your context
   // exampleProperty: string;
@@ -32,6 +49,8 @@ export interface AppContextProps {
   setShowMusicPlyer:Dispatch<SetStateAction<boolean>>;
   createPlaylist: boolean;
   setCreatePlaylist : Dispatch<SetStateAction<boolean>>;
+  userDetail: userData; // Include userDetail in the AppContextProps
+  setUserDetail: (user: userData) => void;
 
 }
 

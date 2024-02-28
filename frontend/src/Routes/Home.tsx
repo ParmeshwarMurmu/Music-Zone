@@ -16,6 +16,8 @@ import 'slick-carousel/slick/slick-theme.css';
 import { FaAngleLeft } from "react-icons/fa";
 import { FaAngleRight } from "react-icons/fa";
 import { Footer } from '../Components/Footer/Footer'
+import { useAppSelector } from '../Redux/Store/Hook'
+import { isAuthValueFromReduxStore } from '../Redux/isAuthReducer/reducer'
 
 
 
@@ -34,6 +36,7 @@ const getResponsiveSettings = (): { slidesToShow: number; slidesToScroll: number
 
 
 export const Home = () => {
+  const isAuth = useAppSelector(isAuthValueFromReduxStore)
   const [currentSlide, setCurrentSlide] = useState<number>(0);
   const [data, setData] = useState<number | null>();
   const [sliderInitialized, setSliderInitialized] = useState(false);
@@ -59,9 +62,21 @@ export const Home = () => {
 
   }, [])
 
+  useEffect(()=>{
+
+    if(isAuth){
+     let musicUserId = localStorage.getItem('musicUserId')
+     axios.get(`${APP_URL}/${musicUserId}`)
+     .then((res)=>{
+      
+     })
+    }
+
+  }, [isAuth])
 
 
-  console.log("musicList", musicList);
+
+  // console.log("musicList", musicList);
 
   const setTrackHandler = (clickedMusic: allMusic) => {
     setCurrentTrack(clickedMusic)
@@ -70,7 +85,7 @@ export const Home = () => {
 
   }
 
-  console.log('Current Track', currentTrack)
+  // console.log('Current Track', currentTrack)
 
   const truncateString = (str: string, maxLength: number) => {
     if (str.length > maxLength) {

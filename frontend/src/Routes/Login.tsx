@@ -74,6 +74,7 @@ export const Login = () => {
             isClosable: true,
             duration: 2000,
           })
+          localStorage.setItem('musicUserId', res.data.userId)
           dispatch(isAuthResetAction())
           dispatch(isAuthAction(true));
           navigate('/')

@@ -1,5 +1,5 @@
 import React, { createContext, useState } from 'react'
-import { AppContextProps, ContextApiProps } from '../Interfaces/Interfce'
+import { AppContextProps, ContextApiProps, initialUserData, userData } from '../Interfaces/Interfce'
 import { useDisclosure, UseDisclosureReturn } from '@chakra-ui/react'
 
 export const appContent = createContext<AppContextProps>({ // Provide an initial value
@@ -17,7 +17,9 @@ export const appContent = createContext<AppContextProps>({ // Provide an initial
   showMusicPlayer: false,
   setShowMusicPlyer: ()=>{},
   createPlaylist: false,
-  setCreatePlaylist: ()=>{}
+  setCreatePlaylist: ()=>{},
+  userDetail: initialUserData,
+  setUserDetail: ()=>{},
   
   
 });
@@ -28,7 +30,7 @@ export const ContextApi: React.FC<ContextApiProps> = ({ children }) => {
   const [showMusicPlayer, setShowMusicPlyer]= useState<boolean>(false)
   const [currentTrack, setCurrentTrack] = useState<AppContextProps['currentTrack'] | null>(null);
   const [createPlaylist, setCreatePlaylist] = useState<boolean>(false)
-
+  const [userDetail, setUserDetail] = useState<userData>(initialUserData)
   const disclosure: UseDisclosureReturn = {
     isOpen, onOpen, onClose,
     onToggle: () => { }, // Add a dummy function if you don't need this functionality
@@ -44,7 +46,9 @@ export const ContextApi: React.FC<ContextApiProps> = ({ children }) => {
     showMusicPlayer,
     setShowMusicPlyer,
     setCreatePlaylist,
-    createPlaylist
+    createPlaylist,
+    userDetail,
+    setUserDetail,
     
     // Add other properties as needed
   };

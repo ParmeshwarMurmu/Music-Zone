@@ -4,6 +4,7 @@ import { Login } from './Login'
 import { Avatar, WrapItem } from '@chakra-ui/react'
 import { useAppSelector } from '../Redux/Store/Hook'
 import { isAuthValueFromReduxStore } from '../Redux/isAuthReducer/reducer'
+import { UserProfile } from '../Components/UserProfile/UserProfile'
 
 
 export const Navbar = () => {
@@ -30,9 +31,10 @@ export const Navbar = () => {
         <Link to={'/uploadMusic'}>Upload Music</Link>
       </div>
 
-      <WrapItem >
-        <Avatar size='sm' name='Kent Dodds' src='https://bit.ly/kent-c-dodds' />{' '}
-      </WrapItem>
+      {
+        isAuth && <UserProfile />
+      }
+      
     </div>
   )
 }
