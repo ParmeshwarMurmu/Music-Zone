@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import { IoHomeSharp } from "react-icons/io5";
 import { ImSearch } from "react-icons/im";
 import { MdLibraryMusic } from "react-icons/md";
@@ -11,12 +11,34 @@ import { RxCross2 } from "react-icons/rx";
 import { ImCross } from "react-icons/im";
 import { Input } from '@chakra-ui/react';
 import { appContent } from '../../ContextApi/ContextApi';
+import axios from 'axios';
+import { APP_URL, CREATE_NEW_PLAYLIST_ENDPOINT } from '../../Endpoints/Endpoints';
 
 
 export const SideBar = () => {
 
   const inputRef = useRef<HTMLInputElement | null>(null);
-  const { createPlaylist, setCreatePlaylist } = useContext(appContent)
+  const { createPlaylist, setCreatePlaylist } = useContext(appContent);
+  const [playlistName, setPlaylistName] = useState<string>('')
+
+  // Function to handle newPlaylistFolderName
+  const newPlaylistFolderName = (e:React.ChangeEvent<HTMLInputElement>)=>{
+    setPlaylistName(e.target.value)
+  }
+
+  // Function to execute saveNewPlaylistHandler
+  const saveNewPlaylistHandler = ()=>{
+    const token = localStorage.getItem('musicToken')
+    axios.post(`${APP_URL}${CREATE_NEW_PLAYLIST_ENDPOINT}`, {playlistName}, {
+      headers: {
+        Authorization: `bearer ${token}`
+      }
+    })
+    .then((res)=>{
+      console.log(res);
+      
+    })
+  }
 
   useEffect(() => {
     // Step 2: Focus on the input element when the component mounts
@@ -83,6 +105,7 @@ export const SideBar = () => {
                   className='mr-2 h-3'
                   placeholder='New Playlist'
                   ref={(el) => (inputRef.current = el)}
+                  onChange={newPlaylistFolderName}
 
 
                    />
@@ -91,9 +114,11 @@ export const SideBar = () => {
               <div className='flex'>
                 <TiTick fontSize={'20px'} 
                 className='mr-2 hover:cursor-pointer' 
+                onClick={saveNewPlaylistHandler}
                 />
 
                 <RxCross2 fontSize={'20px'}
+                onClick={()=>{setCreatePlaylist(false)}}
                 className='mr-2 hover:cursor-pointer' 
 
                  />

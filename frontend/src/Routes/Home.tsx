@@ -4,7 +4,7 @@ import { Navbar } from './Navbar'
 import { AllRoutes } from './AllRoutes'
 import { SideBar } from '../Components/SideBar/SideBar'
 import axios from 'axios'
-import { APP_URL } from '../Endpoints/Endpoints'
+import { APP_URL, SINGLE_USER_DATA } from '../Endpoints/Endpoints'
 import { allMusic } from '../Interfaces/Interfce'
 import { appContent } from '../ContextApi/ContextApi'
 import { FaPlayCircle } from "react-icons/fa";
@@ -41,7 +41,7 @@ export const Home = () => {
   const [data, setData] = useState<number | null>();
   const [sliderInitialized, setSliderInitialized] = useState(false);
   const [musicList, setMusicList] = useState<allMusic[]>([])
-  const { currentTrack, setCurrentTrack, setShowMusicPlyer } = useContext(appContent)
+  const { currentTrack, setCurrentTrack, setShowMusicPlyer, setUserDetail } = useContext(appContent)
   const sliderRef = useRef<any>(null);
 
 
@@ -66,9 +66,10 @@ export const Home = () => {
 
     if(isAuth){
      let musicUserId = localStorage.getItem('musicUserId')
-     axios.get(`${APP_URL}/${musicUserId}`)
+     axios.get(`${APP_URL}${SINGLE_USER_DATA}/${musicUserId}`)
      .then((res)=>{
-      
+      //  console.log(res);
+       setUserDetail(res.data.userData)
      })
     }
 

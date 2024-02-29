@@ -75,6 +75,7 @@ export const Login = () => {
             duration: 2000,
           })
           localStorage.setItem('musicUserId', res.data.userId)
+          localStorage.setItem('musicToken', res.data.token)
           dispatch(isAuthResetAction())
           dispatch(isAuthAction(true));
           navigate('/')

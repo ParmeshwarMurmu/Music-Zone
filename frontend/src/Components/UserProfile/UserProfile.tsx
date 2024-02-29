@@ -20,16 +20,16 @@ export const UserProfile = () => {
   const { userDetail } = useContext(appContent)
 
   console.log('userDetails', userDetail)
-  
+
   return (
     <Menu>
       <MenuButton as={Button} variant={'none'}>
         {/* <WrapItem> */}
-          <Avatar size='sm' name='Kent Dodds' src='https://bit.ly/kent-c-dodds' />{' '}
+          <Avatar size='sm' name={userDetail.name || userDetail.email || `${userDetail.mobile}`} src={''} />
         {/* </WrapItem> */}
       </MenuButton>
       <MenuList>
-        <MenuItem>Download</MenuItem>
+        <MenuItem>{userDetail.name || userDetail.email || `${userDetail.mobile}`}</MenuItem>
         <MenuItem>Create a Copy</MenuItem>
         <MenuItem>Mark as Draft</MenuItem>
         <MenuItem>Delete</MenuItem>

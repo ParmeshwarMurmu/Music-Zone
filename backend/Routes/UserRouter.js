@@ -73,6 +73,19 @@ userRouter.post('/login', async (req, res) => {
 })
 
 
+// Handling Single User
+userRouter.get('/singleUser/:_id', async(req, res)=>{
+    try {
+        const { _id } = req.params;
+        if(_id){
+            const singleUserData = await UserModel.findOne({_id});
+            res.status(200).send({"userData": singleUserData})
+        }
+    } catch (error) {
+        
+    }
+})
+
 
 module.exports = {
     userRouter
