@@ -1,7 +1,9 @@
 const express = require('express');
 const { UserModel } = require('../Models/UserSchema');
 const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken');
+const { auth } = require('../Middlewares/Authorization');
+const { PlaylistModel } = require('../Models/PlaylistSchema');
 require('dotenv').config()
 
 const userRouter = express.Router();
@@ -86,6 +88,17 @@ userRouter.get('/singleUser/:_id', async(req, res)=>{
     }
 })
 
+
+userRouter.post('/createPlaylist',auth, async(req, res)=>{
+    try {
+        const {playlistName, userId, userEmail} = req.body;
+        const newPlaylist =  PlaylistModel({playlistName, user: userId})
+        newPlaylist.save();
+        res.status(200).send({"folderName": playlistName, "message": "Playlist Created"})
+    } catch (error) {
+        
+    }
+})
 
 module.exports = {
     userRouter

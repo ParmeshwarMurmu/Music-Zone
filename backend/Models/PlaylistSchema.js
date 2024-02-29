@@ -10,7 +10,7 @@ const playlistSchema = mongoose.Schema({
     music: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'music',
-        required: true
+        // required: true
     }
 }, {
     versionKey: false

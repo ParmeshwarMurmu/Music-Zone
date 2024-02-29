@@ -9,7 +9,7 @@ import { FaFolderOpen } from "react-icons/fa";
 import { TiTick } from "react-icons/ti";
 import { RxCross2 } from "react-icons/rx";
 import { ImCross } from "react-icons/im";
-import { Input } from '@chakra-ui/react';
+import { Input, useToast } from '@chakra-ui/react';
 import { appContent } from '../../ContextApi/ContextApi';
 import axios from 'axios';
 import { APP_URL, CREATE_NEW_PLAYLIST_ENDPOINT } from '../../Endpoints/Endpoints';
@@ -18,6 +18,7 @@ import { APP_URL, CREATE_NEW_PLAYLIST_ENDPOINT } from '../../Endpoints/Endpoints
 export const SideBar = () => {
 
   const inputRef = useRef<HTMLInputElement | null>(null);
+  const toast = useToast();
   const { createPlaylist, setCreatePlaylist } = useContext(appContent);
   const [playlistName, setPlaylistName] = useState<string>('')
 
@@ -37,6 +38,13 @@ export const SideBar = () => {
     .then((res)=>{
       console.log(res);
       
+      toast({
+        title: `${res.data.message}`,
+        position: 'top-right',
+        status: 'success',
+        isClosable: true,
+        duration: 2000,
+      })
     })
   }
 
