@@ -37,7 +37,6 @@ export const SideBar = () => {
     })
     .then((res)=>{
       console.log(res);
-      
       toast({
         title: `${res.data.message}`,
         position: 'top-right',
