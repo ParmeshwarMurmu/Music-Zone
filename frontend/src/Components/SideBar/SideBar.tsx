@@ -13,6 +13,8 @@ import { Input, useToast } from '@chakra-ui/react';
 import { appContent } from '../../ContextApi/ContextApi';
 import axios from 'axios';
 import { APP_URL, CREATE_NEW_PLAYLIST_ENDPOINT } from '../../Endpoints/Endpoints';
+import { useAppSelector } from '../../Redux/Store/Hook';
+import { isAuthValueFromReduxStore } from '../../Redux/isAuthReducer/reducer';
 
 
 export const SideBar = () => {
@@ -21,7 +23,8 @@ export const SideBar = () => {
   const toast = useToast();
   const { createPlaylist, setCreatePlaylist } = useContext(appContent);
   const [playlistName, setPlaylistName] = useState<string>('')
-
+  const isAuth = useAppSelector(isAuthValueFromReduxStore);
+  
   // Function to handle newPlaylistFolderName
   const newPlaylistFolderName = (e:React.ChangeEvent<HTMLInputElement>)=>{
     setPlaylistName(e.target.value)
@@ -46,6 +49,12 @@ export const SideBar = () => {
       })
     })
   }
+
+
+
+  useEffect(()=>{
+   
+  }, [])
 
   useEffect(() => {
     // Step 2: Focus on the input element when the component mounts
@@ -135,6 +144,8 @@ export const SideBar = () => {
 
             </div>
           }
+
+
 
         </div>
 

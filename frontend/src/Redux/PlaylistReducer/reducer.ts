@@ -2,11 +2,20 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import type { RootState } from "../Store/Store";
 import { FaLess } from "react-icons/fa";
 
+// Defined type for the Playlist Item
+
+interface PlaylistItem {
+    _id: string,
+    playlistName: string,
+    userId: string,
+    email: string
+
+}
 
 // Defined type for the slice state for User Playlist
 
 interface Playlist {
-    usersPlaylist: String,
+    usersPlaylist: PlaylistItem[],
     isLoading: boolean,
     isError: boolean
 }
@@ -15,7 +24,7 @@ interface Playlist {
 // Define the initial state using the above interface
 
 const initialState: Playlist = {
-    usersPlaylist : '',
+    usersPlaylist : [],
     isLoading: false,
     isError: false
 }
