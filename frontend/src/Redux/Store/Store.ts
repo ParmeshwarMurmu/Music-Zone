@@ -3,9 +3,12 @@ import { configureStore } from "@reduxjs/toolkit";
 import signUpReducer from '../SignUpReducer/reducer';
 import loginReducer from '../LoginReducer/reducer'
 import isAuthReducer from '../isAuthReducer/reducer'
+import playlistReducer from '../PlaylistReducer/reducer';
+
 
 export const store = configureStore({
     reducer: {
+      playlist: playlistReducer,
       isAuth: isAuthReducer,
       signUp: signUpReducer,
       login: loginReducer

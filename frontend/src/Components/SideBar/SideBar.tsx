@@ -15,6 +15,7 @@ import axios from 'axios';
 import { APP_URL, CREATE_NEW_PLAYLIST_ENDPOINT, USER_ALL_PLAYLIST_ENDPOINT } from '../../Endpoints/Endpoints';
 import { useAppDispatch, useAppSelector } from '../../Redux/Store/Hook';
 import { isAuthValueFromReduxStore } from '../../Redux/isAuthReducer/reducer';
+import { playlistAllUserPlaylist, usersPlaylistValueFromReduxStore } from '../../Redux/PlaylistReducer/reducer';
 
 
 export const SideBar = () => {
@@ -26,48 +27,54 @@ export const SideBar = () => {
   const isAuth = useAppSelector(isAuthValueFromReduxStore);
   const dispatch = useAppDispatch();
 
+  // Getting  user playlist from redux store
+  const userPlaylist = useAppSelector(usersPlaylistValueFromReduxStore)
   // User Authentication Token
   const token = localStorage.getItem('musicToken')
   // Function to handle newPlaylistFolderName
-  const newPlaylistFolderName = (e:React.ChangeEvent<HTMLInputElement>)=>{
+  const newPlaylistFolderName = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPlaylistName(e.target.value)
   }
 
   // Function to execute saveNewPlaylistHandler
-  const saveNewPlaylistHandler = ()=>{
-    
-    axios.post(`${APP_URL}${CREATE_NEW_PLAYLIST_ENDPOINT}`, {playlistName}, {
+  const saveNewPlaylistHandler = () => {
+
+    axios.post(`${APP_URL}${CREATE_NEW_PLAYLIST_ENDPOINT}`, { playlistName }, {
       headers: {
         Authorization: `bearer ${token}`
       }
     })
-    .then((res)=>{
-      console.log(res);
-      toast({
-        title: `${res.data.message}`,
-        position: 'top-right',
-        status: 'success',
-        isClosable: true,
-        duration: 2000,
+      .then((res) => {
+        console.log(res);
+        toast({
+          title: `${res.data.message}`,
+          position: 'top-right',
+          status: 'success',
+          isClosable: true,
+          duration: 2000,
+        })
+        setCreatePlaylist(false)
       })
-    })
   }
 
 
 
-  useEffect(()=>{
-   if(isAuth){
-    axios.get(`${APP_URL}${USER_ALL_PLAYLIST_ENDPOINT}`, {
-      headers: {
-        Authorization: `bearer ${token}`
-      }
-    })
-    .then((res)=>{
-      console.log(res);
-      // disp
-    })
-   }
-  }, [])
+  useEffect(() => {
+    if (isAuth) {
+      axios.get(`${APP_URL}${USER_ALL_PLAYLIST_ENDPOINT}`, {
+        headers: {
+          Authorization: `bearer ${token}`
+        }
+      })
+        .then((res) => {
+          // console.log(res);
+          dispatch(playlistAllUserPlaylist(res.data.userPlaylist))
+        })
+    }
+  }, [createPlaylist])
+
+
+  console.log("userPlaylist", userPlaylist);
 
 
 
@@ -131,31 +138,47 @@ export const SideBar = () => {
 
 
               <div>
-                
-                <Input  type='text'
+
+                <Input type='text'
                   className='mr-2 h-3'
                   placeholder='New Playlist'
                   ref={(el) => (inputRef.current = el)}
                   onChange={newPlaylistFolderName}
 
 
-                   />
+                />
               </div>
 
               <div className='flex'>
-                <TiTick fontSize={'20px'} 
-                className='mr-2 hover:cursor-pointer' 
-                onClick={saveNewPlaylistHandler}
+                <TiTick fontSize={'20px'}
+                  className='mr-2 hover:cursor-pointer'
+                  onClick={saveNewPlaylistHandler}
                 />
 
                 <RxCross2 fontSize={'20px'}
-                onClick={()=>{setCreatePlaylist(false)}}
-                className='mr-2 hover:cursor-pointer' 
+                  onClick={() => { setCreatePlaylist(false) }}
+                  className='mr-2 hover:cursor-pointer'
 
-                 />
+                />
 
 
               </div>
+
+            </div>
+          }
+
+          {
+            userPlaylist.length > 0 && <div>
+              {
+                userPlaylist.map((el) => (
+                  <div className='mr-2 flex'>
+                    <FaFolderOpen fontSize={'20px'} />
+
+                    <p>{el.playlistName}</p>
+                  </div>
+                ))
+              }
+
 
             </div>
           }

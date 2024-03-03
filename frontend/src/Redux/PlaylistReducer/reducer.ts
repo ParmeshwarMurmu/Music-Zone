@@ -16,10 +16,16 @@ interface PlaylistItem {
 
 }
 
+interface userPlaylist {
+    _id: string,
+    playlistName: string,
+    user: string
+}
+
 // Defined type for the slice state for User Playlist
 
 interface Playlist {
-    usersPlaylist: PlaylistItem[],
+    usersPlaylist: userPlaylist[],
     isLoading: boolean,
     isError: boolean
 }
@@ -44,16 +50,14 @@ export const playlistSlice = createSlice({
 
         playlistIsLoadingAction: (state, action: PayloadAction<boolean>)=>{
             state.isLoading = action.payload;
-
         },
 
         playlistIsEorrAction: (state, action: PayloadAction<boolean>)=>{
             state.isError = action.payload;
-
         },
 
-        playlistAllUserPlaylist: (state, action: PayloadAction<string>) =>{
-
+        playlistAllUserPlaylist: (state, action: PayloadAction<userPlaylist[]>) =>{
+            state.usersPlaylist = action.payload;
         },
 
         playlistResetAction: (state) => {
@@ -64,4 +68,12 @@ export const playlistSlice = createSlice({
 
 })
 
+
+export const { playlistIsLoadingAction, playlistIsEorrAction, playlistAllUserPlaylist, playlistResetAction } = playlistSlice.actions
+export const usersPlaylistValueFromReduxStore = (state: RootState) => state.playlist.usersPlaylist;
+
+
+
+
+export default playlistSlice.reducer
 
