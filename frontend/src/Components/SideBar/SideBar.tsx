@@ -12,8 +12,8 @@ import { ImCross } from "react-icons/im";
 import { Input, useToast } from '@chakra-ui/react';
 import { appContent } from '../../ContextApi/ContextApi';
 import axios from 'axios';
-import { APP_URL, CREATE_NEW_PLAYLIST_ENDPOINT } from '../../Endpoints/Endpoints';
-import { useAppSelector } from '../../Redux/Store/Hook';
+import { APP_URL, CREATE_NEW_PLAYLIST_ENDPOINT, USER_ALL_PLAYLIST_ENDPOINT } from '../../Endpoints/Endpoints';
+import { useAppDispatch, useAppSelector } from '../../Redux/Store/Hook';
 import { isAuthValueFromReduxStore } from '../../Redux/isAuthReducer/reducer';
 
 
@@ -24,7 +24,10 @@ export const SideBar = () => {
   const { createPlaylist, setCreatePlaylist } = useContext(appContent);
   const [playlistName, setPlaylistName] = useState<string>('')
   const isAuth = useAppSelector(isAuthValueFromReduxStore);
-  
+  const dispatch = useAppDispatch();
+
+  // User Authentication Token
+  const token = localStorage.getItem('musicToken')
   // Function to handle newPlaylistFolderName
   const newPlaylistFolderName = (e:React.ChangeEvent<HTMLInputElement>)=>{
     setPlaylistName(e.target.value)
@@ -32,7 +35,7 @@ export const SideBar = () => {
 
   // Function to execute saveNewPlaylistHandler
   const saveNewPlaylistHandler = ()=>{
-    const token = localStorage.getItem('musicToken')
+    
     axios.post(`${APP_URL}${CREATE_NEW_PLAYLIST_ENDPOINT}`, {playlistName}, {
       headers: {
         Authorization: `bearer ${token}`
@@ -53,8 +56,20 @@ export const SideBar = () => {
 
 
   useEffect(()=>{
-   
+   if(isAuth){
+    axios.get(`${APP_URL}${USER_ALL_PLAYLIST_ENDPOINT}`, {
+      headers: {
+        Authorization: `bearer ${token}`
+      }
+    })
+    .then((res)=>{
+      console.log(res);
+      // disp
+    })
+   }
   }, [])
+
+
 
   useEffect(() => {
     // Step 2: Focus on the input element when the component mounts

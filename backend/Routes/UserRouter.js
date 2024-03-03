@@ -88,7 +88,7 @@ userRouter.get('/singleUser/:_id', async(req, res)=>{
     }
 })
 
-
+// Handling Create Playlist 
 userRouter.post('/createPlaylist',auth, async(req, res)=>{
     try {
         const {playlistName, userId, userEmail} = req.body;
@@ -97,6 +97,17 @@ userRouter.post('/createPlaylist',auth, async(req, res)=>{
         res.status(200).send({"folderName": playlistName, "message": "Playlist Created"})
     } catch (error) {
         
+    }
+})
+
+// Handling User Playlist 
+userRouter.get('/playlists', auth,  async(req, res)=>{
+    try {
+        const { userId } = req.body;
+        const userPlaylist = await PlaylistModel.find({user:userId})
+        res.status(200).send({"userPlaylist": userPlaylist})
+    } catch (error) {
+        res.status(400).send({"message":"Cannot get user Playlist"})
     }
 })
 

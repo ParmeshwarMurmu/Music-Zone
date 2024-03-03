@@ -6,9 +6,13 @@ import { FaLess } from "react-icons/fa";
 
 interface PlaylistItem {
     _id: string,
-    playlistName: string,
-    userId: string,
-    email: string
+    fileName: string,
+    title: string,
+    artist: string,
+    album: string,
+    picture: string,
+    releaseYear: string,
+    musicId: string,
 
 }
 
@@ -59,3 +63,5 @@ export const playlistSlice = createSlice({
     }
 
 })
+
+
