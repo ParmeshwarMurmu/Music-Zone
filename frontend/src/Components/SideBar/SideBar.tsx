@@ -16,6 +16,8 @@ import { APP_URL, CREATE_NEW_PLAYLIST_ENDPOINT, USER_ALL_PLAYLIST_ENDPOINT } fro
 import { useAppDispatch, useAppSelector } from '../../Redux/Store/Hook';
 import { isAuthValueFromReduxStore } from '../../Redux/isAuthReducer/reducer';
 import { playlistAllUserPlaylist, usersPlaylistValueFromReduxStore } from '../../Redux/PlaylistReducer/reducer';
+import { MdDelete } from "react-icons/md";
+import DeletePlaylist from './DeletePlaylist';
 
 
 export const SideBar = () => {
@@ -57,7 +59,8 @@ export const SideBar = () => {
       })
   }
 
-
+  
+  
 
   useEffect(() => {
     if (isAuth) {
@@ -75,6 +78,13 @@ export const SideBar = () => {
 
 
   console.log("userPlaylist", userPlaylist);
+  
+
+  // Function to delete user Playlist
+  const handleDelete = (playlistId: string) => {
+    // Implement your logic to delete the playlist with the given ID
+    console.log("Deleting playlist with ID:", playlistId);
+};
 
 
 
@@ -84,6 +94,8 @@ export const SideBar = () => {
       inputRef.current.focus();
     }
   }, [createPlaylist]);
+
+
 
 
   return (
@@ -167,14 +179,24 @@ export const SideBar = () => {
             </div>
           }
 
+
+          {/* User Playlist */}
+
           {
             userPlaylist.length > 0 && <div>
               {
                 userPlaylist.map((el) => (
-                  <div className='mr-2 flex'>
-                    <FaFolderOpen fontSize={'20px'} />
+                  <div className='flex justify-between '>
 
-                    <p>{el.playlistName}</p>
+                    <div className='flex justify-center items-center'>
+                      <FaFolderOpen fontSize={'20px'} />
+
+                      <p className='ml-2'>{el.playlistName}</p>
+                    </div>
+
+                    <DeletePlaylist playlist={el} onDelete={() => handleDelete(el._id)} />
+
+                    {/* <MdDelete fontSize={'20px'} className='cursor-pointer'  /> */}
                   </div>
                 ))
               }

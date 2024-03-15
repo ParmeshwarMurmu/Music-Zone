@@ -67,3 +67,14 @@ export interface WithSidebarLayoutProps {
 export interface WithoutSidebarLayoutProps {
   children: ReactNode;
 }
+
+export interface Playlist {
+  _id: string;
+  playlistName: string;
+  user: string;
+}
+
+export interface DeletePlaylistProps {
+  playlist: Playlist;
+  onDelete: () => void;
+}
