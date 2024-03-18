@@ -111,6 +111,17 @@ userRouter.get('/playlists', auth,  async(req, res)=>{
     }
 })
 
+// Handling Delete Playlist
+userRouter.delete('/deletePlaylist/:_id', async(req, res)=>{
+    try {
+        const {_id} = req.params;
+        await PlaylistModel.findByIdAndDelete({_id});
+        res.status(200).send({"message": 'Playlist Deleted'})
+    } catch (error) {
+        res.status(400).send({"message": 'Something went wrong cannot delete playlist'})
+    }
+})
+
 module.exports = {
     userRouter
 }

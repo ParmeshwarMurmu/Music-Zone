@@ -77,4 +77,5 @@ export interface Playlist {
 export interface DeletePlaylistProps {
   playlist: Playlist;
   onDelete: () => void;
+  deletePlaylistLoading: boolean;
 }

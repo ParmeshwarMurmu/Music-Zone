@@ -16,17 +16,23 @@ import { MdDelete } from "react-icons/md";
 import { Playlist, DeletePlaylistProps } from '../../Interfaces/Interfce'
 
 
-const DeletePlaylist: React.FC<DeletePlaylistProps> = ({ playlist, onDelete }) => {
+const DeletePlaylist: React.FC<DeletePlaylistProps> = ({ playlist, onDelete,  deletePlaylistLoading }) => {
 
   const { isOpen, onOpen, onClose } = useDisclosure()
   const cancelRef = React.useRef<HTMLButtonElement | null>(null);
 
   // Function to handle deletePlaylist
+  // if(!deletePlaylistLoading){
+  //   onClose();
+  // }
+
+  
+  
 
   const deletePlaylistHandler = () => {
+    
     onDelete();
     onClose();
-
   }
 
 
@@ -52,7 +58,9 @@ const DeletePlaylist: React.FC<DeletePlaylistProps> = ({ playlist, onDelete }) =
             <Button ref={cancelRef} onClick={onClose}>
               No
             </Button>
-            <Button colorScheme='red' ml={3} onClick={deletePlaylistHandler}>
+            <Button colorScheme='red' ml={3} onClick={deletePlaylistHandler}
+            
+            >
               Yes
             </Button>
           </AlertDialogFooter>

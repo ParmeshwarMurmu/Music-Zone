@@ -3,12 +3,20 @@ import { FaRegPauseCircle } from "react-icons/fa";
 import { IoPlaySkipBackSharp } from "react-icons/io5";
 import { IoPlaySkipForwardSharp } from "react-icons/io5";
 import { appContent } from '../../ContextApi/ContextApi';
-import { APP_URL } from '../../Endpoints/Endpoints';
+import { APP_URL, USER_ADD_TO_PLAYLIST_ENDPOINT } from '../../Endpoints/Endpoints';
 import { FaPlayCircle } from "react-icons/fa";
 import { FaVolumeLow } from "react-icons/fa6";
 import { RxCross2 } from "react-icons/rx";
 import { MdOutlineRepeat } from "react-icons/md";
 import { MdOutlineRepeatOne } from "react-icons/md";
+import { CreatePlaylist } from '../SideBar/CreatePlaylist';
+import { Button, Menu, MenuButton, MenuItem, MenuList, useToast } from '@chakra-ui/react';
+import { BsThreeDotsVertical } from 'react-icons/bs';
+import { useAppSelector } from '../../Redux/Store/Hook';
+import { usersPlaylistValueFromReduxStore } from '../../Redux/PlaylistReducer/reducer';
+import { isAuthValueFromReduxStore } from '../../Redux/isAuthReducer/reducer';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 export const MusicPlayerProvider = () => {
 
@@ -21,7 +29,37 @@ export const MusicPlayerProvider = () => {
     const [duration, setDuration] = useState(0);
     const [volume, setVolume] = useState<number>(1);
     const [isVolumeControlVisible, setIsVolumeControlVisible] = useState<boolean>(false);
-    const [repeat, setRepeat] = useState<boolean>(false)
+    const [repeat, setRepeat] = useState<boolean>(false);
+    const toast = useToast();
+    const navigate = useNavigate();
+    // Getting  user playlist from redux store
+  const userPlaylist = useAppSelector(usersPlaylistValueFromReduxStore)
+
+  const { createPlaylist, setCreatePlaylist } = useContext(appContent)
+  const isAuth = useAppSelector(isAuthValueFromReduxStore)
+  
+  // User Authentication Token
+  const token = localStorage.getItem('musicToken')
+
+  // Function to handle create Playlist
+
+  const createNewPlaylist = () => {
+    if (isAuth) {
+        setCreatePlaylist(true)
+    }
+    else {
+        toast({
+            title: `Please Login`,
+            position: 'top-right',
+            status: 'warning',
+            isClosable: true,
+            duration: 2000,
+        })
+        navigate('/login')
+    }
+
+}
+
 
     useEffect(() => {
         if (currentTrack && audioRef.current) {
@@ -129,6 +167,32 @@ export const MusicPlayerProvider = () => {
         };
     }, [currentTrack, repeat]);
 
+
+    // Add to playlist handler
+
+    const addToPlaylistHandler = (playlistName: string)=>{
+        console.log("***");
+        
+        console.log(playlistName, "playlist Name");
+        console.log(currentTrack);
+        
+        axios.post(`${APP_URL}${USER_ADD_TO_PLAYLIST_ENDPOINT}/:${playlistName}`, {_id: currentTrack?._id}, {
+            headers: {
+                Authorization: `bearer ${token}`
+              }
+        })
+        .then((res)=>{
+            console.log(res);
+            
+        })
+        .catch((err)=>{
+            console.log(err);
+            
+        })
+        
+
+    }
+
     return (
 
         <div className=''>
@@ -188,12 +252,12 @@ export const MusicPlayerProvider = () => {
                                 {
                                     repeat ? (
                                         <MdOutlineRepeatOne fontSize={'20px'} className='mr-2 hover:cursor-pointer'
-                                        onClick={()=>{setRepeat(false)}}
-                                         />
+                                            onClick={() => { setRepeat(false) }}
+                                        />
                                     ) : (
                                         <MdOutlineRepeat fontSize={'20px'} className='mr-2 hover:cursor-pointer'
-                                         onClick={()=>{setRepeat(true)}}
-                                         />
+                                            onClick={() => { setRepeat(true) }}
+                                        />
                                     )
                                 }
 
@@ -205,6 +269,31 @@ export const MusicPlayerProvider = () => {
                                 )}
 
                                 <IoPlaySkipForwardSharp fontSize={'20px'} className='mr-4' />
+
+                                <div>
+                                    <Menu>
+                                        <MenuButton as={Button} variant={'none'} >
+                                            <BsThreeDotsVertical />
+                                        </MenuButton>
+                                        <MenuList className={'z-50'}>
+                                            {
+                                                userPlaylist.length > 0 && <div>
+                                                    {
+                                                        userPlaylist.map((el)=>(
+                                                            <MenuItem onClick={() => addToPlaylistHandler(el.playlistName)}>Add To {el.playlistName}</MenuItem>
+                                                        ))
+                                                    }
+                                                </div>
+                                            }
+
+                                            <MenuItem onClick={createNewPlaylist}>
+                                            Create Playlist
+                                            </MenuItem>
+                                            
+                                            
+                                        </MenuList>
+                                    </Menu>
+                                </div>
                             </div>
 
 

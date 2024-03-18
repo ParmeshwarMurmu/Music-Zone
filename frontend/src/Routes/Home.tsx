@@ -8,7 +8,7 @@ import { APP_URL, SINGLE_USER_DATA } from '../Endpoints/Endpoints'
 import { allMusic } from '../Interfaces/Interfce'
 import { appContent } from '../ContextApi/ContextApi'
 import { FaPlayCircle } from "react-icons/fa";
-import { Heading, useDisclosure } from '@chakra-ui/react'
+import { Button, Heading, Menu, MenuButton, MenuItem, MenuList, useDisclosure } from '@chakra-ui/react'
 import styled from 'styled-components'
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
@@ -18,6 +18,7 @@ import { FaAngleRight } from "react-icons/fa";
 import { Footer } from '../Components/Footer/Footer'
 import { useAppSelector } from '../Redux/Store/Hook'
 import { isAuthValueFromReduxStore } from '../Redux/isAuthReducer/reducer'
+import { BsThreeDotsVertical } from "react-icons/bs";
 
 
 
@@ -62,15 +63,15 @@ export const Home = () => {
 
   }, [])
 
-  useEffect(()=>{
+  useEffect(() => {
 
-    if(isAuth){
-     let musicUserId = localStorage.getItem('musicUserId')
-     axios.get(`${APP_URL}${SINGLE_USER_DATA}/${musicUserId}`)
-     .then((res)=>{
-      //  console.log(res);
-       setUserDetail(res.data.userData)
-     })
+    if (isAuth) {
+      let musicUserId = localStorage.getItem('musicUserId')
+      axios.get(`${APP_URL}${SINGLE_USER_DATA}/${musicUserId}`)
+        .then((res) => {
+          //  console.log(res);
+          setUserDetail(res.data.userData)
+        })
     }
 
   }, [isAuth])
@@ -166,7 +167,7 @@ export const Home = () => {
         <Navbar />
       </div>
 
-      
+
 
       <div className='relative'>
 
@@ -177,7 +178,7 @@ export const Home = () => {
             musicList.map((music, index) => (
 
               <div key={index} id='musicContainer' className='h-auto p-2 hover:scale-95 '
-              
+
               >
                 <Link
                   id='musicCont'
@@ -185,22 +186,41 @@ export const Home = () => {
                   className='m-2 p-1 hover: shadow-inner'
                   to={''}
                 >
-                  
-                  <div className='relative'>
-                  <img
-                    className=''
-                    src={`data:image/jpeg;base64, ${music.picture}`}
-                    alt='Cover'
-                  />
-                  {/* </div> */}
-                  <FaPlayCircle
-                    id='playBtn'
-                    onClick={() => setTrackHandler(music)}
-                    fontSize={'50px'}
-                    className={`text-neutral-white top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 absolute  z-50 hover:scale-125`}
-                  />
 
-                  
+                  <div className='relative'>
+                    <img
+                      className=''
+                      src={`data:image/jpeg;base64, ${music.picture}`}
+                      alt='Cover'
+                    />
+                    {/* </div> */}
+                    <FaPlayCircle
+                      id='playBtn'
+                      onClick={() => setTrackHandler(music)}
+                      fontSize={'50px'}
+                      className={`text-neutral-white top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 absolute  z-50 hover:scale-125`}
+                    />
+
+                    
+                    <div className={'z-50 absolute top-0 right-0  hover:z-50'}>
+
+                    
+                    {/* <Menu>
+                      <MenuButton as={Button} variant={'none'} >
+                      <BsThreeDotsVertical  />
+                      </MenuButton>
+                      <MenuList className={'z-50'}>
+                        <MenuItem>Download</MenuItem>
+                        <MenuItem>Create a Copy</MenuItem>
+                        <MenuItem>Mark as Draft</MenuItem>
+                        <MenuItem>Delete</MenuItem>
+                        <MenuItem>Attend a Workshop</MenuItem>
+                      </MenuList>
+                    </Menu> */}
+
+                    </div>
+
+
                   </div>
                 </Link>
               </div>
@@ -209,22 +229,22 @@ export const Home = () => {
 
 
 
-        
+
         <FaAngleLeft
-         
+
           className='absolute inset-y-0 left-0 top-1/2 transform -translate-y-1/2 cursor-pointer bg-neutral-silver
           lg:text-3xl
           md:text-base
           sm:text-base
           hover:text-blue-500'
-          
+
           onClick={() => sliderRef.current?.slickPrev()}
         />
-        
+
 
 
         <FaAngleRight
-          
+
           className='absolute inset-y-0 right-0 top-1/2 transform -translate-y-1/2 cursor-pointer  bg-neutral-silver
           lg:text-3xl
           md:text-base

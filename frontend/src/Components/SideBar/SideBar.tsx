@@ -12,7 +12,7 @@ import { ImCross } from "react-icons/im";
 import { Input, useToast } from '@chakra-ui/react';
 import { appContent } from '../../ContextApi/ContextApi';
 import axios from 'axios';
-import { APP_URL, CREATE_NEW_PLAYLIST_ENDPOINT, USER_ALL_PLAYLIST_ENDPOINT } from '../../Endpoints/Endpoints';
+import { APP_URL, CREATE_NEW_PLAYLIST_ENDPOINT, USER_ALL_PLAYLIST_ENDPOINT, USER_DELETE_PLAYLIST_ENDPOINT } from '../../Endpoints/Endpoints';
 import { useAppDispatch, useAppSelector } from '../../Redux/Store/Hook';
 import { isAuthValueFromReduxStore } from '../../Redux/isAuthReducer/reducer';
 import { playlistAllUserPlaylist, usersPlaylistValueFromReduxStore } from '../../Redux/PlaylistReducer/reducer';
@@ -28,6 +28,7 @@ export const SideBar = () => {
   const [playlistName, setPlaylistName] = useState<string>('')
   const isAuth = useAppSelector(isAuthValueFromReduxStore);
   const dispatch = useAppDispatch();
+  const [deletePlaylistLoading, setDeletePlaylistLoading] = useState<boolean>(false)
 
   // Getting  user playlist from redux store
   const userPlaylist = useAppSelector(usersPlaylistValueFromReduxStore)
@@ -59,8 +60,8 @@ export const SideBar = () => {
       })
   }
 
-  
-  
+
+
 
   useEffect(() => {
     if (isAuth) {
@@ -78,13 +79,53 @@ export const SideBar = () => {
 
 
   console.log("userPlaylist", userPlaylist);
-  
+
 
   // Function to delete user Playlist
   const handleDelete = (playlistId: string) => {
-    // Implement your logic to delete the playlist with the given ID
+    // logic to delete the playlist with the given ID
     console.log("Deleting playlist with ID:", playlistId);
-};
+   
+    axios.delete(`${APP_URL}${USER_DELETE_PLAYLIST_ENDPOINT}/${playlistId}`)
+      .then((res) => {
+        console.log(res);
+        
+        toast({
+          title: `${res.data.message}`,
+          position: 'top-right',
+          status: 'success',
+          isClosable: true,
+          duration: 2000,
+        })
+        getUserPlaylistAfterDelete()
+      })
+      .catch((err)=>{
+        setDeletePlaylistLoading(false)
+        toast({
+          title: `${err.data.message}`,
+          position: 'top-right',
+          status: 'error',
+          isClosable: true,
+          duration: 2000,
+        })
+      })
+
+  };
+
+  const getUserPlaylistAfterDelete = ()=>{
+    if (isAuth) {
+      axios.get(`${APP_URL}${USER_ALL_PLAYLIST_ENDPOINT}`, {
+        headers: {
+          Authorization: `bearer ${token}`
+        }
+      })
+        .then((res) => {
+          // console.log(res);
+          dispatch(playlistAllUserPlaylist(res.data.userPlaylist))
+        })
+    }
+  }
+  
 
 
 
@@ -194,7 +235,9 @@ export const SideBar = () => {
                       <p className='ml-2'>{el.playlistName}</p>
                     </div>
 
-                    <DeletePlaylist playlist={el} onDelete={() => handleDelete(el._id)} />
+                    <DeletePlaylist playlist={el} onDelete={() => handleDelete(el._id)}
+                     deletePlaylistLoading={deletePlaylistLoading}
+                     />
 
                     {/* <MdDelete fontSize={'20px'} className='cursor-pointer'  /> */}
                   </div>
