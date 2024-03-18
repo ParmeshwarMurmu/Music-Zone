@@ -122,6 +122,20 @@ userRouter.delete('/deletePlaylist/:_id', async(req, res)=>{
     }
 })
 
+// Handling Add to Song Playlist
+userRouter.post('/addToPlaylist/:playlistName', (req, res)=>{
+    try {
+        
+        const { playlistName } = req.params;
+        const {_id} = req.body;
+        console.log(playlistName, _id);
+        res.status(200).send({"message": "Added to Playlist"})
+        
+    } catch (error) {
+        
+    }
+})
+
 module.exports = {
     userRouter
 }

@@ -176,7 +176,7 @@ export const MusicPlayerProvider = () => {
         console.log(playlistName, "playlist Name");
         console.log(currentTrack);
         
-        axios.post(`${APP_URL}${USER_ADD_TO_PLAYLIST_ENDPOINT}/:${playlistName}`, {_id: currentTrack?._id}, {
+        axios.post(`${APP_URL}${USER_ADD_TO_PLAYLIST_ENDPOINT}/${playlistName}`, {_id: currentTrack?._id}, {
             headers: {
                 Authorization: `bearer ${token}`
               }
