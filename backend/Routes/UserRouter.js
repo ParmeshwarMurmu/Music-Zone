@@ -139,6 +139,19 @@ userRouter.post('/addToPlaylist/:playlistName', auth, async(req, res)=>{
     }
 })
 
+
+// Handling user playlist route
+userRouter.get('/playlist/:playlistName', auth, async(req, res)=>{
+    try {
+        const { playlistName } = req.params;
+        const userPlaylist = await UserPlaylistModel.find({playlistName}).populate('userId').populate('musicId').sort({_id: -1});
+        res.status(200).send({"userPlaylist": userPlaylist})
+
+    } catch (error) {
+        res.status(400).send({"message":"Something went wrong"})
+    }
+})
+
 module.exports = {
     userRouter
 }

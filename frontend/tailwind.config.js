@@ -60,6 +60,12 @@ module.exports = {
       serif: ['Verdana'],
     },
     extend: {
+      height: {
+         '124': '124px'
+      },
+      width: {
+        '124': '124px'
+      },
       spacing: {
         '8xl': '96rem',
         '9xl': '128rem',

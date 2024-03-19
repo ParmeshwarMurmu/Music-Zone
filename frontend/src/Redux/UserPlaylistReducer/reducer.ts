@@ -1,14 +1,29 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import type { RootState } from "../Store/Store";
+import { allMusic } from "../../Interfaces/Interfce";
 
 // Defined type for the user playlist
+
+interface MusicItem {
+    _id: string,
+    fileName: string,
+    title: string,
+    artist: string,
+    album: string,
+    picture: string,
+    releaseYear: string,
+    musicId: string,
+
+}
 
 interface userPlaylistItem {
     _id: string,
     playlistName: string,
     userId: string,
-    musicId: string
+    musicId: allMusic
 }
+
+
 
 interface userPlaylist {
     playlist : userPlaylistItem [],

@@ -9,3 +9,4 @@ export const USER_ALL_PLAYLIST_ENDPOINT : string = '/user/playlists';
 export const USER_DELETE_PLAYLIST_ENDPOINT : string = '/user/deletePlaylist';
 export const USER_ADD_TO_PLAYLIST_ENDPOINT : string = '/user/addToPlaylist';
 
+export const USER_PLAYLIST_ENDPOINT : string = '/user/playlist'
