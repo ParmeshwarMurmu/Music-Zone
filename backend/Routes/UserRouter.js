@@ -4,6 +4,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { auth } = require('../Middlewares/Authorization');
 const { PlaylistModel } = require('../Models/PlaylistSchema');
+const { UserPlaylistModel } = require('../Models/UserPlaylistSchema');
 require('dotenv').config()
 
 const userRouter = express.Router();
@@ -122,17 +123,19 @@ userRouter.delete('/deletePlaylist/:_id', async(req, res)=>{
     }
 })
 
-// Handling Add to Song Playlist
-userRouter.post('/addToPlaylist/:playlistName', (req, res)=>{
+// Handling Add to Song Playlist 
+userRouter.post('/addToPlaylist/:playlistName', auth, async(req, res)=>{
     try {
         
         const { playlistName } = req.params;
-        const {_id} = req.body;
-        console.log(playlistName, _id);
+        const {_id, userId } = req.body;
+        console.log(playlistName, _id, userId);
+        const newUserPlaylist = UserPlaylistModel({playlistName, userId, musicId: _id})
+        await newUserPlaylist.save();
         res.status(200).send({"message": "Added to Playlist"})
         
     } catch (error) {
-        
+        res.status(400).send({"message": "Something went wrong. Try again"})
     }
 })
 

@@ -183,10 +183,23 @@ export const MusicPlayerProvider = () => {
         })
         .then((res)=>{
             console.log(res);
-            
+            toast({
+                title: `${res.data.message}`,
+                position: 'top-right',
+                status: 'success',
+                isClosable: true,
+                duration: 2000,
+              })
         })
         .catch((err)=>{
             console.log(err);
+            toast({
+                title: `${err.data.message}`,
+                position: 'top-right',
+                status: 'error',
+                isClosable: true,
+                duration: 2000,
+              })
             
         })
         

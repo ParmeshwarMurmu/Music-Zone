@@ -4,10 +4,12 @@ import signUpReducer from '../SignUpReducer/reducer';
 import loginReducer from '../LoginReducer/reducer'
 import isAuthReducer from '../isAuthReducer/reducer'
 import playlistReducer from '../PlaylistReducer/reducer';
+import userPlaylistReducer from '../UserPlaylistReducer/reducer';
 
 
 export const store = configureStore({
     reducer: {
+      userPlaylist: userPlaylistReducer,
       playlist: playlistReducer,
       isAuth: isAuthReducer,
       signUp: signUpReducer,

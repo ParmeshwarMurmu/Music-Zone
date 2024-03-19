@@ -227,6 +227,7 @@ export const SideBar = () => {
             userPlaylist.length > 0 && <div>
               {
                 userPlaylist.map((el) => (
+                  <Link to={`/playlist/${el.playlistName}`}>
                   <div className='flex justify-between '>
 
                     <div className='flex justify-center items-center'>
@@ -241,6 +242,7 @@ export const SideBar = () => {
 
                     {/* <MdDelete fontSize={'20px'} className='cursor-pointer'  /> */}
                   </div>
+                  </Link>
                 ))
               }
 
