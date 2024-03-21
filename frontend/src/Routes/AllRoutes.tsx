@@ -16,10 +16,10 @@ export const AllRoutes = () => {
         <Route path='/' element={
           <WithSideBarLayout>
 
-        <Home />
+            <Home />
           </WithSideBarLayout>
         } />
-        <Route path='/login' element={ <Login />} />
+        <Route path='/login' element={<Login />} />
         <Route path='/signUp' element={
           <WithoutSideBarLayout>
 
@@ -29,7 +29,14 @@ export const AllRoutes = () => {
         />
         <Route path='/uploadMusic' element={<UplodMusci />} />
         <Route path='/singleMusic' element={<SingleMusicPage />} />
-        <Route path='/playlist/:playlistName' element={<UserPlaylist />} />
+        <Route path='/playlist/:playlistName' element={
+          <WithSideBarLayout>
+
+            <UserPlaylist />
+          </WithSideBarLayout>
+
+        }
+        />
       </Routes>
     </div>
   )

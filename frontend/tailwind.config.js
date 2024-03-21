@@ -64,7 +64,8 @@ module.exports = {
          '124': '124px'
       },
       width: {
-        '124': '124px'
+        '124': '124px',
+        '108': '108px'
       },
       spacing: {
         '8xl': '96rem',

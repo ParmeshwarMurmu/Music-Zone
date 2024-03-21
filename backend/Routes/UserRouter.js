@@ -144,7 +144,7 @@ userRouter.post('/addToPlaylist/:playlistName', auth, async(req, res)=>{
 userRouter.get('/playlist/:playlistName', auth, async(req, res)=>{
     try {
         const { playlistName } = req.params;
-        const userPlaylist = await UserPlaylistModel.find({playlistName}).populate('userId').populate('musicId').sort({_id: -1});
+        const userPlaylist = await UserPlaylistModel.find({playlistName}).populate('musicId').sort({_id: -1});
         res.status(200).send({"userPlaylist": userPlaylist})
 
     } catch (error) {
