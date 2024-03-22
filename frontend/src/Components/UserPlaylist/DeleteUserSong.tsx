@@ -12,6 +12,8 @@ import {
 } from '@chakra-ui/react'
 import { MdDelete } from "react-icons/md";
 import { allMusic, userData } from '../../Interfaces/Interfce';
+import axios from 'axios';
+import { APP_URL, USER_PLAYLIST_SONG_DELETE_ENDPONT } from '../../Endpoints/Endpoints';
 
 
 
@@ -28,7 +30,17 @@ const DeleteUserSong: React.FC<DeleteUserSongProps> = ({ musicId, playlistName, 
     const cancelRef = React.useRef<HTMLButtonElement | null>(null);
 
     const deleteSongHandler = ()=>{
-
+      console.log(_id, "id");
+      
+      axios.delete(`${APP_URL}${USER_PLAYLIST_SONG_DELETE_ENDPONT}/${_id}`)
+      .then((res)=>{
+        console.log(res);
+        
+      })
+      .catch((err)=>{
+        console.log(err);
+        
+      })
     }
 
 

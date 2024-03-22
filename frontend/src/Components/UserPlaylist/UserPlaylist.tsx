@@ -77,8 +77,8 @@ const UserPlaylist = () => {
                                 className='m-2 p-1 hover: shadow-inner'
                                 to={''}
                               > */}
-                    <div>
-                      <div className=''>
+                    {/* <div> */}
+                      <div className='relative'>
                         <img
                           className=''
                           src={`data:image/jpeg;base64, ${music.musicId.picture}`}
@@ -98,7 +98,7 @@ const UserPlaylist = () => {
 
 
 
-                      </div>
+                      {/* </div> */}
                       {/* </Link> */}
                     </div>
 
