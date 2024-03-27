@@ -162,7 +162,7 @@ export const Home = () => {
 
 
   return (
-    <DIV className=''>
+    <DIV className='h-screen'>
       <div className='flex flex-row-reverse border-4'>
         <Navbar />
       </div>

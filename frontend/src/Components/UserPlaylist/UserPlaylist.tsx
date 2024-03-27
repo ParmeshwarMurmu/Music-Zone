@@ -10,6 +10,8 @@ import { allMusic, userData } from '../../Interfaces/Interfce';
 import { SideBar } from '../SideBar/SideBar';
 import { Button } from '@chakra-ui/react';
 import DeleteUserSong from './DeleteUserSong';
+import { getAllUserPlaylistSong } from '../../Redux/PlaylistReducer/Function';
+import { Navbar } from '../../Routes/Navbar';
 
 
 
@@ -35,35 +37,22 @@ const UserPlaylist = () => {
 
 
   useEffect(() => {
-
-    dispatch(userPlaylistIsLoadingAction(true))
-    axios.get(`${APP_URL}${USER_PLAYLIST_ENDPOINT}/${playlistName}`, {
-      headers: {
-        Authorization: `bearer ${token}`
-      }
-    })
-      .then((res) => {
-        console.log(res);
-        dispatch(userPlaylistIsLoadingAction(false))
-        dispatch(userPlaylistAllPlaylist(res.data.userPlaylist))
-
-      })
-      .catch((err) => {
-        dispatch(userPlaylistIsEorrAction(true))
-      })
-
-
+    dispatch(getAllUserPlaylistSong(playlistName))
   }, [playlistName])
 
   console.log('userPlaylist', userPlaylist)
 
   return (
-    <div>
+    <div className='border-2 border-red-600 h-screen' >
+
+      <div className='flex flex-row-reverse border-4'>
+        <Navbar />
+      </div>
 
 
       {
         isLoading ? <div>Loading</div> :
-          <div className='border-2 border-red-600 grid grid-cols-9 gap-y-6'>
+          <div className='grid grid-cols-9 gap-y-6'>
             {
               userPlaylist.map((music, index) => (
                 <div key={index}>
@@ -78,19 +67,19 @@ const UserPlaylist = () => {
                                 to={''}
                               > */}
                     {/* <div> */}
-                      <div className='relative'>
-                        <img
-                          className=''
-                          src={`data:image/jpeg;base64, ${music.musicId.picture}`}
-                          alt='Cover'
-                        />
+                    <div className='relative'>
+                      <img
+                        className=''
+                        src={`data:image/jpeg;base64, ${music.musicId.picture}`}
+                        alt='Cover'
+                      />
 
-                        <FaPlayCircle
-                          id='playBtn'
-                          onClick={() => setTrackHandler(music.musicId)}
-                          fontSize={'50px'}
-                          className={`text-neutral-white top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 absolute  z-50 hover:scale-125`}
-                        />
+                      <FaPlayCircle
+                        id='playBtn'
+                        onClick={() => setTrackHandler(music.musicId)}
+                        fontSize={'50px'}
+                        className={`text-neutral-white top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 absolute  z-50 hover:scale-125`}
+                      />
 
 
 
@@ -107,7 +96,7 @@ const UserPlaylist = () => {
 
                   <div className='w-11/12 flex justify-center items-center'>
                     <DeleteUserSong musicId={music.musicId} playlistName={music.playlistName}
-                    _id={music._id}
+                      _id={music._id}
                     />
                   </div>
                 </div>
