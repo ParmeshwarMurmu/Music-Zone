@@ -17,6 +17,7 @@ import { usersPlaylistValueFromReduxStore } from '../../Redux/PlaylistReducer/re
 import { isAuthValueFromReduxStore } from '../../Redux/isAuthReducer/reducer';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import MoreInfoOFSomg from './MoreInfoOFSomg';
 
 export const MusicPlayerProvider = () => {
 
@@ -33,32 +34,32 @@ export const MusicPlayerProvider = () => {
     const toast = useToast();
     const navigate = useNavigate();
     // Getting  user playlist from redux store
-  const userPlaylist = useAppSelector(usersPlaylistValueFromReduxStore)
+    const userPlaylist = useAppSelector(usersPlaylistValueFromReduxStore)
 
-  const { createPlaylist, setCreatePlaylist } = useContext(appContent)
-  const isAuth = useAppSelector(isAuthValueFromReduxStore)
-  
-  // User Authentication Token
-  const token = localStorage.getItem('musicToken')
+    const { createPlaylist, setCreatePlaylist } = useContext(appContent)
+    const isAuth = useAppSelector(isAuthValueFromReduxStore)
 
-  // Function to handle create Playlist
+    // User Authentication Token
+    const token = localStorage.getItem('musicToken')
 
-  const createNewPlaylist = () => {
-    if (isAuth) {
-        setCreatePlaylist(true)
+    // Function to handle create Playlist
+
+    const createNewPlaylist = () => {
+        if (isAuth) {
+            setCreatePlaylist(true)
+        }
+        else {
+            toast({
+                title: `Please Login`,
+                position: 'top-right',
+                status: 'warning',
+                isClosable: true,
+                duration: 2000,
+            })
+            navigate('/login')
+        }
+
     }
-    else {
-        toast({
-            title: `Please Login`,
-            position: 'top-right',
-            status: 'warning',
-            isClosable: true,
-            duration: 2000,
-        })
-        navigate('/login')
-    }
-
-}
 
 
     useEffect(() => {
@@ -170,53 +171,58 @@ export const MusicPlayerProvider = () => {
 
     // Add to playlist handler
 
-    const addToPlaylistHandler = (playlistName: string)=>{
+    const addToPlaylistHandler = (playlistName: string) => {
         console.log("***");
-        
+
         console.log(playlistName, "playlist Name");
         console.log(currentTrack);
-        
-        axios.post(`${APP_URL}${USER_ADD_TO_PLAYLIST_ENDPOINT}/${playlistName}`, {_id: currentTrack?._id}, {
+
+        axios.post(`${APP_URL}${USER_ADD_TO_PLAYLIST_ENDPOINT}/${playlistName}`, { _id: currentTrack?._id }, {
             headers: {
                 Authorization: `bearer ${token}`
-              }
+            }
         })
-        .then((res)=>{
-            console.log(res);
-            toast({
-                title: `${res.data.message}`,
-                position: 'top-right',
-                status: 'success',
-                isClosable: true,
-                duration: 2000,
-              })
-        })
-        .catch((err)=>{
-            console.log(err);
-            toast({
-                title: `${err.data.message}`,
-                position: 'top-right',
-                status: 'error',
-                isClosable: true,
-                duration: 2000,
-              })
-            
-        })
-        
+            .then((res) => {
+                console.log(res);
+                toast({
+                    title: `${res.data.message}`,
+                    position: 'top-right',
+                    status: 'success',
+                    isClosable: true,
+                    duration: 2000,
+                })
+            })
+            .catch((err) => {
+                console.log(err);
+                toast({
+                    title: `${err.data.message}`,
+                    position: 'top-right',
+                    status: 'error',
+                    isClosable: true,
+                    duration: 2000,
+                })
+
+            })
+
 
     }
 
     return (
 
-        <div className=''>
+        <div className='w-full '>
 
 
 
+            {
+                currentTrack && <MoreInfoOFSomg currentTrack={currentTrack}  />
+            }
 
-            {currentTrack && (<div className='flex relative'>
+            {currentTrack && (<div className='flex relative '>
 
 
                 {/* Music Thumbnail */}
+
+
 
                 <div className='w-24'>
                     <img src={`data:image/jpeg;base64, ${currentTrack.picture}`} alt="" />
@@ -292,7 +298,7 @@ export const MusicPlayerProvider = () => {
                                             {
                                                 userPlaylist.length > 0 && <div>
                                                     {
-                                                        userPlaylist.map((el)=>(
+                                                        userPlaylist.map((el) => (
                                                             <MenuItem onClick={() => addToPlaylistHandler(el.playlistName)}>Add To {el.playlistName}</MenuItem>
                                                         ))
                                                     }
@@ -300,10 +306,10 @@ export const MusicPlayerProvider = () => {
                                             }
 
                                             <MenuItem onClick={createNewPlaylist}>
-                                            Create Playlist
+                                                Create Playlist
                                             </MenuItem>
-                                            
-                                            
+
+
                                         </MenuList>
                                     </Menu>
                                 </div>

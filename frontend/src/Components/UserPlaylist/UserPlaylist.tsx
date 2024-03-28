@@ -12,6 +12,7 @@ import { Button } from '@chakra-ui/react';
 import DeleteUserSong from './DeleteUserSong';
 import { getAllUserPlaylistSong } from '../../Redux/PlaylistReducer/Function';
 import { Navbar } from '../../Routes/Navbar';
+import styled from 'styled-components'
 
 
 
@@ -43,7 +44,7 @@ const UserPlaylist = () => {
   console.log('userPlaylist', userPlaylist)
 
   return (
-    <div className='border-2 border-red-600 h-screen' >
+    <DIV className='border-2 border-red-600 h-screen' >
 
       <div className='flex flex-row-reverse border-4'>
         <Navbar />
@@ -52,7 +53,7 @@ const UserPlaylist = () => {
 
       {
         isLoading ? <div>Loading</div> :
-          <div className='grid grid-cols-9 gap-y-6'>
+          <div className='grid grid-cols-9 gap-y-6 overflow-y-auto bg-shades-200 h-screen'>
             {
               userPlaylist.map((music, index) => (
                 <div key={index}>
@@ -104,8 +105,18 @@ const UserPlaylist = () => {
             }
           </div>
       }
-    </div>
+    </DIV>
   )
 }
 
 export default UserPlaylist
+
+const DIV = styled.div`
+  #playBtn{
+  display: none;
+}
+
+#musicContainer:hover #playBtn {
+  display: block;
+}
+`
