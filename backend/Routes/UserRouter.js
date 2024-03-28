@@ -5,6 +5,7 @@ const jwt = require('jsonwebtoken');
 const { auth } = require('../Middlewares/Authorization');
 const { PlaylistModel } = require('../Models/PlaylistSchema');
 const { UserPlaylistModel } = require('../Models/UserPlaylistSchema');
+const { MusicModel } = require('../Models/MusicSchema');
 require('dotenv').config()
 
 const userRouter = express.Router();
@@ -161,6 +162,27 @@ userRouter.delete('/deletePlaylistSong/:_id', async(req, res)=>{
         res.status(400).send({"message":"Something went wrong. Cannot remove song"})
     }
 })
+
+
+// More Music From Artist
+
+userRouter.get('/moreSongs/:album/:year', async(req, res)=>{
+
+
+    console.log("******");
+    try {
+        const { album, year } = req.params;
+        console.log(album, year)
+        // let moreAlbum, moreYear;
+        const moreAlbum = await MusicModel.find({album})
+        const moreYear = await MusicModel.find({releaseYear: year})
+        console.log(moreAlbum)
+        res.status(200).send({"message": "Yaer And Album", "album": moreAlbum, "year": moreYear})
+    } catch (error) {
+        res.status(400).send({"message":"Something went wrong. Cannot remove song"})
+    }
+})
+
 
 module.exports = {
     userRouter

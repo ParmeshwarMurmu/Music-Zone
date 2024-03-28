@@ -57,6 +57,12 @@ module.exports = {
 
     fontFamily: {
       Inter: 'Inter',
+      openSans:'Open Sans'
+    },
+
+    fontSize: {
+      '14': '14px',
+      '16': '16px'
     },
     extend: {
       height: {

@@ -207,6 +207,9 @@ export const MusicPlayerProvider = () => {
 
     }
 
+    // console.log(currentTrack);
+    
+
     return (
 
         <div className='w-full '>
@@ -214,7 +217,7 @@ export const MusicPlayerProvider = () => {
 
 
             {
-                currentTrack && <MoreInfoOFSomg currentTrack={currentTrack}  />
+                currentTrack && <MoreInfoOFSomg currentTrackInfo={currentTrack}  />
             }
 
             {currentTrack && (<div className='flex relative '>

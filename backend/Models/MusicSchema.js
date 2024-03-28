@@ -6,7 +6,7 @@ const musicSchema = mongoose.Schema({
     artist: String,
     album: String,
     picture: String,
-    duration: String,
+    durationInMinutes: String,
     releaseYear: String,
     musicId: String
 

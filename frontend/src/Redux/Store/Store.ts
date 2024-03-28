@@ -6,10 +6,11 @@ import isAuthReducer from '../isAuthReducer/reducer'
 import playlistReducer from '../PlaylistReducer/reducer';
 import userPlaylistReducer from '../UserPlaylistReducer/reducer';
 import playlist90Reducer from '../90sSongReducer/reducer';
-
+import moreSongFromArtistReducer from '../MoreFromArtistReducer/reducer'
 
 export const store = configureStore({
     reducer: {
+      moreSongsArt: moreSongFromArtistReducer,
       playlist90S: playlist90Reducer,
       userPlaylist: userPlaylistReducer,
       playlist: playlistReducer,
