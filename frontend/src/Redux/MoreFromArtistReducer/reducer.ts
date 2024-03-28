@@ -25,6 +25,7 @@ interface moreSongFromArtist {
 interface moreSongs {
     
     moreSongsFromArtist : moreSongFromArtist[],
+    moreSongsYear: moreSongFromArtist[]
     isLoading: boolean,
     isError: boolean
 }
@@ -33,6 +34,7 @@ interface moreSongs {
 
 const initialState: moreSongs = {
     moreSongsFromArtist : [],
+    moreSongsYear: [],
     isLoading: false,
     isError: false
 }
@@ -59,6 +61,10 @@ export const moreSongFromArtistSlice = createSlice({
             state.moreSongsFromArtist  = action.payload;
         },
 
+        moreSongFromYearSuccessAction: (state, action: PayloadAction<moreSongFromArtist[]>) =>{
+            state.moreSongsYear  = action.payload;
+        },
+
         moreSongFromArtistPlaylistResetAction: (state) => {
             return initialState;
         }
@@ -68,9 +74,10 @@ export const moreSongFromArtistSlice = createSlice({
 })
 
 
-export const { moreSongFromArtistIsLoadingAction, moreSongFromArtistIsEorrAction, moreSongFromArtistSuccessAction, moreSongFromArtistPlaylistResetAction } = moreSongFromArtistSlice.actions
+export const { moreSongFromArtistIsLoadingAction,moreSongFromYearSuccessAction, moreSongFromArtistIsEorrAction, moreSongFromArtistSuccessAction, moreSongFromArtistPlaylistResetAction } = moreSongFromArtistSlice.actions
 export const moreSongFromArtistAllSongsValueFromReduxStore = (state: RootState) => state.moreSongsArt.moreSongsFromArtist;
 export const moreSongFromArtistIsLoadingValueFromReduxStore = (state: RootState) => state.moreSongsArt.isLoading;
+export const moreSongFromYearValueFromReduxStore = (state: RootState) => state.moreSongsArt.moreSongsYear;
 
 
 export default moreSongFromArtistSlice.reducer;

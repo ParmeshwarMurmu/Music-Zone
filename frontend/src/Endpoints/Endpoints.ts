@@ -12,3 +12,6 @@ export const USER_ADD_TO_PLAYLIST_ENDPOINT : string = '/user/addToPlaylist';
 export const USER_PLAYLIST_ENDPOINT : string = '/user/playlist'
 export const USER_PLAYLIST_SONG_DELETE_ENDPONT : string = '/user/deletePlaylistSong'
 export const MORE_SONG_FROM_ARTIST : string = '/user/moreSongs'
+
+
+export const SONGS_90S : string = '/home/90Songs'

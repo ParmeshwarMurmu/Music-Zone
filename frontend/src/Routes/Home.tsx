@@ -19,6 +19,7 @@ import { Footer } from '../Components/Footer/Footer'
 import { useAppSelector } from '../Redux/Store/Hook'
 import { isAuthValueFromReduxStore } from '../Redux/isAuthReducer/reducer'
 import { BsThreeDotsVertical } from "react-icons/bs";
+import SliderComp from '../Components/Slider/SliderComp'
 
 
 
@@ -258,6 +259,9 @@ export const Home = () => {
 
 
       </div>
+
+
+      <SliderComp />
     </DIV>
   );
 

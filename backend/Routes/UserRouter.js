@@ -168,8 +168,6 @@ userRouter.delete('/deletePlaylistSong/:_id', async(req, res)=>{
 
 userRouter.get('/moreSongs/:album/:year', async(req, res)=>{
 
-
-    console.log("******");
     try {
         const { album, year } = req.params;
         console.log(album, year)

@@ -6,6 +6,7 @@ const { UploadMusicRouter } = require('./Routes/UploadMusicRouter');
 const { MusicRouter } = require('./Routes/MusicRouter');
 const path = require('path');
 const { userRouter } = require('./Routes/UserRouter');
+const { homeMusicRouter } = require('./Routes/HomeMusicRouter');
 
 
 const app = express();
@@ -15,6 +16,7 @@ app.use(cors())
 app.use('/admin', UploadMusicRouter)
 app.use('/home', express.static(path.join(__dirname, 'uploads/music')), MusicRouter)
 app.use('/user', userRouter)
+app.use('/home', homeMusicRouter)
 
 app.listen(process.env.PORT, async()=>{
     try {

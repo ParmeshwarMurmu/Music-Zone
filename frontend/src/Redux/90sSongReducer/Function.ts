@@ -1,24 +1,22 @@
 import axios from "axios";
 import { Dispatch } from "redux";
-import { userPlaylistAllPlaylist, userPlaylistIsEorrAction, userPlaylistIsLoadingAction } from "../UserPlaylistReducer/reducer";
-import { APP_URL, USER_PLAYLIST_ENDPOINT } from "../../Endpoints/Endpoints";
+import { APP_URL, SONGS_90S, } from "../../Endpoints/Endpoints";
+import { playlist90SAllSongs, playlist90SIsEorrAction, playlist90SIsLoadingAction } from "./reducer";
 
-export const getAllUserPlaylistSong = (playlistName: string | undefined)=>(dispatch: Dispatch<any>)=>{
-    const token = localStorage.getItem('musicToken')
-    dispatch(userPlaylistIsLoadingAction(true))
-    axios.get(`${APP_URL}${USER_PLAYLIST_ENDPOINT}/${playlistName}`, {
-      headers: {
-        Authorization: `bearer ${token}`
-      }
-    })
+export const get90Song = ()=>(dispatch: Dispatch<any>)=>{
+    // const token = localStorage.getItem('musicToken')
+    console.log("(((99999999");
+    
+    dispatch(playlist90SIsLoadingAction(true))
+    axios.get(`${APP_URL}${SONGS_90S}`)
       .then((res) => {
         console.log(res);
-        dispatch(userPlaylistIsLoadingAction(false))
-        dispatch(userPlaylistAllPlaylist(res.data.userPlaylist))
+        dispatch(playlist90SIsLoadingAction(false));
+        dispatch(playlist90SAllSongs(res.data.old))
 
       })
       .catch((err) => {
-        dispatch(userPlaylistIsEorrAction(true))
+        dispatch(playlist90SIsEorrAction(true))
       })
 
 }

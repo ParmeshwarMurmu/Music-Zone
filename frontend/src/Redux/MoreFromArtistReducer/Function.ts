@@ -1,7 +1,7 @@
 import axios from "axios";
 import { Dispatch } from "redux";
 
-import { moreSongFromArtistIsEorrAction, moreSongFromArtistIsLoadingAction, moreSongFromArtistSuccessAction } from "./reducer";
+import { moreSongFromArtistIsEorrAction, moreSongFromArtistIsLoadingAction, moreSongFromArtistSuccessAction, moreSongFromYearSuccessAction } from "./reducer";
 import { APP_URL, MORE_SONG_FROM_ARTIST } from "../../Endpoints/Endpoints";
 
 export const MoreFromArtist = (album: string | undefined, year: string | undefined)=>(dispatch: Dispatch<any>)=>{
@@ -15,8 +15,9 @@ export const MoreFromArtist = (album: string | undefined, year: string | undefin
     })
       .then((res) => {
         console.log(res, "+++++++");
-        // dispatch(moreSongFromArtistIsEorrAction(false))
-        // dispatch(moreSongFromArtistSuccessAction(res.data.album))
+        dispatch(moreSongFromArtistIsLoadingAction(false))
+        dispatch(moreSongFromArtistSuccessAction(res.data.album))
+        dispatch(moreSongFromYearSuccessAction(res.data.year))
 
       })
       .catch((err) => {
