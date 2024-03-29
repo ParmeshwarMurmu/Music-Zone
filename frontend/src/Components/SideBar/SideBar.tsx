@@ -3,7 +3,7 @@ import { IoHomeSharp } from "react-icons/io5";
 import { ImSearch } from "react-icons/im";
 import { MdLibraryMusic } from "react-icons/md";
 import { IoMdAdd } from "react-icons/io";
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { CreatePlaylist } from './CreatePlaylist';
 import { FaFolderOpen } from "react-icons/fa";
 import { TiTick } from "react-icons/ti";
@@ -29,6 +29,7 @@ export const SideBar = () => {
   const isAuth = useAppSelector(isAuthValueFromReduxStore);
   const dispatch = useAppDispatch();
   const [deletePlaylistLoading, setDeletePlaylistLoading] = useState<boolean>(false)
+  const [activePlaylist, setActivePlaylist] = useState<string | null>(null);
 
   // Getting  user playlist from redux store
   const userPlaylist = useAppSelector(usersPlaylistValueFromReduxStore)
@@ -85,11 +86,11 @@ export const SideBar = () => {
   const handleDelete = (playlistId: string) => {
     // logic to delete the playlist with the given ID
     console.log("Deleting playlist with ID:", playlistId);
-   
+
     axios.delete(`${APP_URL}${USER_DELETE_PLAYLIST_ENDPOINT}/${playlistId}`)
       .then((res) => {
         console.log(res);
-        
+
         toast({
           title: `${res.data.message}`,
           position: 'top-right',
@@ -99,7 +100,7 @@ export const SideBar = () => {
         })
         getUserPlaylistAfterDelete()
       })
-      .catch((err)=>{
+      .catch((err) => {
         setDeletePlaylistLoading(false)
         toast({
           title: `${err.data.message}`,
@@ -112,7 +113,7 @@ export const SideBar = () => {
 
   };
 
-  const getUserPlaylistAfterDelete = ()=>{
+  const getUserPlaylistAfterDelete = () => {
     if (isAuth) {
       axios.get(`${APP_URL}${USER_ALL_PLAYLIST_ENDPOINT}`, {
         headers: {
@@ -125,7 +126,7 @@ export const SideBar = () => {
         })
     }
   }
-  
+
 
 
 
@@ -227,21 +228,30 @@ export const SideBar = () => {
             userPlaylist.length > 0 && <div>
               {
                 userPlaylist.map((el) => (
-                  <Link to={`/playlist/${el.playlistName}`}>
-                  <div className='flex justify-between '>
+                  <Link
+                    key={el._id}
 
-                    <div className='flex justify-center items-center'>
-                      <FaFolderOpen fontSize={'20px'} />
 
-                      <p className='ml-2'>{el.playlistName}</p>
+                    to={`/playlist/${el.playlistName}`}
+                    onClick={() => setActivePlaylist(el.playlistName)}
+                  >
+                    <div className='flex justify-between '>
+
+                      <div className='flex justify-center items-center'>
+                        <FaFolderOpen fontSize={'20px'} />
+
+                        <p className='ml-2'
+                          style={{ color: activePlaylist === el.playlistName ? 'red' : 'black' }}
+
+                        >{el.playlistName}</p>
+                      </div>
+
+                      <DeletePlaylist playlist={el} onDelete={() => handleDelete(el._id)}
+                        deletePlaylistLoading={deletePlaylistLoading}
+                      />
+
+                      {/* <MdDelete fontSize={'20px'} className='cursor-pointer'  /> */}
                     </div>
-
-                    <DeletePlaylist playlist={el} onDelete={() => handleDelete(el._id)}
-                     deletePlaylistLoading={deletePlaylistLoading}
-                     />
-
-                    {/* <MdDelete fontSize={'20px'} className='cursor-pointer'  /> */}
-                  </div>
                   </Link>
                 ))
               }

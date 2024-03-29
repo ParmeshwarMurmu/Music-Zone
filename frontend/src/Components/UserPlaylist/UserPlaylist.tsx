@@ -53,12 +53,14 @@ const UserPlaylist = () => {
 
       {
         isLoading ? <div>Loading</div> :
-          <div className='grid grid-cols-9 gap-y-6 overflow-y-auto bg-shades-200 h-screen'>
+          <div className='grid 2xl:grid-cols-9 gap-y-6 overflow-y-auto bg-shades-200 h-screen
+          xl:grid-cols-9 lg:grid-cols-7 md:grid-cols-5 sm:grid-cols-4 mobiles-max:grid-cols-2 mobiles-max:gap-y-2
+          '>
             {
               userPlaylist.map((music, index) => (
-                <div key={index}>
+                <div key={index} className=''>
 
-                  <div id='musicContainer' className='mb-1 h-124 w-124 p-2 hover:scale-95 border-2 border-red-600'
+                  <div id='musicContainer' className='mb-1  p-2 hover:scale-95 '
 
                   >
                     {/* <Link
@@ -95,7 +97,7 @@ const UserPlaylist = () => {
 
                   </div>
 
-                  <div className='w-11/12 flex justify-center items-center'>
+                  <div className='w-11/12 flex justify-center items-center border-4'>
                     <DeleteUserSong musicId={music.musicId} playlistName={music.playlistName}
                       _id={music._id}
                     />

@@ -7,7 +7,7 @@ import { SideBar } from '../Components/SideBar/SideBar';
 export const WithSideBarLayout : React.FC<WithSidebarLayoutProps> = ({ children }) => {
     return (
       <div className='flex'>
-        <div className='w-1/6'>
+        <div className='w-1/6 2xl:block xl:block lg:block md:block sm:hidden'>
           <SideBar />
         </div>
 
