@@ -40,8 +40,9 @@ module.exports = {
     screens: {
       // 'mobiles': '640px',
       // 'xs': '420px',
-      'extra-small': {'max': '419px'},
+      
       'mobiles-max': { 'max': '639px'},
+      'small':{'max': '420px'},
       'sm': '640px',
       // => @media (min-width: 640px) { ... }
 
@@ -65,7 +66,8 @@ module.exports = {
 
     fontSize: {
       '14': '14px',
-      '16': '16px'
+      '16': '16px',
+      '12': '12px'
     },
     extend: {
       height: {

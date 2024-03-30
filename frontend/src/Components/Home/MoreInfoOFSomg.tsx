@@ -16,6 +16,8 @@ import { moreSongFromArtistAllSongsValueFromReduxStore, moreSongFromArtistIsLoad
 import { appContent } from '../../ContextApi/ContextApi';
 import { FaPlayCircle } from "react-icons/fa";
 import styled from 'styled-components'
+import { IoCloseSharp } from "react-icons/io5";
+
 
 interface MoreInfoOfSongProps {
     currentTrackInfo: allMusic
@@ -26,7 +28,7 @@ interface MoreInfoOfSongProps {
 const MoreInfoOFSomg: React.FC<MoreInfoOfSongProps> = ({ currentTrackInfo }) => {
 
     const { isOpen, onOpen, onClose } = useDisclosure()
-   
+
     const { currentTrack, setCurrentTrack, setShowMusicPlyer, setUserDetail } = useContext(appContent)
     const dispatch = useAppDispatch();
 
@@ -39,6 +41,10 @@ const MoreInfoOFSomg: React.FC<MoreInfoOfSongProps> = ({ currentTrackInfo }) => 
         //  onOpen()
         setShowMusicPlyer(true)
 
+    }
+
+    const crossHandler = ()=>{
+        onClose()
     }
 
     useEffect(() => {
@@ -57,21 +63,27 @@ const MoreInfoOFSomg: React.FC<MoreInfoOfSongProps> = ({ currentTrackInfo }) => 
             </Button>
             <Drawer placement={'bottom'} onClose={onClose} isOpen={isOpen}>
                 <DrawerOverlay />
-                <DrawerContent height={'100vh'}>
-                    <DrawerCloseButton />
-                    {/* <DrawerHeader borderBottomWidth='1px'>Basic Drawerbgbhbh</DrawerHeader> */}
-                    <DrawerBody>
-                        <div className='w-2/12'>
+                <DrawerContent height={'100vh'} style={{ position: 'relative' }}>
+
+                    {/* <DrawerHeader borderBottomWidth='1px'>Basi w-2/12c Drawerbgbhbh</DrawerHeader> */}
+                    <DrawerBody p={0} m={0}>
+                        <div className={`absolute top-0 right-0 pr-2 pt-2 bg-white cursor-pointer`} onClick={crossHandler}>
+                            <IoCloseSharp id='crossBtn' style={{ marginBottom: '6px', marginLeft: '6px'}} fontSize={'20px'}   />
+                        </div>
+
+                        <div className='w-2/5 small:w-full mobiles-max:w-5/12 sm:w-4/12 md:w-1/4'>
                             <img src={`data:image/jpeg;base64, ${currentTrackInfo.picture}`} alt=""
                             // className='1/12'
                             />
 
-                            <p className={`font-Inter font-semibold text-16`}>Title : <span className={`font-openSans font-normal text-14`}>{currentTrackInfo.title}</span></p>
-                            <p className={`font-Inter font-semibold text-16`}>Artist :  <span className={`font-openSans font-normal text-14`}>{currentTrackInfo.artist}</span></p>
-                            {/* <p>Duration : <span>{currentTrack.duration}</span></p> */}
-                            <p className={`font-Inter font-semibold text-16`}>Release Yaer : <span className={`font-openSans font-normal text-14`}>{currentTrackInfo.releaseYear}</span></p>
-                            <p className={`font-Inter font-semibold text-16`}>Album : <span className={`font-openSans font-normal text-14`}>{currentTrackInfo.album}</span></p>
-                            <p>Dhunu Murmu</p>
+                            <div className={'p-1'}>
+                                <p className={`font-Inter font-semibold text-16 small:text-14`}>Title : <span className={`font-openSans font-normal text-14 small:text-12`}>{currentTrackInfo.title}</span></p>
+                                <p className={`font-Inter font-semibold text-16 small:text-14`}>Artist :  <span className={`font-openSans font-normal text-14 small:text-12`}>{currentTrackInfo.artist}</span></p>
+                                {/* <p>Duration : <span>{currentTrack.duration}</span></p> */}
+                                <p className={`font-Inter font-semibold text-16 small:text-14`}>Release Yaer : <span className={`font-openSans font-normal text-14 small:text-12`}>{currentTrackInfo.releaseYear}</span></p>
+                                <p className={`font-Inter font-semibold text-16 small:text-14`}>Album : <span className={`font-openSans font-normal text-14 small:text-12`}>{currentTrackInfo.album}</span></p>
+                            </div>
+
                         </div>
 
 
@@ -89,7 +101,7 @@ const MoreInfoOFSomg: React.FC<MoreInfoOfSongProps> = ({ currentTrackInfo }) => 
                                                     <div id='musicCont' className='mb-1 h-124 w-124 p-2 hover:scale-95 border-2 border-red-600'
 
                                                     >
-                                                     
+
                                                         {/* <div> */}
                                                         <div className='relative'>
                                                             <img

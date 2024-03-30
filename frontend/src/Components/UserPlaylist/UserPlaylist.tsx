@@ -54,7 +54,7 @@ const UserPlaylist = () => {
       {
         isLoading ? <div>Loading</div> :
           <div className=' grid 2xl:grid-cols-7 gap-y-6 overflow-y-auto h-screen
-          xl:grid-cols-7 lg:grid-cols-6 md:grid-cols-5 sm:grid-cols-4 mobiles-max:grid-cols-2
+          xl:grid-cols-7 lg:grid-cols-6 md:grid-cols-5 sm:grid-cols-4 mobiles-max:grid-cols-3 small:grid-cols-2
           '>
             {
               userPlaylist.map((music, index) => (
