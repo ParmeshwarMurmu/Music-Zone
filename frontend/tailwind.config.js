@@ -39,7 +39,10 @@ module.exports = {
 
     screens: {
       // 'mobiles': '640px',
-      'mobiles-max': { max: '500px' },
+      // 'xs': '420px',
+      'extra-small': {'max': '419px'},
+      'mobiles-max': { 'max': '639px'},
+      'sm': '640px',
       // => @media (min-width: 640px) { ... }
 
       'md': '768px',

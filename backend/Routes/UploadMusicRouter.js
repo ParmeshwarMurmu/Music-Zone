@@ -39,17 +39,24 @@ UploadMusicRouter.post('/uploadMusic', upload.single('music'), async (req, res) 
         const { filename, path } = req.file;
 
         const metadata = await mm.parseFile(path);
-        console.log(metadata);
+        // console.log(metadata);
         let { title, artist, album, picture } = metadata.common;
-        console.log(artist)
-        console.log(album)
+        
         title = title.split('-')[0]
         album = album.split('-')[0]
         artist = artist.split('-')[0]
         
-        const releaseYear = metadata.common.year; // Extract the release year
+        let releaseYear = metadata.common.year; // Extract the release year
+        console.log(artist, 'artist')
+        console.log(album, "album")
+        
         const durationInSeconds = metadata.format.duration;
         const durationInMinutes = Math.floor(durationInSeconds / 60);
+        if(isNaN(releaseYear)){
+            console.log("&&*&****");
+            releaseYear = '1998'
+        }
+        console.log(releaseYear, "year")
 
         // If there is a cover image in the metadata, extract it
         //   const coverImage = picture && picture.length > 0 ? `${req.protocol}://${req.get('host')}${staticFilesRoute}/${filename}` : null;

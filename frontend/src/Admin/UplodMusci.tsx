@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { Button, Input } from '@chakra-ui/react';
+import { Button, Input, useToast } from '@chakra-ui/react';
 import axios from 'axios';
 import { APP_URL } from '../Endpoints/Endpoints';
 
@@ -8,7 +8,8 @@ export const UplodMusci = () => {
 
   const [file, setFile] = useState<File | null>(null);
   const [url, setUrl] = useState<string | null>(null);
-  const [uploaded, setUploaded] = useState<boolean>(false)
+  const [uploaded, setUploaded] = useState<boolean>(false);
+  const toast = useToast();
 
   const fileHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFile = e.target.files && e.target.files[0];
@@ -31,6 +32,13 @@ export const UplodMusci = () => {
         formData.append('music', file);
         const response = await axios.post(`${APP_URL}/admin/uploadMusic`, formData);
         console.log(response.data)
+        toast({
+          title: `${response.data.message}`,
+          position: 'top-right',
+          status: 'success',
+          isClosable: true,
+          duration: 2000,
+        })
         setUploaded(false)
       }
     } catch (error) {

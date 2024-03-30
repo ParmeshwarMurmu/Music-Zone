@@ -49,7 +49,7 @@ export const CreatePlaylist = () => {
             <Menu>
                 <MenuButton><IoMdAdd fontSize={'20px'} /></MenuButton>
                 <Portal>
-                    <MenuList>
+                    <MenuList zIndex={10}>
                         <MenuItem onClick={createNewPlaylist}>New Playlist</MenuItem>
                         <MenuItem>New Window</MenuItem>
                         <MenuItem>Open Closed Tab</MenuItem>

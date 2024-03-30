@@ -97,9 +97,9 @@ const SliderComp = () => {
     dots: true,
     infinite: true,
     speed: 500,
-    // slidesToShow: 7, // Set the number of slides to show at a time
-    // slidesToScroll: 7, // Set the number of slides to scroll,
-    ...getResponsiveSettings(),
+    slidesToShow: 7, // Set the number of slides to show at a time
+    slidesToScroll: 7, // Set the number of slides to scroll,
+    // ...getResponsiveSettings(),
   };
 
   console.log("settings", settings)
@@ -137,20 +137,20 @@ const SliderComp = () => {
 
   useEffect(() => {
     // Initial setup
-    initializeSlider();
+    // initializeSlider();
 
-    // Listen for window resize events and update the slider
-    const handleResize = () => {
-      setCurrentSlide(0);
-      console.log('Window is resizing!');
-      initializeSlider();
-    };
+    // // Listen for window resize events and update the slider
+    // const handleResize = () => {
+    //   setCurrentSlide(0);
+    //   console.log('Window is resizing!');
+    //   initializeSlider();
+    // };
 
-    window.addEventListener('resize', handleResize);
+    // window.addEventListener('resize', handleResize);
 
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
+    // return () => {
+    //   window.removeEventListener('resize', handleResize);
+    // };
   }, [currentSlide]);
 
 

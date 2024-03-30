@@ -44,33 +44,27 @@ const UserPlaylist = () => {
   console.log('userPlaylist', userPlaylist)
 
   return (
-    <DIV className='border-2 border-red-600 h-screen' >
+    <DIV className='border-4 border-red-600 h-screen sm:bg-red' >
 
-      <div className='flex flex-row-reverse border-4'>
+      <div className='flex border-4 justify-end'>
         <Navbar />
       </div>
 
 
       {
         isLoading ? <div>Loading</div> :
-          <div className='grid 2xl:grid-cols-9 gap-y-6 overflow-y-auto bg-shades-200 h-screen
-          xl:grid-cols-9 lg:grid-cols-7 md:grid-cols-5 sm:grid-cols-4 mobiles-max:grid-cols-2 mobiles-max:gap-y-2
+          <div className=' grid 2xl:grid-cols-7 gap-y-6 overflow-y-auto h-screen
+          xl:grid-cols-7 lg:grid-cols-6 md:grid-cols-5 sm:grid-cols-4 mobiles-max:grid-cols-2
           '>
             {
               userPlaylist.map((music, index) => (
-                <div key={index} className=''>
+                <div key={index} className=' border-4'>
 
                   <div id='musicContainer' className='mb-1  p-2 hover:scale-95 '
 
                   >
-                    {/* <Link
-                                id='musicCont'
-                                // hover:brightness-50
-                                className='m-2 p-1 hover: shadow-inner'
-                                to={''}
-                              > */}
-                    {/* <div> */}
-                    <div className='relative'>
+                    
+                    <div className='relative '>
                       <img
                         className=''
                         src={`data:image/jpeg;base64, ${music.musicId.picture}`}
@@ -97,7 +91,7 @@ const UserPlaylist = () => {
 
                   </div>
 
-                  <div className='w-11/12 flex justify-center items-center border-4'>
+                  <div className=' flex justify-center items-center border-4'>
                     <DeleteUserSong musicId={music.musicId} playlistName={music.playlistName}
                       _id={music._id}
                     />

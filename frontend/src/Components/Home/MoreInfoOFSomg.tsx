@@ -26,7 +26,7 @@ interface MoreInfoOfSongProps {
 const MoreInfoOFSomg: React.FC<MoreInfoOfSongProps> = ({ currentTrackInfo }) => {
 
     const { isOpen, onOpen, onClose } = useDisclosure()
-    const placement: string = 'bottom';
+   
     const { currentTrack, setCurrentTrack, setShowMusicPlyer, setUserDetail } = useContext(appContent)
     const dispatch = useAppDispatch();
 

@@ -19,32 +19,14 @@ export const Main = () => {
 
 
 
-      {/* <div className='flex'>
 
-
-        
-        <div className='w-1/6'>
-          <SideBar />
-        </div>
-
-
-        
-        <div className='w-4/5'>
-
-          <div>
-
-            <AllRoutes />
-          </div>
-
-        </div>
-      </div> */}
 
       <div>
 
         <AllRoutes />
       </div>
 
-      
+
 
       {
         showMusicPlayer && <div className='bg-neutral-silver fixed bottom-0 left-0 right-0 shadow-2xl opacity-100 p-2 '>
@@ -52,11 +34,11 @@ export const Main = () => {
         </div>
       }
 
-<div className='border-4 mt-6 '>
+      <div className='border-4 mt-6 w-full'>
         <Footer />
       </div>
 
-      
+
 
 
     </div>

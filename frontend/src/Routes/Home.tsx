@@ -103,9 +103,9 @@ export const Home = () => {
     dots: true,
     infinite: true,
     speed: 500,
-    // slidesToShow: 7, // Set the number of slides to show at a time
-    // slidesToScroll: 7, // Set the number of slides to scroll,
-    ...getResponsiveSettings(),
+    slidesToShow: 7, // Set the number of slides to show at a time
+    slidesToScroll: 7, // Set the number of slides to scroll,
+    // ...getResponsiveSettings(),
   };
 
   console.log("settings", settings)
@@ -143,28 +143,29 @@ export const Home = () => {
 
   useEffect(() => {
     // Initial setup
-    initializeSlider();
+    // initializeSlider();
 
     // Listen for window resize events and update the slider
-    const handleResize = () => {
-      setCurrentSlide(0);
-      console.log('Window is resizing!');
-      initializeSlider();
-    };
+    // const handleResize = () => {
+    //   setCurrentSlide(0);
+    //   console.log('Window is resizing!');
+    //   initializeSlider();
+    // };
 
-    window.addEventListener('resize', handleResize);
+    // window.addEventListener('resize', handleResize);
 
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
+    // return () => {
+      // window.removeEventListener('resize', handleResize);
+    // };
   }, [currentSlide]);
 
 
 
 
   return (
-    <DIV className='h-screen'>
-      <div className='flex flex-row-reverse border-4'>
+    <DIV className='h-screen bg-neutral-info'>
+      {/* flex flex-row-reverse */}
+      <div className={'bg-action-error flex 2xl:justify-end xl:justify-end lg:justify-end md:justify-end'}>
         <Navbar />
       </div>
 
@@ -174,7 +175,7 @@ export const Home = () => {
 
 
 
-        <Slider className='' ref={sliderRef} {...settings}>
+        {/* <Slider className='' ref={sliderRef} {...settings}>
           {musicList &&
             musicList.map((music, index) => (
 
@@ -183,7 +184,7 @@ export const Home = () => {
               >
                 <Link
                   id='musicCont'
-                  // hover:brightness-50
+                  
                   className='m-2 p-1 hover: shadow-inner'
                   to={''}
                 >
@@ -194,7 +195,7 @@ export const Home = () => {
                       src={`data:image/jpeg;base64, ${music.picture}`}
                       alt='Cover'
                     />
-                    {/* </div> */}
+                  
                     <FaPlayCircle
                       id='playBtn'
                       onClick={() => setTrackHandler(music)}
@@ -204,20 +205,6 @@ export const Home = () => {
 
                     
                     <div className={'z-50 absolute top-0 right-0  hover:z-50'}>
-
-                    
-                    {/* <Menu>
-                      <MenuButton as={Button} variant={'none'} >
-                      <BsThreeDotsVertical  />
-                      </MenuButton>
-                      <MenuList className={'z-50'}>
-                        <MenuItem>Download</MenuItem>
-                        <MenuItem>Create a Copy</MenuItem>
-                        <MenuItem>Mark as Draft</MenuItem>
-                        <MenuItem>Delete</MenuItem>
-                        <MenuItem>Attend a Workshop</MenuItem>
-                      </MenuList>
-                    </Menu> */}
 
                     </div>
 
@@ -252,7 +239,7 @@ export const Home = () => {
           sm:text-base
           hover:text-blue-500'
           onClick={() => sliderRef.current?.slickNext()}
-        />
+        /> */}
 
 
 
@@ -261,7 +248,7 @@ export const Home = () => {
       </div>
 
 
-      <SliderComp />
+      {/* <SliderComp /> */}
     </DIV>
   );
 
