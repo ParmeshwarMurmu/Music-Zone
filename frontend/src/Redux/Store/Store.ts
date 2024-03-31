@@ -7,10 +7,12 @@ import playlistReducer from '../PlaylistReducer/reducer';
 import userPlaylistReducer from '../UserPlaylistReducer/reducer';
 import playlist90Reducer from '../90sSongReducer/reducer';
 import moreSongFromArtistReducer from '../MoreFromArtistReducer/reducer'
-import arjitSongReducer from '../ArjitSinghReducer/reducer'
+import arjitSongReducer from '../ArjitSinghReducer/reducer';
+import armaanAndDarshanReducer from '../Armaan&DarshanReducer/reducer';
 
 export const store = configureStore({
     reducer: {
+      armaanAndDarshanSongName: armaanAndDarshanReducer,
       arjitSingSongs: arjitSongReducer,
       moreSongsArt: moreSongFromArtistReducer,
       playlist90S: playlist90Reducer,
