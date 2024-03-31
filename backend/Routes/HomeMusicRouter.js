@@ -5,7 +5,7 @@ const { MusicModel } = require('../Models/MusicSchema');
 const homeMusicRouter = express.Router();
 
 homeMusicRouter.get('/90Songs', async(req, res)=>{
-    console.log(">>>>>>");
+   
 
     try {
         // const songs = await MusicModel.find({ $or: [{releaseYear: {$lt: 2005}}, {releaseYear: {$eq: NaN}}] });
@@ -17,6 +17,22 @@ homeMusicRouter.get('/90Songs', async(req, res)=>{
         res.status(400).send({"message":"Something went wrong. Cannot remove song"})
     }
 })
+
+homeMusicRouter.get('/arjitSingh', async(req, res)=>{
+   
+
+    try {
+        
+        console.log("arjit Singh");
+        // const songs = await MusicModel.find();
+        const songs = await MusicModel.find({artist: { $regex: 'arijit', $options: 'i' } }).sort({_id: -1});
+        // console.log(songs);
+        res.status(200).send({"arjitSingh": songs})
+    } catch (error) {
+        res.status(400).send({"message":"Something went wrong. Cannot remove song"})
+    }
+})
+
 
 
 module.exports = {

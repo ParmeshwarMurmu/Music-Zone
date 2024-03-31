@@ -70,6 +70,12 @@ module.exports = {
       '12': '12px'
     },
     extend: {
+
+      inset:{
+        '10': '-12px',
+
+      },
+
       height: {
          '124': '124px'
       },

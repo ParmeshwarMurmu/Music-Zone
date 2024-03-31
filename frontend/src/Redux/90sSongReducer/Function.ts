@@ -5,7 +5,7 @@ import { playlist90SAllSongs, playlist90SIsEorrAction, playlist90SIsLoadingActio
 
 export const get90Song = ()=>(dispatch: Dispatch<any>)=>{
     // const token = localStorage.getItem('musicToken')
-    console.log("(((99999999");
+    console.log("90S");
     
     dispatch(playlist90SIsLoadingAction(true))
     axios.get(`${APP_URL}${SONGS_90S}`)

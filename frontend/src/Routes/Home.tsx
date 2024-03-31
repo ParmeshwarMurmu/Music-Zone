@@ -20,6 +20,7 @@ import { useAppSelector } from '../Redux/Store/Hook'
 import { isAuthValueFromReduxStore } from '../Redux/isAuthReducer/reducer'
 import { BsThreeDotsVertical } from "react-icons/bs";
 import SliderComp from '../Components/Slider/SliderComp'
+import ArjitSinghSongs from '../Components/Slider/ArjitSinghSongs'
 
 
 
@@ -248,7 +249,14 @@ export const Home = () => {
       </div>
 
 
-      {/* <SliderComp /> */}
+      <SliderComp />
+      
+      <div>
+       
+      <ArjitSinghSongs />
+      </div>
+
+
     </DIV>
   );
 

@@ -21,18 +21,6 @@ import { get90Song } from '../../Redux/90sSongReducer/Function';
 import { playlist90SAllSongsValueFromReduxStore } from '../../Redux/90sSongReducer/reducer';
 
 
-const getResponsiveSettings = (): { slidesToShow: number; slidesToScroll: number } => {
-  const windowWidth = window.innerWidth;
-
-  if (windowWidth < 600) {
-    return { slidesToShow: 2, slidesToScroll: 2 };
-  } else if (windowWidth < 900) {
-    return { slidesToShow: 4, slidesToScroll: 4 };
-  } else {
-    return { slidesToShow: 7, slidesToScroll: 7 };
-  }
-};
-
 
 
 
@@ -53,8 +41,8 @@ const SliderComp = () => {
 
 
   useEffect(() => {
-    
-   dispatch(get90Song())
+
+    dispatch(get90Song())
 
   }, [])
 
@@ -94,64 +82,49 @@ const SliderComp = () => {
 
 
   const settings = {
-    dots: true,
+    dots: false,
     infinite: true,
+    arrows: false,
     speed: 500,
     slidesToShow: 7, // Set the number of slides to show at a time
     slidesToScroll: 7, // Set the number of slides to scroll,
     // ...getResponsiveSettings(),
+    responsive: [
+      {
+        breakpoint: 768, // Medium screens
+        settings: {
+          slidesToShow: 5,
+          slidesToScroll: 5
+        },
+      },
+      {
+        breakpoint: 640, // Extra small screens
+        settings: {
+          slidesToShow: 4,
+          slidesToScroll: 4
+        },
+      },
+
+      {
+        breakpoint: 640, // Extra small screens
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3
+        },
+      },
+
+      {
+        breakpoint: 420, // Extra small screens
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2
+        },
+      },
+    ],
   };
 
-  console.log("settings", settings)
-
-
-  const initializeSlider = () => {
-    // Check if the slider is already initialized
-    if (!sliderInitialized) {
-      setSliderInitialized(true);
-    }
-
-
-    // If already initialized, update the settings
-    // If already initialized, update the settings
-    if (sliderRef.current) {
-      sliderRef.current.slickGoTo(0);
-      const responsiveSettings = getResponsiveSettings();
-
-      // Try using slickSetOption (older versions)
-      if (sliderRef.current.slickSetOption) {
-        sliderRef.current.slickSetOption('slidesToShow', responsiveSettings.slidesToShow);
-        sliderRef.current.slickSetOption('slidesToScroll', responsiveSettings.slidesToScroll);
-      }
-      // If slickSetOption is not available, try using slickSetOptions (newer versions)
-      else if (sliderRef.current.slickSetOptions) {
-        sliderRef.current.slickSetOptions({
-          slidesToShow: responsiveSettings.slidesToShow,
-          slidesToScroll: responsiveSettings.slidesToScroll,
-        });
-      }
-    }
-
-  };
-
-
-  useEffect(() => {
-    // Initial setup
-    // initializeSlider();
-
-    // // Listen for window resize events and update the slider
-    // const handleResize = () => {
-    //   setCurrentSlide(0);
-    //   console.log('Window is resizing!');
-    //   initializeSlider();
-    // };
-
-    // window.addEventListener('resize', handleResize);
-
-    // return () => {
-    //   window.removeEventListener('resize', handleResize);
-    // };
-  }, [currentSlide]);
+  
+  
 
 
 
@@ -191,23 +164,9 @@ const SliderComp = () => {
                     />
 
 
-                    <div className={'z-50 absolute top-0 right-0  hover:z-50'}>
+                    {/* <div className={'z-50 absolute top-0 right-0  hover:z-50'}>
 
-
-                      {/* <Menu>
-              <MenuButton as={Button} variant={'none'} >
-              <BsThreeDotsVertical  />
-              </MenuButton>
-              <MenuList className={'z-50'}>
-                <MenuItem>Download</MenuItem>
-                <MenuItem>Create a Copy</MenuItem>
-                <MenuItem>Mark as Draft</MenuItem>
-                <MenuItem>Delete</MenuItem>
-                <MenuItem>Attend a Workshop</MenuItem>
-              </MenuList>
-            </Menu> */}
-
-                    </div>
+                    </div> */}
 
 
                   </div>

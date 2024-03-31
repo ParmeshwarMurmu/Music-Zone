@@ -11,7 +11,7 @@ export const WithSideBarLayout : React.FC<WithSidebarLayoutProps> = ({ children 
           <SideBar />
         </div>
 
-        <div className='2xl:w-4/5 xl:w-4/5 lg:w-4/5 md:w-4/5 w-full'>{children}</div>
+        <div className='2xl:w-4/5 xl:w-4/5 lg:w-4/5 md:w-4/5 w-full '>{children}</div>
       </div>
     );
   
