@@ -49,6 +49,8 @@ UploadMusicRouter.post('/uploadMusic', upload.single('music'), async (req, res) 
         let releaseYear = metadata.common.year; // Extract the release year
         console.log(artist, 'artist')
         console.log(album, "album")
+        console.log(title, "title")
+        console.log(picture, "picture")
         
         const durationInSeconds = metadata.format.duration;
         const durationInMinutes = Math.floor(durationInSeconds / 60);
@@ -56,7 +58,9 @@ UploadMusicRouter.post('/uploadMusic', upload.single('music'), async (req, res) 
             console.log("&&*&****");
             releaseYear = '1998'
         }
+
         console.log(releaseYear, "year")
+        console.log(durationInMinutes, "D")
 
         // If there is a cover image in the metadata, extract it
         //   const coverImage = picture && picture.length > 0 ? `${req.protocol}://${req.get('host')}${staticFilesRoute}/${filename}` : null;
@@ -64,8 +68,10 @@ UploadMusicRouter.post('/uploadMusic', upload.single('music'), async (req, res) 
         const coverImage = picture && picture.length > 0 ? picture[0].data.toString('base64') : null;
 
         // Perform any additional processing or save the file details to your database
+        console.log(coverImage);
         // ...
         const newMusic = MusicModel({filename, title, artist, album, picture: coverImage, releaseYear, durationInMinutes, musicId: musicId })
+      
         await newMusic.save()
         res.status(200).send({
             message: 'File uploaded successfully',

@@ -9,9 +9,11 @@ import playlist90Reducer from '../90sSongReducer/reducer';
 import moreSongFromArtistReducer from '../MoreFromArtistReducer/reducer'
 import arjitSongReducer from '../ArjitSinghReducer/reducer';
 import armaanAndDarshanReducer from '../Armaan&DarshanReducer/reducer';
+import honneySinghAndBadshahReducer from '../HonneySinghAndBadshahReducer/reducer';
 
 export const store = configureStore({
     reducer: {
+      honneySinghAndBadshahSongName: honneySinghAndBadshahReducer,
       armaanAndDarshanSongName: armaanAndDarshanReducer,
       arjitSingSongs: arjitSongReducer,
       moreSongsArt: moreSongFromArtistReducer,

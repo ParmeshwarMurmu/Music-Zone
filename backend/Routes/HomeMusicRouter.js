@@ -8,7 +8,7 @@ homeMusicRouter.get('/90Songs', async(req, res)=>{
    
 
     try {
-        // const songs = await MusicModel.find({ $or: [{releaseYear: {$lt: 2005}}, {releaseYear: {$eq: NaN}}] });
+       
         const songs = await MusicModel.find();
         console.log("&&");
         // console.log(songs);
@@ -54,7 +54,7 @@ homeMusicRouter.get('/honneySinghAndBadshah', async(req, res)=>{
 
     try {
         
-        const songs = await MusicModel.find({ $or : [{artist: { $regex: 'honney', $options: 'i' } }, {artist: { $regex: 'badshah', $options: 'i' } }]});
+        const songs = await MusicModel.find({ $or : [{artist: { $regex: 'honey', $options: 'i' } }, {artist: { $regex: 'badshah', $options: 'i' } }]});
         // console.log(songs);
         res.status(200).send({"honneySinghAndBadshah": songs})
     } catch (error) {

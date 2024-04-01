@@ -22,6 +22,8 @@ import { BsThreeDotsVertical } from "react-icons/bs";
 import SliderComp from '../Components/Slider/SliderComp'
 import ArjitSinghSongs from '../Components/Slider/ArjitSinghSongs'
 import ArmaanAndDarshan from '../Components/Slider/ArmaanAndDarshan'
+import HoneySinghAndBadshah from '../Components/Slider/HoneySinghAndBadshah'
+import BestOf90S from '../Components/Slider/BestOf90S'
 
 
 
@@ -165,9 +167,9 @@ export const Home = () => {
 
 
   return (
-    <DIV className='h-screen bg-neutral-info'>
-      {/* flex flex-row-reverse */}
-      <div className={'bg-action-error flex 2xl:justify-end xl:justify-end lg:justify-end md:justify-end'}>
+    <DIV className='h-screen bg-neutral-info overflow-y-auto '>
+      {/* flex flex-row-reverse flex 2xl:justify-end xl:justify-end lg:justify-end md:justify-end */}
+      <div className={'bg-action-error w-full z-50 fixed flex 2xl:justify-end xl:justify-end lg:justify-end md:justify-end '}>
         <Navbar />
       </div>
 
@@ -260,6 +262,14 @@ export const Home = () => {
       
       <div>
         <ArmaanAndDarshan />
+      </div>
+
+      <div>
+        <HoneySinghAndBadshah />
+      </div>
+
+      <div>
+        <BestOf90S />
       </div>
 
 

@@ -1,22 +1,22 @@
 import axios from "axios";
 import { Dispatch } from "redux";
-import { APP_URL, ARJIT_SINGH_SONGS, ARMAAN_AND_DARSHAN_SONGS } from "../../Endpoints/Endpoints";
-import { armaanAndDarshanSongIsErrorAction, armaanAndDarshanSongIsLoadingAction, armaanAndDarshanSongSuccessAction } from "./reducer";
+import { honneySinghAndBadshahSongIsErrorAction, honneySinghAndBadshahSongIsLoadingAction, honneySinghAndBadshahSongSuccessAction } from "./reducer";
+import { APP_URL, HONNEY_SINGH_AND_BADSHAH_SONGS,  } from "../../Endpoints/Endpoints";
 
-export const getArmaanAndDarshanSong = ()=>(dispatch: Dispatch<any>)=>{
+export const gethonneySinghAndBadshahSong = ()=>(dispatch: Dispatch<any>)=>{
   
-    console.log("Armaan");
+    console.log("honneySinghAndBadshahSong");
     
-    dispatch(armaanAndDarshanSongIsLoadingAction(true))
-    axios.get(`${APP_URL}${ARMAAN_AND_DARSHAN_SONGS}`)
+    dispatch(honneySinghAndBadshahSongIsLoadingAction(true))
+    axios.get(`${APP_URL}${HONNEY_SINGH_AND_BADSHAH_SONGS}`)
       .then((res) => {
         console.log(res);
-        dispatch(armaanAndDarshanSongIsLoadingAction(false));
-        dispatch(armaanAndDarshanSongSuccessAction(res.data.armaanAndDarshan))
+        dispatch(honneySinghAndBadshahSongIsLoadingAction(false));
+        dispatch(honneySinghAndBadshahSongSuccessAction(res.data.honneySinghAndBadshah))
 
       })
       .catch((err) => {
-        dispatch(armaanAndDarshanSongIsErrorAction(true))
+        dispatch(honneySinghAndBadshahSongIsErrorAction(true))
       })
 
 }

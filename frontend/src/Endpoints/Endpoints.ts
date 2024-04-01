@@ -18,3 +18,4 @@ export const SONGS_90S : string = '/home/90Songs'
 
 export const ARJIT_SINGH_SONGS : string = '/home/arjitSingh'
 export const ARMAAN_AND_DARSHAN_SONGS : string = '/home/armaanAndDarshan'
+export const HONNEY_SINGH_AND_BADSHAH_SONGS : string = '/home/honneySinghAndBadshah'

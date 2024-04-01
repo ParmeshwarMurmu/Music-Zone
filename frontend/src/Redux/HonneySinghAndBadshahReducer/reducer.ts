@@ -4,7 +4,7 @@ import { ObjectId } from "mongodb";
 
 // Define the type for Arjit singh Playlist Item
 
-interface armaanAndDarshanSong {
+interface honneySinghAndBadshahSong {
     filename: string,
     title: string,
     artist: string,
@@ -20,16 +20,16 @@ interface armaanAndDarshanSong {
 // Defined type for the slice state for arjit  Playlist
 
 
-interface armaanAndDarshanSongPlaylist {
-    armaanAndDarshan : armaanAndDarshanSong[],
+interface honneySinghAndBadshahSongPlaylist {
+    honneySinghAndBadshah : honneySinghAndBadshahSong[],
     isLoading: boolean,
     isError: boolean
 }
 
 // Define the initial state using the above interface
 
-const initialState : armaanAndDarshanSongPlaylist = {
-    armaanAndDarshan: [],
+const initialState : honneySinghAndBadshahSongPlaylist = {
+    honneySinghAndBadshah: [],
     isLoading: false,
     isError: false
 
@@ -38,28 +38,28 @@ const initialState : armaanAndDarshanSongPlaylist = {
 
 // Function to Create Slice
 
-export const armaanAndDarshanSongSlice = createSlice({
-    name: 'armaanAndDarshanSongName',
+export const honneySinghAndBadshahSongSlice = createSlice({
+    name: 'honneySinghAndBadshahSongName',
     initialState,
 
     reducers:{
-        armaanAndDarshanSongIsLoadingAction: (state, action: PayloadAction<boolean>)=>{
+        honneySinghAndBadshahSongIsLoadingAction: (state, action: PayloadAction<boolean>)=>{
             state.isLoading = action.payload;
          },
 
-         armaanAndDarshanSongIsErrorAction: (state, action: PayloadAction<boolean>)=>{
+         honneySinghAndBadshahSongIsErrorAction: (state, action: PayloadAction<boolean>)=>{
             state.isError = action.payload;
          },
 
-         armaanAndDarshanSongSuccessAction: (state, action: PayloadAction<armaanAndDarshanSong[]>)=>{
-            state.armaanAndDarshan = action.payload;
+         honneySinghAndBadshahSongSuccessAction: (state, action: PayloadAction<honneySinghAndBadshahSong[]>)=>{
+            state.honneySinghAndBadshah = action.payload;
          }
     }
 })
 
-export const { armaanAndDarshanSongIsLoadingAction, armaanAndDarshanSongIsErrorAction, armaanAndDarshanSongSuccessAction } = armaanAndDarshanSongSlice.actions;
-export const armaanAndDarshanSongValueFromReduxStore = (state: RootState) => state.armaanAndDarshanSongName.armaanAndDarshan;
-export const armaanAndDarshanSongIsLoadingValueFromReduxStore = (state: RootState) => state.armaanAndDarshanSongName.isLoading;
-export const armaanAndDarshanSongIsErrorValueFromReduxStore = (state: RootState) => state.armaanAndDarshanSongName.isError;
+export const { honneySinghAndBadshahSongIsLoadingAction, honneySinghAndBadshahSongIsErrorAction, honneySinghAndBadshahSongSuccessAction } = honneySinghAndBadshahSongSlice.actions;
+export const honneySinghAndBadshahSongValueFromReduxStore = (state: RootState) => state.honneySinghAndBadshahSongName.honneySinghAndBadshah;
+export const honneySinghAndBadshahSongIsLoadingValueFromReduxStore = (state: RootState) => state.honneySinghAndBadshahSongName.isLoading;
+export const honneySinghAndBadshahSongIsErrorValueFromReduxStore = (state: RootState) => state.honneySinghAndBadshahSongName.isError;
 
-export default armaanAndDarshanSongSlice.reducer;
+export default honneySinghAndBadshahSongSlice.reducer;

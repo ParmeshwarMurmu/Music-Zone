@@ -26,7 +26,7 @@ export const Navbar = () => {
         <Hamberg />
       </div>
 
-      <div className={'bg-action-warning flex justify-end '}>
+      <div className={'bg-action-warning flex  '}>
       
 
       {
