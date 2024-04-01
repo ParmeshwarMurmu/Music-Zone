@@ -21,6 +21,7 @@ import { isAuthValueFromReduxStore } from '../Redux/isAuthReducer/reducer'
 import { BsThreeDotsVertical } from "react-icons/bs";
 import SliderComp from '../Components/Slider/SliderComp'
 import ArjitSinghSongs from '../Components/Slider/ArjitSinghSongs'
+import ArmaanAndDarshan from '../Components/Slider/ArmaanAndDarshan'
 
 
 
@@ -256,7 +257,10 @@ export const Home = () => {
       <ArjitSinghSongs />
       </div>
 
-      {/* <ArjitSinghSongs /> */}
+      
+      <div>
+        <ArmaanAndDarshan />
+      </div>
 
 
     </DIV>

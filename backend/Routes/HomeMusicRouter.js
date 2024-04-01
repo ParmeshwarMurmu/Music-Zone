@@ -34,7 +34,48 @@ homeMusicRouter.get('/arjitSingh', async(req, res)=>{
 })
 
 
+homeMusicRouter.get('/armaanAndDarshan', async(req, res)=>{
+   
 
+    try {
+        
+        console.log('armaanAndDarshan');
+        // const songs = await MusicModel.find();
+        const songs = await MusicModel.find({ $or : [{artist: { $regex: 'armaan', $options: 'i' } }, {artist: { $regex: 'darshan', $options: 'i' } }]});
+        // console.log(songs);
+        res.status(200).send({"armaanAndDarshan": songs})
+    } catch (error) {
+        res.status(400).send({"message":"Something went wrong. Cannot find armaanAndDarshan song"})
+    }
+})
+
+homeMusicRouter.get('/honneySinghAndBadshah', async(req, res)=>{
+   
+
+    try {
+        
+        const songs = await MusicModel.find({ $or : [{artist: { $regex: 'honney', $options: 'i' } }, {artist: { $regex: 'badshah', $options: 'i' } }]});
+        // console.log(songs);
+        res.status(200).send({"honneySinghAndBadshah": songs})
+    } catch (error) {
+        res.status(400).send({"message":"Something went wrong. Cannot find honneySinghAndBadshah song"})
+    }
+})
+
+
+homeMusicRouter.delete('/music/:_id', async(req, res)=>{
+   
+
+    try {
+        
+        const { _id } = req.params;
+        console.log("/id", _id);
+        const songs = await MusicModel.findByIdAndDelete({_id})
+        res.status(200).send({"message": "Song Deleted"})
+    } catch (error) {
+        res.status(400).send({"message":"Something went wrong. Cannot Delete"})
+    }
+})
 module.exports = {
     homeMusicRouter
 }

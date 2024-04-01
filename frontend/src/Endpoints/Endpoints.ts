@@ -17,3 +17,4 @@ export const MORE_SONG_FROM_ARTIST : string = '/user/moreSongs'
 export const SONGS_90S : string = '/home/90Songs'
 
 export const ARJIT_SINGH_SONGS : string = '/home/arjitSingh'
+export const ARMAAN_AND_DARSHAN_SONGS : string = '/home/armaanAndDarshan'
