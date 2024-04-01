@@ -175,7 +175,7 @@ export const Home = () => {
 
 
 
-      <div className='relative'>
+      <div className='relative mt-16'>
 
 
 
@@ -251,8 +251,10 @@ export const Home = () => {
 
       </div>
 
+      <div>
 
       <SliderComp />
+      </div>
       
       <div>
        

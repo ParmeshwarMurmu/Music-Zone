@@ -9,38 +9,38 @@ export const Footer = () => {
     <div>
 
       <div className='flex justify-center'>
-        <FaTwitter className='m-4 size-6 cursor-pointer hover:scale-125' />
-        <FaFacebook className='m-4 size-6 cursor-pointer hover:scale-125' />
-        <FaInstagram className='m-4 size-6 cursor-pointer hover:scale-125' />
-        <FaLinkedin className='m-4 size-6 cursor-pointer hover:scale-125' />
+        <FaTwitter className={`m-4 size-6 cursor-pointer hover:scale-125`} />
+        <FaFacebook className={`m-4 size-6 cursor-pointer hover:scale-125`} />
+        <FaInstagram className={`m-4 size-6 cursor-pointer hover:scale-125`} />
+        <FaLinkedin className={`m-4 size-6 cursor-pointer hover:scale-125`} />
       </div>
 
       <div className='flex justify-evenly'>
         <div>
-          <p className='text-lg mb-4'>
+          <p className={`text-18 mb-4 font-semibold font-Inter`}>
             Community
           </p>
-          <p className='text-sm mb-2 cursor-pointer'>Blogs</p>
-          <p className='text-sm mb-2 cursor-pointer'>Community</p>
-          <p className='text-sm mb-2 cursor-pointer'>Developers</p>
+          <p className={`text-14 mb-2 cursor-pointer font-Inter`}>Blogs</p>
+          <p className={`text-14 mb-2 cursor-pointer font-Inter`}>Community</p>
+          <p className={`text-14 mb-2 cursor-pointer font-Inter`}>Developers</p>
         </div>
 
         <div>
-          <p className='text-lg mb-4'>
+          <p className={`text-18 mb-4 font-semibold font-Inter`}>
             Company
           </p>
-          <p className='text-sm mb-2 cursor-pointer'>About Us</p>
-          <p className='text-sm mb-2 cursor-pointer'>Team</p>
-          <p className='text-sm mb-2 cursor-pointer'>Media</p>
-          <p className='text-sm mb-2 cursor-pointer'>Our Commitments</p>
+          <p className={`text-14 mb-2 cursor-pointer font-Inter`}>About Us</p>
+          <p className={`text-14 mb-2 cursor-pointer font-Inter`}>Team</p>
+          <p className={`text-14 mb-2 cursor-pointer font-Inter`}>Media</p>
+          <p className={`text-14 mb-2 cursor-pointer font-Inter`}>Our Commitments</p>
         </div>
 
         <div>
-          <p className='text-lg mb-4'>
+          <p className={`text-18 mb-4 font-semibold font-Inter`}>
             Useful Links
           </p>
-          <p className='text-sm mb-2 cursor-pointer'>Terms & Services</p>
-          <p className='text-sm mb-2 cursor-pointer'>Policy & Privacy</p>
+          <p className={`text-14 mb-2 cursor-pointer font-Inter`}>Terms & Services</p>
+          <p className={`text-14 mb-2 cursor-pointer font-Inter`}>Policy & Privacy</p>
          
         </div>
       </div>

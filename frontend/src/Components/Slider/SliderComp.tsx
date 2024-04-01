@@ -123,8 +123,8 @@ const SliderComp = () => {
     ],
   };
 
-  
-  
+
+
 
 
 
@@ -132,6 +132,12 @@ const SliderComp = () => {
   return (
     <div>
       <div className='relative'>
+
+        <div className={'flex justify-between  pl-2 pr-2 absolute w-full top-10'}>
+          <p className={' cursor-pointer text-14 bg-neutral-gery text-neutral-white p-1 rounded-md'}>Latest Release</p>
+          <p className={'cursor-pointer text-14'}>View All</p>
+        </div>
+
 
 
 

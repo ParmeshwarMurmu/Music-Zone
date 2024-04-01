@@ -67,7 +67,8 @@ module.exports = {
     fontSize: {
       '14': '14px',
       '16': '16px',
-      '12': '12px'
+      '12': '12px',
+      '18': '18px'
     },
     extend: {
 

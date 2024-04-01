@@ -9,7 +9,7 @@ homeMusicRouter.get('/90Songs', async(req, res)=>{
 
     try {
        
-        const songs = await MusicModel.find();
+        const songs = await MusicModel.find({releaseYear: {$lt: 2001}});
         console.log("&&");
         // console.log(songs);
         res.status(200).send({"old": songs})
