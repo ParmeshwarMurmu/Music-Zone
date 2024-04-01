@@ -13,6 +13,7 @@ module.exports = {
          'silver': '#F5F7FA',
          'white': '#FFFFFF',
          'info': '#2194f3',
+         'loader': 'rgb(203 213 225)'
       },
       shades: {
         '100': '#43A046',
@@ -74,15 +75,22 @@ module.exports = {
 
       inset:{
         '10': '-12px',
+        '20': '140px',
+        '15': '9px',
+        '16': '300px'
 
       },
 
       height: {
-         '124': '124px'
+         '124': '124px',
+         '269': '269px',
+         '50': '160px'
       },
       width: {
         '124': '124px',
-        '108': '108px'
+        '108': '108px',
+        '269': '269px',
+        '50': '50%'
       },
       spacing: {
         '8xl': '96rem',

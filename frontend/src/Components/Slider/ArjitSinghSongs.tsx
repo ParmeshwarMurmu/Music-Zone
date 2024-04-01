@@ -19,8 +19,9 @@ import { allMusic } from '../../Interfaces/Interfce';
 import { appContent } from '../../ContextApi/ContextApi';
 import { APP_URL, SINGLE_USER_DATA } from '../../Endpoints/Endpoints';
 import { get90Song } from '../../Redux/90sSongReducer/Function';
-import { arjitSingSongsValueFromReduxStore } from '../../Redux/ArjitSinghReducer/reducer';
+import { arjitSingSongsIsLoadingValueFromReduxStore, arjitSingSongsValueFromReduxStore } from '../../Redux/ArjitSinghReducer/reducer';
 import { getArjitSinghSong } from '../../Redux/ArjitSinghReducer/Function';
+import Loader from '../Home/Loader';
 
 
 
@@ -36,7 +37,8 @@ const ArjitSinghSongs = () => {
   const sliderRef = useRef<any>(null);
   const dispatch = useAppDispatch()
 
-  const arjitSingSongs = useAppSelector(arjitSingSongsValueFromReduxStore)
+  const arjitSingSongs = useAppSelector(arjitSingSongsValueFromReduxStore);
+  const isLoading = useAppSelector(arjitSingSongsIsLoadingValueFromReduxStore)
 
 
 
@@ -131,6 +133,10 @@ const ArjitSinghSongs = () => {
 
   return (
     <div className={''}>
+
+      {
+        isLoading ? <Loader /> : 
+     
       <div className='relative'>
 
       <div className={'flex justify-between  pl-2 pr-2 absolute w-full top-10'}>
@@ -209,6 +215,7 @@ const ArjitSinghSongs = () => {
 
 
       </div>
+       }
     </div>
   )
 }

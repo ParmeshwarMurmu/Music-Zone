@@ -17,8 +17,9 @@ import { isAuthValueFromReduxStore } from '../../Redux/isAuthReducer/reducer';
 import { allMusic } from '../../Interfaces/Interfce';
 import { appContent } from '../../ContextApi/ContextApi';
 import { APP_URL, SINGLE_USER_DATA } from '../../Endpoints/Endpoints';
-import { honneySinghAndBadshahSongValueFromReduxStore } from '../../Redux/HonneySinghAndBadshahReducer/reducer';
+import { honneySinghAndBadshahSongIsLoadingValueFromReduxStore, honneySinghAndBadshahSongValueFromReduxStore } from '../../Redux/HonneySinghAndBadshahReducer/reducer';
 import { gethonneySinghAndBadshahSong } from '../../Redux/HonneySinghAndBadshahReducer/Function';
+import Loader from '../Home/Loader';
 
 
 
@@ -35,7 +36,7 @@ const HoneySinghAndBadshah = () => {
     const dispatch = useAppDispatch()
   
     const honeySinghAndBadshah = useAppSelector(honneySinghAndBadshahSongValueFromReduxStore)
-  
+    const isLoading = useAppSelector(honneySinghAndBadshahSongIsLoadingValueFromReduxStore)
   
   
     useEffect(() => {
@@ -129,6 +130,9 @@ const HoneySinghAndBadshah = () => {
   
     return (
       <div className={''}>
+        {
+          isLoading ? <Loader /> :
+        
         <div className='relative'>
   
         <div className={'flex justify-between  pl-2 pr-2 absolute w-full top-10'}>
@@ -207,6 +211,7 @@ const HoneySinghAndBadshah = () => {
   
   
         </div>
+}
       </div>
     )
 

@@ -24,6 +24,7 @@ import ArjitSinghSongs from '../Components/Slider/ArjitSinghSongs'
 import ArmaanAndDarshan from '../Components/Slider/ArmaanAndDarshan'
 import HoneySinghAndBadshah from '../Components/Slider/HoneySinghAndBadshah'
 import BestOf90S from '../Components/Slider/BestOf90S'
+import Loader from '../Components/Home/Loader'
 
 
 
@@ -167,93 +168,20 @@ export const Home = () => {
 
 
   return (
-    <DIV className='h-screen bg-neutral-info overflow-y-auto '>
+    <DIV className='h-screen  overflow-y-auto '>
       {/* flex flex-row-reverse flex 2xl:justify-end xl:justify-end lg:justify-end md:justify-end */}
       <div className={'bg-action-error w-full z-50 fixed flex 2xl:justify-end xl:justify-end lg:justify-end md:justify-end '}>
         <Navbar />
       </div>
 
 
+      
 
-      <div className='relative mt-16'>
+     
 
+      <div className={`mt-16`}>
 
-
-        {/* <Slider className='' ref={sliderRef} {...settings}>
-          {musicList &&
-            musicList.map((music, index) => (
-
-              <div key={index} id='musicContainer' className='h-auto p-2 hover:scale-95 '
-
-              >
-                <Link
-                  id='musicCont'
-                  
-                  className='m-2 p-1 hover: shadow-inner'
-                  to={''}
-                >
-
-                  <div className='relative'>
-                    <img
-                      className=''
-                      src={`data:image/jpeg;base64, ${music.picture}`}
-                      alt='Cover'
-                    />
-                  
-                    <FaPlayCircle
-                      id='playBtn'
-                      onClick={() => setTrackHandler(music)}
-                      fontSize={'50px'}
-                      className={`text-neutral-white top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 absolute  z-50 hover:scale-125`}
-                    />
-
-                    
-                    <div className={'z-50 absolute top-0 right-0  hover:z-50'}>
-
-                    </div>
-
-
-                  </div>
-                </Link>
-              </div>
-            ))}
-        </Slider>
-
-
-
-
-        <FaAngleLeft
-
-          className='absolute inset-y-0 left-0 top-1/2 transform -translate-y-1/2 cursor-pointer bg-neutral-silver
-          lg:text-3xl
-          md:text-base
-          sm:text-base
-          hover:text-blue-500'
-
-          onClick={() => sliderRef.current?.slickPrev()}
-        />
-
-
-
-        <FaAngleRight
-
-          className='absolute inset-y-0 right-0 top-1/2 transform -translate-y-1/2 cursor-pointer  bg-neutral-silver
-          lg:text-3xl
-          md:text-base
-          sm:text-base
-          hover:text-blue-500'
-          onClick={() => sliderRef.current?.slickNext()}
-        /> */}
-
-
-
-
-
-      </div>
-
-      <div>
-
-      <SliderComp />
+      {/* <SliderComp /> */}
       </div>
       
       <div>

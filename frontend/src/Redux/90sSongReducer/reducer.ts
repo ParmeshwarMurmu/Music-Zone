@@ -68,6 +68,7 @@ export const playlist90Slice = createSlice({
 
 export const { playlist90SIsLoadingAction, playlist90SIsEorrAction, playlist90SAllSongs, playlistResetAction } = playlist90Slice.actions
 export const playlist90SAllSongsValueFromReduxStore = (state: RootState) => state.playlist90S.playlist90S;
+export const playlist90SAllSongsIsLoadingValueFromReduxStore = (state: RootState) => state.playlist90S.isLoading;
 
 
 export default playlist90Slice.reducer;

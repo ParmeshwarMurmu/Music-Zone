@@ -20,8 +20,9 @@ import { APP_URL, SINGLE_USER_DATA } from '../../Endpoints/Endpoints';
 import { get90Song } from '../../Redux/90sSongReducer/Function';
 import { arjitSingSongsValueFromReduxStore } from '../../Redux/ArjitSinghReducer/reducer';
 import { getArjitSinghSong } from '../../Redux/ArjitSinghReducer/Function';
-import { armaanAndDarshanSongValueFromReduxStore } from '../../Redux/Armaan&DarshanReducer/reducer';
+import { armaanAndDarshanSongIsLoadingValueFromReduxStore, armaanAndDarshanSongValueFromReduxStore } from '../../Redux/Armaan&DarshanReducer/reducer';
 import { getArmaanAndDarshanSong } from '../../Redux/Armaan&DarshanReducer/Function';
+import Loader from '../Home/Loader';
 
 
 
@@ -36,7 +37,8 @@ const ArmaanAndDarshan = () => {
     const sliderRef = useRef<any>(null);
     const dispatch = useAppDispatch()
 
-    const armaanAndDarshanSongs = useAppSelector(armaanAndDarshanSongValueFromReduxStore)
+    const armaanAndDarshanSongs = useAppSelector(armaanAndDarshanSongValueFromReduxStore);
+    const isLoading = useAppSelector(armaanAndDarshanSongIsLoadingValueFromReduxStore)
 
 
 
@@ -131,84 +133,88 @@ const ArmaanAndDarshan = () => {
 
     return (
         <div className={''}>
-            <div className='relative'>
+            {
+                isLoading ? <Loader /> :
 
-                <div className={'flex justify-between  pl-2 pr-2 absolute w-full top-10'}>
-                    <p className={' cursor-pointer text-14 bg-neutral-gery text-neutral-white p-1 rounded-md'}>Best of Darshan Raval & Armaan Malik</p>
-                    <p className={'cursor-pointer text-14'}>View All</p>
-                </div>
+                    <div className='relative'>
 
-                <Slider className='' ref={sliderRef} {...settings}>
-                    {armaanAndDarshanSongs.length > 0 &&
-                        armaanAndDarshanSongs.map((music, index) => (
+                        <div className={'flex justify-between  pl-2 pr-2 absolute w-full top-10'}>
+                            <p className={' cursor-pointer text-14 bg-neutral-gery text-neutral-white p-1 rounded-md'}>Best of Darshan Raval & Armaan Malik</p>
+                            <p className={'cursor-pointer text-14'}>View All</p>
+                        </div>
 
-                            <div key={index} id='musicContainer' className='h-auto p-2 hover:scale-95 '
+                        <Slider className='' ref={sliderRef} {...settings}>
+                            {armaanAndDarshanSongs.length > 0 &&
+                                armaanAndDarshanSongs.map((music, index) => (
 
-                            >
-                                <Link
-                                    id='musicCont'
-                                    // hover:brightness-50
-                                    className='m-2 p-1 hover: shadow-inner'
-                                    to={''}
-                                >
+                                    <div key={index} id='musicContainer' className='h-auto p-2 hover:scale-95 '
 
-                                    <div className='relative'>
-                                        <img
-                                            className=''
-                                            src={`data:image/jpeg;base64, ${music.picture}`}
-                                            alt='Cover'
-                                        />
-                                        {/* </div> */}
-                                        <FaPlayCircle
-                                            id='playBtn'
-                                            onClick={() => setTrackHandler(music)}
-                                            fontSize={'50px'}
-                                            className={`text-neutral-white top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 absolute  z-50 hover:scale-125`}
-                                        />
+                                    >
+                                        <Link
+                                            id='musicCont'
+                                            // hover:brightness-50
+                                            className='m-2 p-1 hover: shadow-inner'
+                                            to={''}
+                                        >
+
+                                            <div className='relative'>
+                                                <img
+                                                    className=''
+                                                    src={`data:image/jpeg;base64, ${music.picture}`}
+                                                    alt='Cover'
+                                                />
+                                                {/* </div> */}
+                                                <FaPlayCircle
+                                                    id='playBtn'
+                                                    onClick={() => setTrackHandler(music)}
+                                                    fontSize={'50px'}
+                                                    className={`text-neutral-white top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 absolute  z-50 hover:scale-125`}
+                                                />
 
 
-                                        {/* <div className={'z-50 absolute top-0 right-0  hover:z-50'}>
+                                                {/* <div className={'z-50 absolute top-0 right-0  hover:z-50'}>
   
                       </div> */}
 
 
+                                            </div>
+                                        </Link>
                                     </div>
-                                </Link>
-                            </div>
-                        ))}
-                </Slider>
+                                ))}
+                        </Slider>
 
 
 
 
-                <FaAngleLeft
+                        <FaAngleLeft
 
-                    className='absolute inset-y-0 left-0 top-1/2 transform -translate-y-1/2 cursor-pointer bg-neutral-silver
+                            className='absolute inset-y-0 left-0 top-1/2 transform -translate-y-1/2 cursor-pointer bg-neutral-silver
     lg:text-3xl
     md:text-base
     sm:text-base
     hover:text-blue-500'
 
-                    onClick={() => sliderRef.current?.slickPrev()}
-                />
+                            onClick={() => sliderRef.current?.slickPrev()}
+                        />
 
 
 
-                <FaAngleRight
+                        <FaAngleRight
 
-                    className='absolute inset-y-0 right-0 top-1/2 transform -translate-y-1/2 cursor-pointer  bg-neutral-silver
+                            className='absolute inset-y-0 right-0 top-1/2 transform -translate-y-1/2 cursor-pointer  bg-neutral-silver
     lg:text-3xl
     md:text-base
     sm:text-base
     hover:text-blue-500'
-                    onClick={() => sliderRef.current?.slickNext()}
-                />
+                            onClick={() => sliderRef.current?.slickNext()}
+                        />
 
 
 
 
 
-            </div>
+                    </div>
+            }
         </div>
     )
 }

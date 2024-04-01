@@ -17,8 +17,9 @@ import { isAuthValueFromReduxStore } from '../../Redux/isAuthReducer/reducer';
 import { allMusic } from '../../Interfaces/Interfce';
 import { appContent } from '../../ContextApi/ContextApi';
 import { APP_URL, SINGLE_USER_DATA } from '../../Endpoints/Endpoints';
-import { playlist90SAllSongsValueFromReduxStore } from '../../Redux/90sSongReducer/reducer';
+import { playlist90SAllSongsIsLoadingValueFromReduxStore, playlist90SAllSongsValueFromReduxStore } from '../../Redux/90sSongReducer/reducer';
 import { get90Song } from '../../Redux/90sSongReducer/Function';
+import Loader from '../Home/Loader';
 
 
 const BestOf90S = () => {
@@ -34,7 +35,8 @@ const BestOf90S = () => {
     const sliderRef = useRef<any>(null);
     const dispatch = useAppDispatch()
   
-    const bestOf90S = useAppSelector(playlist90SAllSongsValueFromReduxStore)
+    const bestOf90S = useAppSelector(playlist90SAllSongsValueFromReduxStore);
+    const isLoading = useAppSelector(playlist90SAllSongsIsLoadingValueFromReduxStore)
   
   
   
@@ -129,6 +131,10 @@ const BestOf90S = () => {
   
     return (
       <div className={''}>
+
+        {
+          isLoading ? <Loader /> :
+        
         <div className='relative'>
   
         <div className={'flex justify-between  pl-2 pr-2 absolute w-full top-10'}>
@@ -207,6 +213,7 @@ const BestOf90S = () => {
   
   
         </div>
+}
       </div>
     )
 
