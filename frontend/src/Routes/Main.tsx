@@ -15,7 +15,7 @@ export const Main = () => {
 
 
   return (
-    <div className='h-screen relative'>
+    <div className='h-screen relative bg-neutral-background'>
 
 
 
@@ -29,12 +29,12 @@ export const Main = () => {
 
 
       {
-        showMusicPlayer && <div className='bg-neutral-silver fixed bottom-0 left-0 right-0 shadow-2xl opacity-100 p-2 '>
+        showMusicPlayer && <div className='fixed bottom-0 left-0 right-0 shadow-2xl opacity-100 p-2 '>
           <MusicPlayerProvider />
         </div>
       }
 
-      <div className='border-4 mt-6 w-full'>
+      <div className='w-full  pt-12'>
         <Footer />
       </div>
 

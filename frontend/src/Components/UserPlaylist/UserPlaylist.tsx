@@ -44,21 +44,21 @@ const UserPlaylist = () => {
   console.log('userPlaylist', userPlaylist)
 
   return (
-    <DIV className='border-4 border-red-600 h-screen sm:bg-red' >
+    <DIV className='border-4 border-red-600 h-screen sm:bg-red overflow-y-auto' >
 
-      <div className='flex border-4 justify-end'>
+      <div className='flex border-4 justify-end fixed z-50 2xl:justify-end xl:justify-end lg:justify-end md:justify-end w-full'>
         <Navbar />
       </div>
 
 
       {
         isLoading ? <div>Loading</div> :
-          <div className=' grid 2xl:grid-cols-7 gap-y-6 overflow-y-auto h-screen
+          <div className=' grid 2xl:grid-cols-7 gap-y-6  border-black border-4 mt-12
           xl:grid-cols-7 lg:grid-cols-6 md:grid-cols-5 sm:grid-cols-4 mobiles-max:grid-cols-3 small:grid-cols-2
           '>
             {
               userPlaylist.map((music, index) => (
-                <div key={index} className=' border-4'>
+                <div key={index} className='border-4 border-black '>
 
                   <div id='musicContainer' className='mb-1  p-2 hover:scale-95 '
 

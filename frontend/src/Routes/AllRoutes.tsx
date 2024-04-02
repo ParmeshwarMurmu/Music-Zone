@@ -8,6 +8,7 @@ import { SingleMusicPage } from './SingleMusicPage'
 import { WithoutSideBarLayout } from './WithoutSideBarLayout'
 import { WithSideBarLayout } from './WithSideBarLayout'
 import UserPlaylist from '../Components/UserPlaylist/UserPlaylist'
+import ViewAll from '../Components/ViewAll/ViewAll'
 
 export const AllRoutes = () => {
   return (
@@ -28,6 +29,11 @@ export const AllRoutes = () => {
         }
         />
         <Route path='/uploadMusic' element={<UplodMusci />} />
+        <Route path='/viewAll/:category' element={
+          <WithSideBarLayout>
+            <ViewAll />
+          </WithSideBarLayout>
+        } />
         <Route path='/singleMusic' element={<SingleMusicPage />} />
         <Route path='/playlist/:playlistName' element={
           <WithSideBarLayout>

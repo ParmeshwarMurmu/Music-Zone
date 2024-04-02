@@ -13,7 +13,10 @@ module.exports = {
          'silver': '#F5F7FA',
          'white': '#FFFFFF',
          'info': '#2194f3',
-         'loader': 'rgb(203 213 225)'
+         'loader': 'rgb(203 213 225)',
+         'background': 'rgb(17 24 39)',
+         'textDarkThemeClor': '#E0E0E0',
+         'headingDarkThemeColor': '#A0A0A0'
       },
       shades: {
         '100': '#43A046',
@@ -69,7 +72,9 @@ module.exports = {
       '14': '14px',
       '16': '16px',
       '12': '12px',
-      '18': '18px'
+      '18': '18px',
+      '20': '20px',
+      '30': '25px'
     },
     extend: {
 

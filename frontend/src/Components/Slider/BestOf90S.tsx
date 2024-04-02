@@ -139,7 +139,10 @@ const BestOf90S = () => {
   
         <div className={'flex justify-between  pl-2 pr-2 absolute w-full top-10'}>
           <p className={' cursor-pointer text-14 bg-neutral-gery text-neutral-white p-1 rounded-md'}>Best of 90S</p>
-          <p className={'cursor-pointer text-14'}>View All</p>
+          <p className={'cursor-pointer text-14'}>
+          <Link to={'/viewAll/bestOf90s'}>
+                                View All</Link>
+          </p>
          </div>
   
           <Slider  className='' ref={sliderRef} {...settings}>
@@ -188,9 +191,11 @@ const BestOf90S = () => {
           <FaAngleLeft
   
             className='absolute inset-y-0 left-0 top-1/2 transform -translate-y-1/2 cursor-pointer bg-neutral-silver
-    lg:text-3xl
-    md:text-base
-    sm:text-base
+            lg:text-30
+            md:text-20
+            sm:text-20
+            small:text-20
+            mobiles-max:text-20
     hover:text-blue-500'
   
             onClick={() => sliderRef.current?.slickPrev()}
@@ -201,9 +206,11 @@ const BestOf90S = () => {
           <FaAngleRight
   
             className='absolute inset-y-0 right-0 top-1/2 transform -translate-y-1/2 cursor-pointer  bg-neutral-silver
-    lg:text-3xl
-    md:text-base
-    sm:text-base
+            lg:text-30
+            md:text-20
+            sm:text-20
+            small:text-20
+            mobiles-max:text-20
     hover:text-blue-500'
             onClick={() => sliderRef.current?.slickNext()}
           />

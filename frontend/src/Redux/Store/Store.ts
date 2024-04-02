@@ -10,9 +10,11 @@ import moreSongFromArtistReducer from '../MoreFromArtistReducer/reducer'
 import arjitSongReducer from '../ArjitSinghReducer/reducer';
 import armaanAndDarshanReducer from '../Armaan&DarshanReducer/reducer';
 import honneySinghAndBadshahReducer from '../HonneySinghAndBadshahReducer/reducer';
+import themeReducer from '../ThemeReducer/reducer';
 
 export const store = configureStore({
     reducer: {
+      themeName: themeReducer,
       honneySinghAndBadshahSongName: honneySinghAndBadshahReducer,
       armaanAndDarshanSongName: armaanAndDarshanReducer,
       arjitSingSongs: arjitSongReducer,

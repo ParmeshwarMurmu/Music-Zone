@@ -8,7 +8,7 @@ import { DiffRoutes } from './Routes/DiffRoutes';
 
 function App() {
   return (
-    <div className='box-border bg-neutral-silver '>
+    <div className='box-border bg-neutral-background '>
       <Main />
     
     </div>

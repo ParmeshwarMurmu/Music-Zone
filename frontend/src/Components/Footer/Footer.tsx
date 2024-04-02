@@ -2,11 +2,17 @@ import { Heading } from '@chakra-ui/react';
 import React from 'react'
 import { FaTwitter, FaFacebook, FaInstagram } from "react-icons/fa";
 import { FaLinkedin } from "react-icons/fa6";
+import { useAppSelector } from '../../Redux/Store/Hook';
+import { themeValueFromReduxStore } from '../../Redux/ThemeReducer/reducer';
 
 export const Footer = () => {
 
+  const theme = useAppSelector(themeValueFromReduxStore)
+
+  console.log(theme, "theme")
+
   return (
-    <div>
+    <div className={``}>
 
       <div className='flex justify-center'>
         <FaTwitter className={`m-4 size-6 cursor-pointer hover:scale-125`} />
@@ -17,10 +23,10 @@ export const Footer = () => {
 
       <div className='flex justify-evenly'>
         <div>
-          <p className={`text-18 mb-4 font-semibold font-Inter`}>
+          <p className={`text-18 mb-4 font-semibold font-Inter text-neutral-textDarkThemeClor `}>
             Community
           </p>
-          <p className={`text-14 mb-2 cursor-pointer font-Inter`}>Blogs</p>
+          <p className={`text-14 mb-2 cursor-pointer font-Inter text-neutral-headingDarkThemeColor `}>Blogs</p>
           <p className={`text-14 mb-2 cursor-pointer font-Inter`}>Community</p>
           <p className={`text-14 mb-2 cursor-pointer font-Inter`}>Developers</p>
         </div>
@@ -45,13 +51,7 @@ export const Footer = () => {
         </div>
       </div>
 
-      <div>
-
-      </div>
-
-      <div>
-
-      </div>
+      
 
 
     </div>
