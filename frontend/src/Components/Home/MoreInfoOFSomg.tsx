@@ -58,7 +58,7 @@ const MoreInfoOFSomg: React.FC<MoreInfoOfSongProps> = ({ currentTrackInfo }) => 
 
     return (
         <DIV className=''>
-            <Button variant={'none'} className={`hover:scale-150`} style={{ position: 'absolute', left: '50%', top: '-25px' }} colorScheme='blue' p={0} m={0} onClick={onOpen}>
+            <Button variant={'none'} className={`hover:scale-150`} style={{ position: 'absolute', left: '50%', top: '-25px', backgroundColor: 'rgb(209 213 219)' }} p={0} m={0} onClick={onOpen}>
                 <MdKeyboardArrowUp fontSize={'30px'} color='black' />
             </Button>
             <Drawer placement={'bottom'} onClose={onClose} isOpen={isOpen}>

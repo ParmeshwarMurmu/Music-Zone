@@ -18,6 +18,7 @@ import { isAuthValueFromReduxStore } from '../../Redux/isAuthReducer/reducer';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import MoreInfoOFSomg from './MoreInfoOFSomg';
+import { themeValueFromReduxStore } from '../../Redux/ThemeReducer/reducer';
 
 export const MusicPlayerProvider = () => {
 
@@ -35,6 +36,7 @@ export const MusicPlayerProvider = () => {
     const navigate = useNavigate();
     // Getting  user playlist from redux store
     const userPlaylist = useAppSelector(usersPlaylistValueFromReduxStore)
+    const theme = useAppSelector(themeValueFromReduxStore)
 
     const { createPlaylist, setCreatePlaylist } = useContext(appContent)
     const isAuth = useAppSelector(isAuthValueFromReduxStore)
@@ -254,9 +256,13 @@ export const MusicPlayerProvider = () => {
                     <div className='relative flex pl-6 justify-between'>
 
                         <div>
-                            <p className='text-lg font-bold'>{currentTrack.title}</p>
-                            <p className='text-sm'>{`${currentTrack.artist}`}</p>
-                            <p className='text-sm'>{`${currentTrack.album} - ${currentTrack.releaseYear} `}</p>
+                            <p className={`text-xl font-semibold  ${theme === 'dark' ? 'text-neutral-headingDarkThemeColor' : 'text-neutral-lightThemeHeadingColor'}`}
+                            
+                            >{currentTrack.title}</p>
+                            <p className={`text-sm ${theme === 'dark' ? 'text-neutral-textDarkThemeColor' : 'text-neutral-lightThemeHeadingColor'}`}
+                            >{`${currentTrack.artist}`}</p>
+                            <p className={`text-sm ${theme === 'dark' ? 'text-neutral-textDarkThemeColor' : 'text-neutral-lightThemeHeadingColor'}`}>
+                                {`${currentTrack.album} - ${currentTrack.releaseYear} `}</p>
                         </div>
 
 

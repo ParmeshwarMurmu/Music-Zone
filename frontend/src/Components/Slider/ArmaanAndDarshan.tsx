@@ -23,6 +23,7 @@ import { getArjitSinghSong } from '../../Redux/ArjitSinghReducer/Function';
 import { armaanAndDarshanSongIsLoadingValueFromReduxStore, armaanAndDarshanSongValueFromReduxStore } from '../../Redux/Armaan&DarshanReducer/reducer';
 import { getArmaanAndDarshanSong } from '../../Redux/Armaan&DarshanReducer/Function';
 import Loader from '../Home/Loader';
+import { themeValueFromReduxStore } from '../../Redux/ThemeReducer/reducer';
 
 
 
@@ -36,7 +37,7 @@ const ArmaanAndDarshan = () => {
     const { currentTrack, setCurrentTrack, setShowMusicPlyer, setUserDetail } = useContext(appContent)
     const sliderRef = useRef<any>(null);
     const dispatch = useAppDispatch()
-
+    const theme = useAppSelector(themeValueFromReduxStore)
     const armaanAndDarshanSongs = useAppSelector(armaanAndDarshanSongValueFromReduxStore);
     const isLoading = useAppSelector(armaanAndDarshanSongIsLoadingValueFromReduxStore)
 
@@ -139,8 +140,17 @@ const ArmaanAndDarshan = () => {
                     <div className='relative'>
 
                         <div className={'flex justify-between  pl-2 pr-2 absolute w-full top-10'}>
-                            <p className={' cursor-pointer text-14 bg-neutral-gery text-neutral-white p-1 rounded-md'}>Best of Darshan Raval & Armaan Malik</p>
-                            <Link to={'/viewAll/armaanAndDarshan'}> <p className={'cursor-pointer text-14'}>
+                            <p className={`cursor-pointer text-16  font-normal p-1 rounded-sm
+          font-Inter ${theme === 'dark' ? 'text-neutral-silver animate-pulse ' : 'text-neutral-lightThemeHeadingColor bg-neutral-silver '}
+          
+        `}
+                            >Best of Darshan Raval & Armaan Malik</p>
+
+
+                            <Link to={'/viewAll/armaanAndDarshan'}> <p className={`underline  cursor-pointer text-16  font-normal p-1 rounded-sm
+          font-Inter ${theme === 'dark' ? 'text-neutral-silver animate-pulse ' : 'text-neutral-lightThemeHeadingColor bg-neutral-silver '}
+          
+        `}>
 
                                 View All
                             </p>

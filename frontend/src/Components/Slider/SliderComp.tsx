@@ -19,6 +19,7 @@ import { appContent } from '../../ContextApi/ContextApi';
 import { APP_URL, SINGLE_USER_DATA } from '../../Endpoints/Endpoints';
 import { get90Song } from '../../Redux/90sSongReducer/Function';
 import { playlist90SAllSongsValueFromReduxStore } from '../../Redux/90sSongReducer/reducer';
+import { themeValueFromReduxStore } from '../../Redux/ThemeReducer/reducer';
 
 
 
@@ -28,14 +29,10 @@ const SliderComp = () => {
 
 
   const isAuth = useAppSelector(isAuthValueFromReduxStore)
-  const [currentSlide, setCurrentSlide] = useState<number>(0);
-  const [data, setData] = useState<number | null>();
-  const [sliderInitialized, setSliderInitialized] = useState(false);
-  const [musicList, setMusicList] = useState<allMusic[]>([])
   const { currentTrack, setCurrentTrack, setShowMusicPlyer, setUserDetail } = useContext(appContent)
   const sliderRef = useRef<any>(null);
   const dispatch = useAppDispatch()
-
+  const theme = useAppSelector(themeValueFromReduxStore)
   const old90s = useAppSelector(playlist90SAllSongsValueFromReduxStore)
 
 
@@ -134,8 +131,22 @@ const SliderComp = () => {
       <div className='relative'>
 
         <div className={'flex justify-between  pl-2 pr-2 absolute w-full top-10'}>
-          <p className={' cursor-pointer text-14 bg-neutral-gery text-neutral-white p-1 rounded-md'}>Latest Release</p>
-          <p className={'cursor-pointer text-14'}>View All</p>
+
+          <p className={`cursor-pointer text-16  font-normal p-1 rounded-sm
+          font-Inter ${theme === 'dark' ? 'text-neutral-silver animate-pulse ' : 'text-neutral-lightThemeHeadingColor bg-neutral-silver '}
+          
+        `}>
+            Latest Release</p>
+
+          <Link to={'/viewAll/latest'}>
+            <p className={`underline  cursor-pointer text-16  font-normal p-1 rounded-sm
+          font-Inter ${theme === 'dark' ? 'text-neutral-silver animate-pulse ' : 'text-neutral-lightThemeHeadingColor bg-neutral-silver '}
+          
+        `}>
+
+              View All
+            </p>
+          </Link>
         </div>
 
 

@@ -22,13 +22,14 @@ import { get90Song } from '../../Redux/90sSongReducer/Function';
 import { arjitSingSongsIsLoadingValueFromReduxStore, arjitSingSongsValueFromReduxStore } from '../../Redux/ArjitSinghReducer/reducer';
 import { getArjitSinghSong } from '../../Redux/ArjitSinghReducer/Function';
 import Loader from '../Home/Loader';
+import { themeValueFromReduxStore } from '../../Redux/ThemeReducer/reducer';
 
 
 
 
 const ArjitSinghSongs = () => {
-  
-    const isAuth = useAppSelector(isAuthValueFromReduxStore)
+
+  const isAuth = useAppSelector(isAuthValueFromReduxStore)
   const [currentSlide, setCurrentSlide] = useState<number>(0);
   const [data, setData] = useState<number | null>();
   const [sliderInitialized, setSliderInitialized] = useState(false);
@@ -36,7 +37,7 @@ const ArjitSinghSongs = () => {
   const { currentTrack, setCurrentTrack, setShowMusicPlyer, setUserDetail } = useContext(appContent)
   const sliderRef = useRef<any>(null);
   const dispatch = useAppDispatch()
-
+  const theme = useAppSelector(themeValueFromReduxStore)
   const arjitSingSongs = useAppSelector(arjitSingSongsValueFromReduxStore);
   const isLoading = useAppSelector(arjitSingSongsIsLoadingValueFromReduxStore)
 
@@ -125,8 +126,8 @@ const ArjitSinghSongs = () => {
     ],
   };
 
-  
-  
+
+
 
 
 
@@ -135,96 +136,102 @@ const ArjitSinghSongs = () => {
     <div className={''}>
 
       {
-        isLoading ? <Loader /> : 
-     
-      <div className='relative'>
+        isLoading ? <Loader /> :
 
-      <div className={'flex justify-between  pl-2 pr-2 absolute w-full top-10'}>
-        <p className={' cursor-pointer text-14 bg-neutral-gery text-neutral-white p-1 rounded-md'}>Best of Arijit Singh</p>
-        <p className={'cursor-pointer text-14'}>
-          <Link to={'/viewAll/arijitSingh'}>
-          View All
-          </Link>
-          </p>
-       </div>
+          <div className='relative'>
 
-        <Slider  className='' ref={sliderRef} {...settings}>
-          {arjitSingSongs.length > 0 &&
-            arjitSingSongs.map((music, index) => (
+            <div className={'flex justify-between  pl-2 pr-2 absolute w-full top-10'}>
+              <p className={`cursor-pointer text-16  font-normal p-1 rounded-sm
+          font-Inter ${theme === 'dark' ? 'text-neutral-silver animate-pulse ' : 'text-neutral-lightThemeHeadingColor bg-neutral-silver '}
+          
+        `}>Best of Arijit Singh</p>
+              <Link to={'/viewAll/arijitSingh'}>
+                <p className={`underline  cursor-pointer text-16  font-normal p-1 rounded-sm
+          font-Inter ${theme === 'dark' ? 'text-neutral-silver animate-pulse ' : 'text-neutral-lightThemeHeadingColor bg-neutral-silver '}
+          
+        `}>
+                  View All
+                </p>
+              </Link>
+            </div>
 
-              <div key={index} id='musicContainer' className='h-auto p-2 hover:scale-95 '
+            <Slider className='' ref={sliderRef} {...settings}>
+              {arjitSingSongs.length > 0 &&
+                arjitSingSongs.map((music, index) => (
 
-              >
-                <Link
-                  id='musicCont'
-                  // hover:brightness-50
-                  className='m-2 p-1 hover: shadow-inner'
-                  to={''}
-                >
+                  <div key={index} id='musicContainer' className='h-auto p-2 hover:scale-95 '
 
-                  <div className='relative'>
-                    <img
-                      className=''
-                      src={`data:image/jpeg;base64, ${music.picture}`}
-                      alt='Cover'
-                    />
-                    {/* </div> */}
-                    <FaPlayCircle
-                      id='playBtn'
-                      onClick={() => setTrackHandler(music)}
-                      fontSize={'50px'}
-                      className={`text-neutral-white top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 absolute  z-50 hover:scale-125`}
-                    />
+                  >
+                    <Link
+                      id='musicCont'
+                      // hover:brightness-50
+                      className='m-2 p-1 hover: shadow-inner'
+                      to={''}
+                    >
+
+                      <div className='relative'>
+                        <img
+                          className=''
+                          src={`data:image/jpeg;base64, ${music.picture}`}
+                          alt='Cover'
+                        />
+                        {/* </div> */}
+                        <FaPlayCircle
+                          id='playBtn'
+                          onClick={() => setTrackHandler(music)}
+                          fontSize={'50px'}
+                          className={`text-neutral-white top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 absolute  z-50 hover:scale-125`}
+                        />
 
 
-                    {/* <div className={'z-50 absolute top-0 right-0  hover:z-50'}>
+                        {/* <div className={'z-50 absolute top-0 right-0  hover:z-50'}>
 
                     </div> */}
 
 
+                      </div>
+                    </Link>
                   </div>
-                </Link>
-              </div>
-            ))}
-        </Slider>
+                ))}
+            </Slider>
 
 
 
 
-        <FaAngleLeft
+            <FaAngleLeft
 
-          className='absolute inset-y-0 left-0 top-1/2 transform -translate-y-1/2 cursor-pointer bg-neutral-silver
+              className='absolute inset-y-0 left-0 top-1/2 transform -translate-y-1/2 cursor-pointer bg-neutral-silver
   lg:text-30
   md:text-20
   sm:text-20
   small:text-20
   mobiles-max:text-20
   hover:text-blue-500'
- 
-
-          onClick={() => sliderRef.current?.slickPrev()}
-        />
 
 
+              onClick={() => sliderRef.current?.slickPrev()}
+            />
 
-        <FaAngleRight
 
-          className='absolute inset-y-0 right-0 top-1/2 transform -translate-y-1/2 cursor-pointer  bg-neutral-silver
+
+            <FaAngleRight
+
+              className='absolute inset-y-0 right-0 top-1/2 transform -translate-y-1/2 cursor-pointer  bg-neutral-silver
           lg:text-30
           md:text-20
           sm:text-20
           small:text-20
           mobiles-max:text-20
   hover:text-blue-500'
-          onClick={() => sliderRef.current?.slickNext()}
-        />
+              onClick={() => sliderRef.current?.slickNext()}
+            />
 
 
 
 
 
-      </div>
-       }
+          </div>
+      }
     </div>
   )
 }

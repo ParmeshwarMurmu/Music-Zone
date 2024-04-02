@@ -15,7 +15,7 @@ export const Footer = () => {
     <div className={``}>
 
       <div className='flex justify-center'>
-        <FaTwitter className={`m-4 size-6 cursor-pointer hover:scale-125`} />
+        <FaTwitter className={`m-4 size-6 cursor-pointer hover:scale-125 `} />
         <FaFacebook className={`m-4 size-6 cursor-pointer hover:scale-125`} />
         <FaInstagram className={`m-4 size-6 cursor-pointer hover:scale-125`} />
         <FaLinkedin className={`m-4 size-6 cursor-pointer hover:scale-125`} />
@@ -23,30 +23,34 @@ export const Footer = () => {
 
       <div className='flex justify-evenly'>
         <div>
-          <p className={`text-18 mb-4 font-semibold font-Inter text-neutral-textDarkThemeClor `}>
+          <p className={`text-18 mb-4 font-semibold font-Inter ${theme === 'dark' ? 'text-neutral-headingDarkThemeColor' : 'text-neutral-lightThemeHeadingColor'} `}>
             Community
           </p>
-          <p className={`text-14 mb-2 cursor-pointer font-Inter text-neutral-headingDarkThemeColor `}>Blogs</p>
-          <p className={`text-14 mb-2 cursor-pointer font-Inter`}>Community</p>
-          <p className={`text-14 mb-2 cursor-pointer font-Inter`}>Developers</p>
+          <p className={`text-14 mb-2 cursor-pointer font-Inter ${theme === 'dark' ? 'text-neutral-textDarkThemeColor' : 'text-neutral-lightThemeHeadingColor'} `}>Blogs</p>
+          <p className={`text-14 mb-2 cursor-pointer font-Inter ${theme === 'dark' ? 'text-neutral-textDarkThemeColor' : 'text-neutral-lightThemeHeadingColor'} `}>Community</p>
+          <p className={`text-14 mb-2 cursor-pointer font-Inter ${theme === 'dark' ? 'text-neutral-textDarkThemeColor' : 'text-neutral-lightThemeHeadingColor'} `}>Developers</p>
         </div>
 
         <div>
-          <p className={`text-18 mb-4 font-semibold font-Inter`}>
+          <p className={`text-18 mb-4 font-semibold font-Inter
+          ${theme === 'dark' ? 'text-neutral-headingDarkThemeColor' : 'text-neutral-lightThemeHeadingColor'} 
+          `}>
             Company
           </p>
-          <p className={`text-14 mb-2 cursor-pointer font-Inter`}>About Us</p>
-          <p className={`text-14 mb-2 cursor-pointer font-Inter`}>Team</p>
-          <p className={`text-14 mb-2 cursor-pointer font-Inter`}>Media</p>
-          <p className={`text-14 mb-2 cursor-pointer font-Inter`}>Our Commitments</p>
+          <p className={`text-14 mb-2 cursor-pointer font-Inter ${theme === 'dark' ? 'text-neutral-textDarkThemeColor' : 'text-neutral-lightThemeHeadingColor'}`}>About Us</p>
+          <p className={`text-14 mb-2 cursor-pointer font-Inter ${theme === 'dark' ? 'text-neutral-textDarkThemeColor' : 'text-neutral-lightThemeHeadingColor'}`}>Team</p>
+          <p className={`text-14 mb-2 cursor-pointer font-Inter ${theme === 'dark' ? 'text-neutral-textDarkThemeColor' : 'text-neutral-lightThemeHeadingColor'}`}>Media</p>
+          <p className={`text-14 mb-2 cursor-pointer font-Inter ${theme === 'dark' ? 'text-neutral-textDarkThemeColor' : 'text-neutral-lightThemeHeadingColor'}`}>Our Commitments</p>
         </div>
 
         <div>
-          <p className={`text-18 mb-4 font-semibold font-Inter`}>
+          <p className={`text-18 mb-4 font-semibold font-Inter
+          ${theme === 'dark' ? 'text-neutral-headingDarkThemeColor' : 'text-neutral-lightThemeHeadingColor'} 
+          `}>
             Useful Links
           </p>
-          <p className={`text-14 mb-2 cursor-pointer font-Inter`}>Terms & Services</p>
-          <p className={`text-14 mb-2 cursor-pointer font-Inter`}>Policy & Privacy</p>
+          <p className={`text-14 mb-2 cursor-pointer font-Inter ${theme === 'dark' ? 'text-neutral-textDarkThemeColor' : 'text-neutral-lightThemeHeadingColor'}`}>Terms & Services</p>
+          <p className={`text-14 mb-2 cursor-pointer font-Inter ${theme === 'dark' ? 'text-neutral-textDarkThemeColor' : 'text-neutral-lightThemeHeadingColor'}`}>Policy & Privacy</p>
          
         </div>
       </div>

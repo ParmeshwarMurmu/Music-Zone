@@ -14,9 +14,13 @@ module.exports = {
          'white': '#FFFFFF',
          'info': '#2194f3',
          'loader': 'rgb(203 213 225)',
-         'background': 'rgb(17 24 39)',
-         'textDarkThemeClor': '#E0E0E0',
-         'headingDarkThemeColor': '#A0A0A0'
+         'darkThemeBackground': 'rgb(17 24 39)',
+         'lightThemeBackground': 'white',
+         'headingDarkThemeColor': '#E0E0E0',
+         'textDarkThemeColor': '#A0A0A0',
+         'lightThemeTextColor': 'rgb(75 85 99)',
+         'lightThemeHeadingColor':'rgb(17 24 39)',
+         'playerBackground': 'rgb(209 213 219)'
       },
       shades: {
         '100': '#43A046',
@@ -68,6 +72,7 @@ module.exports = {
       openSans:'Open Sans'
     },
 
+    
     fontSize: {
       '14': '14px',
       '16': '16px',
@@ -77,6 +82,11 @@ module.exports = {
       '30': '25px'
     },
     extend: {
+
+      borderRadius:{
+        '4': '4px'
+
+      },
 
       inset:{
         '10': '-12px',
