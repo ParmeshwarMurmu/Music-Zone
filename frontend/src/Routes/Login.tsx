@@ -16,6 +16,7 @@ import { APP_URL, USER_LOGIN_ENDPOINT } from '../Endpoints/Endpoints';
 import { GoogleAuthProvider, signInWithPopup, signInWithRedirect, getRedirectResult } from "firebase/auth";
 import { auth } from '../fireBase/Config'
 import { isAuthAction, isAuthResetAction, isAuthValueFromReduxStore } from '../Redux/isAuthReducer/reducer';
+import { themeValueFromReduxStore } from '../Redux/ThemeReducer/reducer';
 
 export const Login = () => {
 
@@ -36,7 +37,7 @@ export const Login = () => {
   const userLoginPassword = useAppSelector(loginPasswordValueFromReduxStore);
   const loginIsLoading = useAppSelector(loginIsLoadingValueFromReduxStore);
   const loginIsError = useAppSelector(loginIsErrorValueFromReduxStore);
-  
+  const theme = useAppSelector(themeValueFromReduxStore)
   const isAuth = useAppSelector(isAuthValueFromReduxStore);
 
   // Function To Handle User Email Input
@@ -141,7 +142,7 @@ export const Login = () => {
 
 
   return (
-    <div className='flex justify-center items-center'>
+    <div className='flex justify-center items-center mb-14'>
 
 
       <div className='w-full hidden md:block lg:block md:w-6/12 lg:w-4/12 md:h-screen 
@@ -152,23 +153,16 @@ export const Login = () => {
 
       <div>
 
-        {/* <div>
-    <Wrap>
-        <WrapItem>
-            <Avatar
-                size='lg'
-                name='Prosper Otemuyiwa'
-                src={MusicZone}
-            />{' '}
-        </WrapItem>
-    </Wrap>
-</div> */}
-
+      
 
 
         <div className='p-2'>
 
-          <Heading className='mb-4' as='h2' size='xl'>
+          <Heading className={`mb-4`} 
+          color={`${theme === 'dark' ? '#E0E0E0' : 'rgb(17 24 39)'}`}
+          as='h2' size='xl'
+
+          >
             Login up to start listening
           </Heading>
 
@@ -179,9 +173,12 @@ export const Login = () => {
 
             <form onSubmit={handleLoginSubmitForm}>
               <FormControl isRequired mt={1}>
-                <FormLabel>Email</FormLabel>
+                <FormLabel
+                color={`${theme === 'dark' ? '#E0E0E0' : 'rgb(17 24 39)'}`}
+                >Email</FormLabel>
                 <Input type='email' placeholder='example@gmail.com' value={userLoginEmail}
                   onChange={handleLoginEmailChange} required
+                  color={`${theme === 'dark' ? '#E0E0E0' : 'rgb(17 24 39)'}`}
                 />
               </FormControl>
 
@@ -189,11 +186,14 @@ export const Login = () => {
 
               <InputGroup>
                 <FormControl isRequired mt={1}>
-                  <FormLabel>Password</FormLabel>
+                  <FormLabel
+                  color={`${theme === 'dark' ? '#E0E0E0' : 'rgb(17 24 39)'}`}
+                  >Password</FormLabel>
 
                   <InputGroup>
                     <Input type={showPassword ? 'text' : 'password'}
                       placeholder='Password' value={userLoginPassword}
+                      color={`${theme === 'dark' ? '#E0E0E0' : 'rgb(17 24 39)'}`}
                       onChange={handleLoginPasswordChange} required
                     />
 
@@ -208,6 +208,7 @@ export const Login = () => {
                             aria-label=''
                             icon={<IoMdEye />}
                             onClick={() => { setShowPassword(false) }}
+                            color={`${theme === 'dark' ? '#E0E0E0' : 'rgb(17 24 39)'}`}
                           />
                         </Tooltip> : <Tooltip hasArrow label='show password' bg='gray.300' color='black'>
                           <IconButton
@@ -217,6 +218,7 @@ export const Login = () => {
                             aria-label=''
                             icon={<IoMdEyeOff />}
                             onClick={() => { setShowPassword(true) }}
+                            color={`${theme === 'dark' ? '#E0E0E0' : 'rgb(17 24 39)'}`}
                           />
                         </Tooltip>
                       }
@@ -249,9 +251,9 @@ export const Login = () => {
 
 
 
-          <div className='flex items-center justify-center mb-4'>
+          <div className={`flex items-center justify-center mb-4`}>
             {/* <hr></hr> */}
-            <p>Or</p>
+            <p className={`${theme === 'dark' ? 'text-neutral-headingDarkThemeColor' : 'text-neutral-lightThemeHeadingColor'}`}>Or</p>
             {/* <hr></hr> */}
           </div>
 
@@ -259,7 +261,7 @@ export const Login = () => {
             <Button colorScheme='' size='md' className='w-full mb-4 p-2 outline border-2 hover:border-indigo-300'
             // isLoading
             >
-              <FcPhoneAndroid className='mr-5 text-blue-500' fontSize={'30px'} /> <span className='text-black'>Continue Using OTP</span>
+              <FcPhoneAndroid className='mr-5 text-blue-500' fontSize={'30px'} /> <span className={`text-black ${theme === 'dark' ? 'text-neutral-headingDarkThemeColor' : 'text-neutral-lightThemeHeadingColor'}`}>Continue Using OTP</span>
             </Button>
           </div>
 
@@ -278,17 +280,17 @@ export const Login = () => {
 
 
 
-          <hr className='mb-4'></hr>
+          {/* <hr className='mb-4'></hr> */}
 
-          <div className='flex justify-center items-center mb-6'>
-            <p>Don't have an account ? <Link to={'/signUp'}><span className='text-blue-600 underline decoration-solid'>Sign Up</span></Link></p>
+          <div className='flex justify-center items-center mb-6 mt-4' >
+            <p className={`${theme === 'dark' ? 'text-neutral-headingDarkThemeColor' : 'text-neutral-lightThemeHeadingColor'}`}>Don't have an account ? <Link to={'/signUp'}><span className='text-blue-600 underline decoration-solid'>Sign Up</span></Link></p>
           </div>
 
 
 
-          <div className='flex mb-6'>
+          <div className={`flex mb-6 ${theme === 'dark' ? 'text-neutral-headingDarkThemeColor' : 'text-neutral-lightThemeHeadingColor'}`}>
             <p className='text-xs text-center'>This site is protected by reCAPTCHA and the Google
-              <span className='underline decoration-solid'>Privacy Policy</span> and <span className='underline decoration-solid'>Terms of Service</span> apply.</p>
+              <span className='underline decoration-solid ml-1'>Privacy Policy</span> and <span className='underline decoration-solid'>Terms of Service</span> apply.</p>
           </div>
 
 

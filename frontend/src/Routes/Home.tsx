@@ -160,7 +160,7 @@ export const Home = () => {
     // window.addEventListener('resize', handleResize);
 
     // return () => {
-      // window.removeEventListener('resize', handleResize);
+    // window.removeEventListener('resize', handleResize);
     // };
   }, [currentSlide]);
 
@@ -168,39 +168,71 @@ export const Home = () => {
 
 
   return (
-    <DIV className='h-screen  overflow-y-auto '>
+    // overflow-y-auto className={'bg-action-error top-0 w-full z-50 fixed flex 2xl:justify-end xl:justify-end lg:justify-end md:justify-end '}
+    <DIV >
       {/* flex flex-row-reverse flex 2xl:justify-end xl:justify-end lg:justify-end md:justify-end */}
-      <div className={'bg-action-error w-full z-50 fixed flex 2xl:justify-end xl:justify-end lg:justify-end md:justify-end '}>
+      {/* <div >
         <Navbar />
+      </div> */}
+
+
+
+
+
+
+      <div className='overflow-y-auto h-screen ' id='scrollbar-hide'>
+        <div className={`mt-16`}>
+          <ArjitSinghSongs />
+        </div>
+        <div>
+          <ArmaanAndDarshan />
+        </div>
+        <div>
+          <HoneySinghAndBadshah />
+        </div>
+        <div>
+          <HoneySinghAndBadshah />
+        </div>
       </div>
 
 
-      
+      {/* <div className={`mt-16`}>
 
-     
-
-      <div className={`mt-16`}>
-
-      {/* <SliderComp /> */}
+        
       </div>
-      
+
       <div>
-       
-      <ArjitSinghSongs />
+
+        <ArjitSinghSongs />
       </div>
 
-      
+      <div>
+
+        <ArjitSinghSongs />
+      </div>
+
+      <div>
+
+        <ArjitSinghSongs />
+      </div>
+
+      <div>
+
+        <ArjitSinghSongs />
+      </div>
+
+
       <div>
         <ArmaanAndDarshan />
       </div>
 
       <div>
         <HoneySinghAndBadshah />
-      </div>
+      </div> */}
 
-      <div>
+      {/* <div>
         <BestOf90S />
-      </div>
+      </div> */}
 
 
     </DIV>
@@ -217,6 +249,10 @@ const DIV = styled.div`
 
 #musicContainer:hover #playBtn {
   display: block;
+}
+
+#scrollbar-hide::-webkit-scrollbar {
+  display: none;
 }
 
 `

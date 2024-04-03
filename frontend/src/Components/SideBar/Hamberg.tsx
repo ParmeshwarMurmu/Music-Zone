@@ -12,14 +12,19 @@ import {
 } from '@chakra-ui/react'
 import { GiHamburgerMenu } from "react-icons/gi";
 import { SideBar } from './SideBar';
+import { themeValueFromReduxStore } from '../../Redux/ThemeReducer/reducer';
+import { useAppSelector } from '../../Redux/Store/Hook';
 
 const Hamberg = () => {
-    const { isOpen, onOpen, onClose } = useDisclosure()
+    const { isOpen, onOpen, onClose } = useDisclosure();
+    const theme = useAppSelector(themeValueFromReduxStore)
 
     return (
         <div>
             <Button colorScheme='blue' variant={'none'} p={0} m={0} onClick={onOpen}>
-                <GiHamburgerMenu />
+                <GiHamburgerMenu
+                 color={`${theme === 'dark' ? '#E0E0E0' : 'rgb(17 24 39)'}`}
+                 />
             </Button>
             <Drawer placement={'left'} onClose={onClose} isOpen={isOpen}>
                 <DrawerOverlay />

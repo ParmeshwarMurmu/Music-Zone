@@ -141,7 +141,7 @@ const ArjitSinghSongs = () => {
           <div className='relative'>
 
             <div className={'flex justify-between  pl-2 pr-2 absolute w-full top-10'}>
-              <p className={`cursor-pointer text-16  font-normal p-1 rounded-sm
+              <p className={`cursor-pointer text-14 lg:text-16 xl:text-16 2xl:text-16  font-normal p-1 rounded-sm
           font-Inter ${theme === 'dark' ? 'text-neutral-silver animate-pulse ' : 'text-neutral-lightThemeHeadingColor bg-neutral-silver '}
           
         `}>Best of Arijit Singh</p>

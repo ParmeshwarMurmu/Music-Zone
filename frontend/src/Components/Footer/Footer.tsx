@@ -15,10 +15,10 @@ export const Footer = () => {
     <div className={``}>
 
       <div className='flex justify-center'>
-        <FaTwitter className={`m-4 size-6 cursor-pointer hover:scale-125 `} />
-        <FaFacebook className={`m-4 size-6 cursor-pointer hover:scale-125`} />
-        <FaInstagram className={`m-4 size-6 cursor-pointer hover:scale-125`} />
-        <FaLinkedin className={`m-4 size-6 cursor-pointer hover:scale-125`} />
+        <FaTwitter className={`m-4 size-6 cursor-pointer hover:scale-125 `} color={`${theme === 'dark' ? '#E0E0E0' : 'rgb(17 24 39)'}`} />
+        <FaFacebook className={`m-4 size-6 cursor-pointer hover:scale-125`}  color={`${theme === 'dark' ? '#E0E0E0' : 'rgb(17 24 39)'}`}/>
+        <FaInstagram className={`m-4 size-6 cursor-pointer hover:scale-125`} color={`${theme === 'dark' ? '#E0E0E0' : 'rgb(17 24 39)'}`} />
+        <FaLinkedin className={`m-4 size-6 cursor-pointer hover:scale-125`}  color={`${theme === 'dark' ? '#E0E0E0' : 'rgb(17 24 39)'}`}/>
       </div>
 
       <div className='flex justify-evenly'>

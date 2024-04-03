@@ -18,10 +18,11 @@ import { isAuthValueFromReduxStore } from '../../Redux/isAuthReducer/reducer';
 import { playlistAllUserPlaylist, usersPlaylistValueFromReduxStore } from '../../Redux/PlaylistReducer/reducer';
 import { MdDelete } from "react-icons/md";
 import DeletePlaylist from './DeletePlaylist';
+import { themeValueFromReduxStore } from '../../Redux/ThemeReducer/reducer';
 
 
 export const SideBar = () => {
-
+  const theme = useAppSelector(themeValueFromReduxStore)
   const inputRef = useRef<HTMLInputElement | null>(null);
   const toast = useToast();
   const { createPlaylist, setCreatePlaylist } = useContext(appContent);
@@ -147,10 +148,10 @@ export const SideBar = () => {
       {/* Home */}
       <div className='flex mb-2'>
         <div className='mr-6'>
-          <IoHomeSharp fontSize={'20px'} color='' />
+          <IoHomeSharp fontSize={'20px'} color={`${theme === 'dark' ? '#E0E0E0' : 'rgb(17 24 39)'}`} />
         </div>
 
-        <div className='text-neutral-silver'>
+        <div className={`text-14 lg:text-16 xl:text-16 2xl:text-16  font-normal ${theme === 'dark' ? 'text-neutral-headingDarkThemeColor' : 'text-neutral-lightThemeHeadingColor'} text-16`}>
           <Link to={'/'}>Home</Link>
         </div>
       </div>

@@ -229,25 +229,25 @@ export const MusicPlayerProvider = () => {
 
 
 
-                <div className='w-24'>
+                <div className='w-24 small:hidden'>
                     <img src={`data:image/jpeg;base64, ${currentTrack.picture}`} alt="" />
                 </div>
 
                 {/* Music Details */}
-                <div className='w-full'>
+                <div className='w-full '>
 
 
                     {/* Music Duration */}
                     <div className="flex justify-center items-center">
-                        <span>{formatTime(currentTime)}</span>
-                        <input className='w-11/12 h-0.5 text-neutral-info'
+                        <span className={`text-14 font-Inter ${theme === 'dark' ? 'text-neutral-textDarkThemeColor' : 'text-neutral-lightThemeHeadingColor'}`}>{formatTime(currentTime)}</span>
+                        <input className='w-11/12 h-0.5 text-neutral-info mr-1 ml-1'
                             type="range"
                             min={0}
                             max={duration}
                             value={currentTime}
                             onChange={handleSeek}
                         />
-                        <span>{formatTime(duration)}</span>
+                        <span className={`text-14 font-Inter ${theme === 'dark' ? 'text-neutral-textDarkThemeColor' : 'text-neutral-lightThemeHeadingColor'}`}>{formatTime(duration)}</span>
                     </div>
 
 
@@ -255,7 +255,7 @@ export const MusicPlayerProvider = () => {
 
                     <div className='relative flex pl-6 justify-between'>
 
-                        <div>
+                        <div className={`small:hidden`}>
                             <p className={`text-xl font-semibold  ${theme === 'dark' ? 'text-neutral-headingDarkThemeColor' : 'text-neutral-lightThemeHeadingColor'}`}
                             
                             >{currentTrack.title}</p>
@@ -275,33 +275,47 @@ export const MusicPlayerProvider = () => {
                             </audio>
 
                             {/* Music Pause next prevoius Btns */}
-                            <div className="flex justify-center items-center">
+                            <div className={`flex justify-center items-center`}>
 
                                 {
                                     repeat ? (
                                         <MdOutlineRepeatOne fontSize={'20px'} className='mr-2 hover:cursor-pointer'
                                             onClick={() => { setRepeat(false) }}
+                                            color={`${theme === 'dark' ? '#E0E0E0' : 'rgb(17 24 39)'}`}
                                         />
                                     ) : (
                                         <MdOutlineRepeat fontSize={'20px'} className='mr-2 hover:cursor-pointer'
                                             onClick={() => { setRepeat(true) }}
+                                            color={`${theme === 'dark' ? '#E0E0E0' : 'rgb(17 24 39)'}`}
                                         />
                                     )
                                 }
 
-                                <IoPlaySkipBackSharp fontSize={'20px'} className='mr-2' />
+                                <IoPlaySkipBackSharp fontSize={'20px'} className='mr-2'
+                                color={`${theme === 'dark' ? '#E0E0E0' : 'rgb(17 24 39)'}`}
+                                 />
                                 {isPlaying ? (
-                                    <FaRegPauseCircle onClick={handlePlayPause} fontSize={'40px'} className='hover:text-sky-700 mr-2' />
-                                ) : (
-                                    <FaPlayCircle onClick={handlePlayPause} fontSize={'40px'} className='hover:text-sky-700 mr-2' />
+                                    <FaRegPauseCircle 
+                                    color={`${theme === 'dark' ? '#E0E0E0' : 'rgb(17 24 39)'}`}
+                                    onClick={handlePlayPause} 
+                                    fontSize={'40px'} 
+                                    className={`hover:text-blue-500 mr-2 cursor-pointer `}
+                                     />                                ) : (
+                                    <FaPlayCircle 
+                                    color={`${theme === 'dark' ? '#E0E0E0' : 'rgb(17 24 39)'}`}
+                                    onClick={handlePlayPause} fontSize={'40px'} 
+                                    className={`hover:text-blue-500 mr-2 cursor-pointer `}
+                                     />
                                 )}
 
-                                <IoPlaySkipForwardSharp fontSize={'20px'} className='mr-4' />
+                                <IoPlaySkipForwardSharp
+                                color={`${theme === 'dark' ? '#E0E0E0' : 'rgb(17 24 39)'}`}
+                                 fontSize={'20px'} className='mr-4' />
 
                                 <div>
                                     <Menu>
                                         <MenuButton as={Button} variant={'none'} >
-                                            <BsThreeDotsVertical />
+                                            <BsThreeDotsVertical color={`${theme === 'dark' ? '#E0E0E0' : 'rgb(17 24 39)'}`} />
                                         </MenuButton>
                                         <MenuList className={'z-50'}>
                                             {
@@ -331,6 +345,7 @@ export const MusicPlayerProvider = () => {
                         {/* Music Volume Controller */}
                         <div className='flex justify-center items-center pr-5'>
                             <FaVolumeLow
+                             color={`${theme === 'dark' ? '#E0E0E0' : 'rgb(17 24 39)'}`}
                                 className='mr-4'
                                 fontSize={'20px'}
 
@@ -356,7 +371,9 @@ export const MusicPlayerProvider = () => {
                 {/* Cross Button */}
 
                 <div className='absolute top-0 right-0 '>
-                    <RxCross2 className='hover:cursor-pointer'
+                    <RxCross2 className={`hover:cursor-pointer  `}
+                     color={`${theme === 'dark' ? '#E0E0E0' : 'rgb(17 24 39)'}`}
+                        fontSize={'20px'}
                         onClick={closeMusicPlayer}
                     />
                 </div>

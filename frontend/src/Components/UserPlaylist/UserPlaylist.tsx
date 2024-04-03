@@ -46,9 +46,9 @@ const UserPlaylist = () => {
   return (
     <DIV className='border-4 border-red-600 h-screen sm:bg-red overflow-y-auto' >
 
-      <div className='flex border-4 justify-end fixed z-50 2xl:justify-end xl:justify-end lg:justify-end md:justify-end w-full'>
+      {/* <div className='flex border-4 justify-end fixed z-50 2xl:justify-end xl:justify-end lg:justify-end md:justify-end w-full'>
         <Navbar />
-      </div>
+      </div> */}
 
 
       {

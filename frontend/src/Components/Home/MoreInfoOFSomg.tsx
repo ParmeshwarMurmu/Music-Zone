@@ -17,6 +17,9 @@ import { appContent } from '../../ContextApi/ContextApi';
 import { FaPlayCircle } from "react-icons/fa";
 import styled from 'styled-components'
 import { IoCloseSharp } from "react-icons/io5";
+import { themeValueFromReduxStore } from '../../Redux/ThemeReducer/reducer';
+import { FaAngleUp } from "react-icons/fa";
+import { MusicPlayerProvider } from './MusicPlayerProvider';
 
 
 interface MoreInfoOfSongProps {
@@ -28,10 +31,12 @@ interface MoreInfoOfSongProps {
 const MoreInfoOFSomg: React.FC<MoreInfoOfSongProps> = ({ currentTrackInfo }) => {
 
     const { isOpen, onOpen, onClose } = useDisclosure()
+    
 
     const { currentTrack, setCurrentTrack, setShowMusicPlyer, setUserDetail } = useContext(appContent)
     const dispatch = useAppDispatch();
-
+     const theme = useAppSelector(themeValueFromReduxStore)
+     const [clicked, setClicked] = useState<boolean>(false)
     const moreAlbums = useAppSelector(moreSongFromArtistAllSongsValueFromReduxStore)
     const moreYears = useAppSelector(moreSongFromYearValueFromReduxStore);
     const isLoading = useAppSelector(moreSongFromArtistIsLoadingValueFromReduxStore)
@@ -43,8 +48,14 @@ const MoreInfoOFSomg: React.FC<MoreInfoOfSongProps> = ({ currentTrackInfo }) => 
 
     }
 
+    const clickedHandler = ()=>{
+        onOpen();
+        // setClicked(true)
+    }
+
     const crossHandler = ()=>{
-        onClose()
+        onClose();
+        // setClicked(false)
     }
 
     useEffect(() => {
@@ -58,12 +69,46 @@ const MoreInfoOFSomg: React.FC<MoreInfoOfSongProps> = ({ currentTrackInfo }) => 
 
     return (
         <DIV className=''>
-            <Button variant={'none'} className={`hover:scale-150`} style={{ position: 'absolute', left: '50%', top: '-25px', backgroundColor: 'rgb(209 213 219)' }} p={0} m={0} onClick={onOpen}>
+            {/* <Button variant={'none'} className={`hover:scale-125 z-20`} style={{ position: 'absolute', left: '50%', top: '-25px' }} p={0} m={0} onClick={onOpen}>
                 <MdKeyboardArrowUp fontSize={'30px'} color='black' />
-            </Button>
-            <Drawer placement={'bottom'} onClose={onClose} isOpen={isOpen}>
+            </Button> */}
+
+{/* <FaAngleLeft
+
+className='absolute inset-y-0 left-0 top-1/2 transform -translate-y-1/2 cursor-pointer bg-neutral-silver
+lg:text-30
+md:text-20
+sm:text-20
+small:text-20
+mobiles-max:text-20
+hover:text-blue-500'
+
+onClick={() => sliderRef.current?.slickPrev()}
+/> */}
+
+            <div onClick={clickedHandler}
+            
+             style={{ position: 'absolute', left: '51%', top: '-6px' }} >
+            <FaAngleUp
+            className=' transform -translate-y-1/2 cursor-pointer bg-neutral-silver
+            lg:text-30
+            md:text-20
+            sm:text-20
+            small:text-20
+            mobiles-max:text-20
+            hover:text-blue-500'
+
+             />
+
+            </div>
+
+            <Drawer placement={'bottom'} onClose={onClose} isOpen={isOpen}
+        
+            >
                 <DrawerOverlay />
-                <DrawerContent height={'100vh'} style={{ position: 'relative' }}>
+                <DrawerContent height={'100vh'} style={{ position: 'relative' }}
+                backgroundColor={`${theme === 'dark' ? 'rgb(17 24 39)' : 'white'}`}
+                >
 
                     {/* <DrawerHeader borderBottomWidth='1px'>Basi w-2/12c Drawerbgbhbh</DrawerHeader> */}
                     <DrawerBody p={0} m={0}>
@@ -76,19 +121,19 @@ const MoreInfoOFSomg: React.FC<MoreInfoOfSongProps> = ({ currentTrackInfo }) => 
                             // className='1/12'
                             />
 
-                            <div className={'p-1'}>
-                                <p className={`font-Inter font-semibold text-16 small:text-14`}>Title : <span className={`font-openSans font-normal text-14 small:text-12`}>{currentTrackInfo.title}</span></p>
-                                <p className={`font-Inter font-semibold text-16 small:text-14`}>Artist :  <span className={`font-openSans font-normal text-14 small:text-12`}>{currentTrackInfo.artist}</span></p>
+                            <div className={'p-2'}>
+                                <p className={`font-Inter font-semibold text-16 small:text-14 ${theme === 'dark' ? 'text-neutral-headingDarkThemeColor' : 'text-neutral-lightThemeHeadingColor'}`}>Title : <span className={`font-Inter font-normal text-14 small:text-12 ${theme === 'dark' ? 'text-neutral-textDarkThemeColor' : 'text-neutral-lightThemeHeadingColor'}`}>{currentTrackInfo.title}</span></p>
+                                <p className={`font-Inter font-semibold text-16 small:text-14 ${theme === 'dark' ? 'text-neutral-headingDarkThemeColor' : 'text-neutral-lightThemeHeadingColor'}`}>Artist :  <span className={`font-Inter font-normal text-14 small:text-12 ${theme === 'dark' ? 'text-neutral-textDarkThemeColor' : 'text-neutral-lightThemeHeadingColor'}`}>{currentTrackInfo.artist}</span></p>
                                 {/* <p>Duration : <span>{currentTrack.duration}</span></p> */}
-                                <p className={`font-Inter font-semibold text-16 small:text-14`}>Release Yaer : <span className={`font-openSans font-normal text-14 small:text-12`}>{currentTrackInfo.releaseYear}</span></p>
-                                <p className={`font-Inter font-semibold text-16 small:text-14`}>Album : <span className={`font-openSans font-normal text-14 small:text-12`}>{currentTrackInfo.album}</span></p>
+                                <p className={`font-Inter font-semibold text-16 small:text-14 ${theme === 'dark' ? 'text-neutral-headingDarkThemeColor' : 'text-neutral-lightThemeHeadingColor'}`}>Release Year : <span className={`font-Inter font-normal text-14 small:text-12 ${theme === 'dark' ? 'text-neutral-textDarkThemeColor' : 'text-neutral-lightThemeHeadingColor'}`}>{currentTrackInfo.releaseYear}</span></p>
+                                <p className={`font-Inter font-semibold text-16 small:text-14 ${theme === 'dark' ? 'text-neutral-headingDarkThemeColor' : 'text-neutral-lightThemeHeadingColor'}`}>Album : <span className={`font-Inter font-normal text-14 small:text-12 ${theme === 'dark' ? 'text-neutral-textDarkThemeColor' : 'text-neutral-lightThemeHeadingColor'}`}>{currentTrackInfo.album}</span></p>
                             </div>
 
                         </div>
 
 
 
-                        <div>
+                        {/* <div>
                             <p>More From {currentTrackInfo.album}</p>
 
                             {
@@ -102,7 +147,7 @@ const MoreInfoOFSomg: React.FC<MoreInfoOfSongProps> = ({ currentTrackInfo }) => 
 
                                                     >
 
-                                                        {/* <div> */}
+                                                        
                                                         <div className='relative'>
                                                             <img
                                                                 className=''
@@ -123,8 +168,7 @@ const MoreInfoOFSomg: React.FC<MoreInfoOfSongProps> = ({ currentTrackInfo }) => 
 
 
 
-                                                            {/* </div> */}
-                                                            {/* </Link> */}
+                                     
                                                         </div>
 
 
@@ -138,7 +182,13 @@ const MoreInfoOFSomg: React.FC<MoreInfoOfSongProps> = ({ currentTrackInfo }) => 
                             }
 
 
-                        </div>
+                        </div> */}
+
+                      {/* {
+                        clicked && <MusicPlayerProvider />
+                      }    */}
+
+                        
 
 
                     </DrawerBody>
