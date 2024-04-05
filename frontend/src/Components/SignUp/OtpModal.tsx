@@ -6,6 +6,8 @@ import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/style.css'
 import { RecaptchaVerifier, signInWithPhoneNumber, ConfirmationResult, PhoneAuthProvider } from 'firebase/auth';
 import { auth } from '../../fireBase/Config';
+import { useAppSelector } from '../../Redux/Store/Hook';
+import { themeValueFromReduxStore } from '../../Redux/ThemeReducer/reducer';
 
 
 interface CustomWindow extends Window {
@@ -14,6 +16,7 @@ interface CustomWindow extends Window {
 
 
 export const OtpModal = () => {
+    const theme = useAppSelector(themeValueFromReduxStore)
     const { isOpen, onOpen, onClose } = useDisclosure();
     const [phone, setPhone] = useState<string>('');
     const [getOTP, setGetOTP] = useState<boolean>(false)
@@ -95,7 +98,7 @@ export const OtpModal = () => {
                 <Button colorScheme='' size='md' className='w-full mb-4 p-2 outline border-2 hover:border-indigo-300'
                     onClick={onOpen} variant={'none'}
                 >
-                    <FcPhoneAndroid className='mr-5 text-blue-500' fontSize={'30px'} /> <span className='text-black'>Sign up Using   OTP</span>
+                    <FcPhoneAndroid className='mr-5 text-blue-500' fontSize={'30px'} /> <span className={`text-black  ${theme === 'dark' ? 'text-neutral-headingDarkThemeColor' : 'text-neutral-lightThemeHeadingColor'}`}>Sign up Using   OTP</span>
                 </Button>
 
 

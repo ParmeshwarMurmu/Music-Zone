@@ -19,6 +19,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { GoogleAuthProvider, getRedirectResult, signInWithPopup, signInWithRedirect } from 'firebase/auth';
 import { auth } from '../fireBase/Config';
+import { themeValueFromReduxStore } from '../Redux/ThemeReducer/reducer';
 
 
 
@@ -36,7 +37,7 @@ export const SignUp = () => {
     const userSignUpLoading = useAppSelector(signUpLoadingValueFromReduxStore);
     const userSignUpError = useAppSelector(signUpErrorValueFromReduxStore);
 
-
+    const theme = useAppSelector(themeValueFromReduxStore)
     const toast = useToast()
 
 
@@ -190,7 +191,9 @@ export const SignUp = () => {
 
             <div className='p-2 '>
 
-                <Heading className='mb-4' as='h2' size='xl'>
+                <Heading className='mb-4' as='h2' size='xl'
+                color={`${theme === 'dark' ? '#E0E0E0' : 'rgb(17 24 39)'}`}
+                >
                     Sign up to start listening
                 </Heading>
 
@@ -201,9 +204,12 @@ export const SignUp = () => {
 
                     <form onSubmit={handleSignUpSubmitForm}>
                         <FormControl isRequired mt={1}>
-                            <FormLabel>Email</FormLabel>
+                            <FormLabel
+                             color={`${theme === 'dark' ? '#E0E0E0' : 'rgb(17 24 39)'}`}
+                            >Email</FormLabel>
                             <Input type='email' placeholder='example@gmail.com' value={userSignUpEmail}
                                 onChange={handleEmailChange} required
+                                color={`${theme === 'dark' ? '#E0E0E0' : 'rgb(17 24 39)'}`}
                             />
                         </FormControl>
 
@@ -211,12 +217,15 @@ export const SignUp = () => {
 
                         <InputGroup>
                             <FormControl isRequired mt={1}>
-                                <FormLabel>Password</FormLabel>
+                                <FormLabel
+                                 color={`${theme === 'dark' ? '#E0E0E0' : 'rgb(17 24 39)'}`}
+                                >Password</FormLabel>
 
                                 <InputGroup>
                                     <Input type={showPassword ? 'text' : 'password'}
                                         placeholder='Password' value={userSignUpPassword}
                                         onChange={handlePasswordChange} required
+                                        color={`${theme === 'dark' ? '#E0E0E0' : 'rgb(17 24 39)'}`}
                                     />
 
                                     <InputRightElement width="4.5rem">
@@ -230,6 +239,7 @@ export const SignUp = () => {
                                                     aria-label=''
                                                     icon={<IoMdEye />}
                                                     onClick={() => { setShowPassword(false) }}
+                                                    color={`${theme === 'dark' ? '#E0E0E0' : 'rgb(17 24 39)'}`}
                                                 />
                                             </Tooltip> : <Tooltip hasArrow label='show password' bg='gray.300' color='black'>
                                                 <IconButton
@@ -239,6 +249,7 @@ export const SignUp = () => {
                                                     aria-label=''
                                                     icon={<IoMdEyeOff />}
                                                     onClick={() => { setShowPassword(true) }}
+                                                    color={`${theme === 'dark' ? '#E0E0E0' : 'rgb(17 24 39)'}`}
                                                 />
                                             </Tooltip>
                                         }
@@ -248,7 +259,7 @@ export const SignUp = () => {
                                     </InputRightElement>
                                 </InputGroup>
 
-                                <div>
+                                <div className={`${theme === 'dark' ? 'text-neutral-headingDarkThemeColor' : 'text-neutral-lightThemeHeadingColor'}`}>
                                     {
                                         passwordStrengthMessage === 'Strong Password' ? <p className='text-green-800 text-xs'>{passwordStrengthMessage}</p> : <p className='text-red-600 text-xs'>{passwordStrengthMessage}</p>
                                     }
@@ -281,7 +292,9 @@ export const SignUp = () => {
 
 
 
-                <div className='flex items-center justify-center mb-4'>
+                <div className={`flex items-center justify-center mb-4
+                ${theme === 'dark' ? 'text-neutral-headingDarkThemeColor' : 'text-neutral-lightThemeHeadingColor'}
+                `}>
                     {/* <hr></hr> */}
                     <p>Or</p>
                     {/* <hr></hr> */}
@@ -309,23 +322,27 @@ export const SignUp = () => {
                     </Button> */}
                 </div>
 
-                <div className='mb-6'>
+                {/* <div className='mb-6'>
                     <Button colorScheme='' size='md' className='w-full p-2 outline border-2 hover:border-indigo-300'
                     // isLoading
                     >
                         <ImFacebook2 className='mr-5 text-blue-500' fontSize={'30px'} /> <span className='text-black'>Sign up with Facebook</span>
                     </Button>
-                </div>
+                </div> */}
 
-                <hr className='mb-4'></hr>
+                {/* <hr className='mb-4'></hr> */}
 
-                <div className='flex justify-center items-center mb-6'>
+                <div className={`flex justify-center items-center mb-6 mt-4
+                 ${theme === 'dark' ? 'text-neutral-headingDarkThemeColor' : 'text-neutral-lightThemeHeadingColor'}
+                `}>
                     <p>Already have an account ? <Link to={'/login'}><span className='text-blue-600 underline decoration-solid'>Login</span></Link></p>
                 </div>
 
 
 
-                <div className='flex mb-6'>
+                <div className={`flex mb-6
+                 ${theme === 'dark' ? 'text-neutral-headingDarkThemeColor' : 'text-neutral-lightThemeHeadingColor'}
+                `}>
                     <p className='text-xs text-center'>This site is protected by reCAPTCHA and the Google
                         Privacy Policy and Terms of Service apply.</p>
                 </div>

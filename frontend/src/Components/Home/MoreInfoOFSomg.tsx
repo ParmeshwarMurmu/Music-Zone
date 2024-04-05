@@ -87,8 +87,11 @@ onClick={() => sliderRef.current?.slickPrev()}
 /> */}
 
             <div onClick={clickedHandler}
-            
-             style={{ position: 'absolute', left: '51%', top: '-6px' }} >
+            //  className={`absolute  top-53 mobiles-max:left-52`}
+            id='moreInfo'
+             
+            //  style={{ position: 'absolute', left: '51%', top: '-6px' }} 
+             >
             <FaAngleUp
             className=' transform -translate-y-1/2 cursor-pointer bg-neutral-silver
             lg:text-30
@@ -210,6 +213,18 @@ const DIV = styled.div`
   display: block;
 }
 
+#moreInfo{
+    position: absolute;
+    left: 51%;
+    top: -6px;
+}
+
+@media screen(max-width: 639px) {
+    #moreInfo{
+        left: 30%
+    }
+    
+}
 
 
     

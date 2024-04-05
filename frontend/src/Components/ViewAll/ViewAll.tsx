@@ -63,13 +63,13 @@ const ViewAll = () => {
     console.log("data", data)
 
     return (
-        <DIV>
-            <div className=' grid 2xl:grid-cols-7 gap-y-6  border-black border-4 mt-12
+        <DIV className='h-screen'>
+            <div className=' grid 2xl:grid-cols-7 gap-y-6  mt-12 
           xl:grid-cols-7 lg:grid-cols-6 md:grid-cols-5 sm:grid-cols-4 mobiles-max:grid-cols-3 small:grid-cols-2
           '>
                 {
                     data.map((music, index) => (
-                        <div key={index} className='border-4 border-black '>
+                        <div key={index} className=''>
 
                             <div id='musicContainer' className='mb-1  p-2 hover:scale-95 '
 

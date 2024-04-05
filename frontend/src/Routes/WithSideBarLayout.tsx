@@ -13,14 +13,14 @@ export const WithSideBarLayout: React.FC<WithSidebarLayoutProps> = ({ children }
   const theme = useAppSelector(themeValueFromReduxStore)
   return (
     <DIV className='flex'>
-      <div  className='border-r w-1/6 2xl:block xl:block lg:block md:block sm:hidden mobiles-max:hidden'>
+      <div  className=' w-1/6 2xl:block xl:block lg:block md:block sm:hidden mobiles-max:hidden'>
         <SideBar />
       </div>
 
 
 
       <div className=' 2xl:w-4/5 xl:w-4/5 lg:w-4/5 md:w-4/5 w-full'>
-        <div  className={`fixed z-50 2xl:w-10/12 xl:w-10/12 lg:w-10/12 md:w-10/12 w-full border-b
+        <div  className={`fixed z-50 2xl:w-10/12 xl:w-10/12 lg:w-10/12 md:w-10/12 w-full
          ${theme === 'dark' ? 'bg-neutral-darkThemeBackground' : 'bg-neutral-lightThemeBackground'}
         `}>
           <Navbar />

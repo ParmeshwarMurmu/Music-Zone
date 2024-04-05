@@ -151,7 +151,7 @@ export const SideBar = () => {
           <IoHomeSharp fontSize={'20px'} color={`${theme === 'dark' ? '#E0E0E0' : 'rgb(17 24 39)'}`} />
         </div>
 
-        <div className={`text-14 lg:text-16 xl:text-16 2xl:text-16  font-normal ${theme === 'dark' ? 'text-neutral-headingDarkThemeColor' : 'text-neutral-lightThemeHeadingColor'} text-16`}>
+        <div className={`text-14 lg:text-16 xl:text-16 2xl:text-16  font-normal ${theme === 'dark' ? 'text-neutral-headingDarkThemeColor' : 'text-neutral-lightThemeHeadingColor'}`}>
           <Link to={'/'}>Home</Link>
         </div>
       </div>
@@ -161,10 +161,10 @@ export const SideBar = () => {
 
       <div className='flex mb-2'>
         <div className='mr-6'>
-          <ImSearch fontSize={'20px'} color='' />
+          <ImSearch fontSize={'20px'} color={`${theme === 'dark' ? '#E0E0E0' : 'rgb(17 24 39)'}`}  />
         </div>
 
-        <div>
+        <div className={`text-14 lg:text-16 xl:text-16 2xl:text-16  font-normal ${theme === 'dark' ? 'text-neutral-headingDarkThemeColor' : 'text-neutral-lightThemeHeadingColor'}`}>
           <Link to={'/'}>Search</Link>
         </div>
       </div>
@@ -174,13 +174,13 @@ export const SideBar = () => {
 
       <div className='flex'>
         <div className='mr-6'>
-          <MdLibraryMusic fontSize={'20px'} color='' />
+          <MdLibraryMusic fontSize={'20px'} color={`${theme === 'dark' ? '#E0E0E0' : 'rgb(17 24 39)'}`} />
         </div>
 
         <div className='w-full'>
 
           <div className='flex justify-between mb-2'>
-            <div><Link to={'/'}>Your Library </Link></div>
+            <div className={`text-14 lg:text-16 xl:text-16 2xl:text-16  font-normal ${theme === 'dark' ? 'text-neutral-headingDarkThemeColor' : 'text-neutral-lightThemeHeadingColor'} text-16`}><Link to={'/'}>Your Library </Link></div>
             <div className=''><CreatePlaylist /></div>
           </div>
 
@@ -188,7 +188,9 @@ export const SideBar = () => {
             createPlaylist && <div className='flex justify-center items-center'>
 
               <div className='mr-2'>
-                <FaFolderOpen fontSize={'20px'} />
+                <FaFolderOpen fontSize={'20px'}
+                color={`${theme === 'dark' ? '#E0E0E0' : 'rgb(17 24 39)'}`} 
+                 />
               </div>
 
 
@@ -208,11 +210,13 @@ export const SideBar = () => {
                 <TiTick fontSize={'20px'}
                   className='mr-2 hover:cursor-pointer'
                   onClick={saveNewPlaylistHandler}
+                  color={`${theme === 'dark' ? '#E0E0E0' : 'rgb(17 24 39)'}`} 
                 />
 
                 <RxCross2 fontSize={'20px'}
                   onClick={() => { setCreatePlaylist(false) }}
                   className='mr-2 hover:cursor-pointer'
+                  color={`${theme === 'dark' ? '#E0E0E0' : 'rgb(17 24 39)'}`} 
 
                 />
 
@@ -239,7 +243,9 @@ export const SideBar = () => {
                     <div className='flex justify-between '>
 
                       <div className='flex justify-center items-center'>
-                        <FaFolderOpen fontSize={'20px'} />
+                        <FaFolderOpen fontSize={'20px'} 
+                        color={`${theme === 'dark' ? '#E0E0E0' : 'rgb(17 24 39)'}`} 
+                        />
 
                         <p className='ml-2'
                           style={{ color: activePlaylist === el.playlistName ? 'red' : 'black' }}

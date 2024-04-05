@@ -46,20 +46,22 @@ export const Navbar = () => {
         <Hamberg />
       </div>
 
-
-      <div className={' bg-neutral-info 2xl:w-1/4 xl:w-1/4 lg:w-1/3 md:w-6/12 sm:w-6/12  mobiles-max:w-10/12'}>
+      {/* */}
+      <div className={` pt-1
+      ${isAuth ? '2xl:w-1/12 xl:w-1/12 lg:w-2/12 md:w-2/12 sm:w-2/12 small:w-1/4 mobiles-max:w-1/4': '2xl:w-1/6 xl:w-1/5 lg:w-1/4 md:w-1/3 sm:w-1/3 mobiles-max:w-2/5 small:w-3/5'} `}>
 
         <div className='flex items-center p-1 justify-between '>
 
           {
-            theme === 'dark' ? <div>
+            theme === 'dark' ? <div className='cursor-pointer'>
               {/* <Tooltip hasArrow label='Light Theme' bg='gray.300' color='black'> */}
               <GoSun onClick={lightThemeHandler}
                fontSize={'20px'}
                color={`${theme === 'dark' ? '#E0E0E0' : 'rgb(17 24 39)'}`}
+               
                />
               {/* </Tooltip> */}
-            </div> : <div>
+            </div> : <div className='cursor-pointer'>
               {/* <Tooltip hasArrow label='Dark Theme' bg='gray.300' color='black'> */}
               <FiMoon onClick={darkthemHandler}
                fontSize={'20px'}

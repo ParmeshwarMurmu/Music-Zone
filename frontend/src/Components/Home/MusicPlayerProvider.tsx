@@ -34,6 +34,7 @@ export const MusicPlayerProvider = () => {
     const [repeat, setRepeat] = useState<boolean>(false);
     const toast = useToast();
     const navigate = useNavigate();
+    const [currentTrackerLoading, setCurrentTrackerLoading] = useState<boolean>(false)
     // Getting  user playlist from redux store
     const userPlaylist = useAppSelector(usersPlaylistValueFromReduxStore)
     const theme = useAppSelector(themeValueFromReduxStore)
@@ -65,9 +66,13 @@ export const MusicPlayerProvider = () => {
 
 
     useEffect(() => {
+        
         if (currentTrack && audioRef.current) {
+            // setCurrentTrackerLoading(true)
             audioRef.current.src = `${APP_URL}/home/singleMusic/${currentTrack.filename}`;
+
             audioRef.current.load(); // Reload the audio element
+           
             audioRef.current.play();
             setIsPlaying(true); // Pause the audio when changing the track
         }
@@ -93,6 +98,9 @@ export const MusicPlayerProvider = () => {
 
 
     const formatTime = (seconds: number): string => {
+        if (isNaN(seconds)) {
+            return '0:00';
+        }
         const minutes = Math.floor(seconds / 60);
         const remainingSeconds = Math.floor(seconds % 60);
         return `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
@@ -214,7 +222,7 @@ export const MusicPlayerProvider = () => {
 
     return (
 
-        <div className='w-full '>
+        <div className='w-full mobiles-max:h-51 mobiles-max:pt-4 '>
 
 
 
@@ -229,7 +237,7 @@ export const MusicPlayerProvider = () => {
 
 
 
-                <div className='w-24 small:hidden'>
+                <div className='w-24 small:hidden sm:hidden md:block 2xl:block lg:block xl:block mobiles-max:hidden'>
                     <img src={`data:image/jpeg;base64, ${currentTrack.picture}`} alt="" />
                 </div>
 
@@ -253,9 +261,9 @@ export const MusicPlayerProvider = () => {
 
                     {/* Music Details title, artists etc */}
 
-                    <div className='relative flex pl-6 justify-between'>
+                    <div className={`relative flex  justify-between small:pl-0 sm:pl-0 md:pl-6 lg:pl-6 xl:pl-6 2xl:pl-6`}>
 
-                        <div className={`small:hidden`}>
+                        <div className={`small:hidden mobiles-max:hidden`}>
                             <p className={`text-xl font-semibold  ${theme === 'dark' ? 'text-neutral-headingDarkThemeColor' : 'text-neutral-lightThemeHeadingColor'}`}
                             
                             >{currentTrack.title}</p>
@@ -265,8 +273,8 @@ export const MusicPlayerProvider = () => {
                                 {`${currentTrack.album} - ${currentTrack.releaseYear} `}</p>
                         </div>
 
-
-                        <div className="w-1/6 flex absolute top-2 left-1/2 transform -translate-x-1/2 justify-center items-center pt-3">
+{/* cccc */}
+                        <div className={`w-1/6 flex absolute top-2 left-1/2 transform -translate-x-1/2 justify-center items-center pt-3 mobiles-max:top-21 `}>
                             <audio ref={audioRef}
                                 onTimeUpdate={handleTimeUpdate}
                                 onEnded={() => setIsPlaying(false)}
@@ -343,7 +351,7 @@ export const MusicPlayerProvider = () => {
                         </div>
 
                         {/* Music Volume Controller */}
-                        <div className='flex justify-center items-center pr-5'>
+                        {/* <div className='flex justify-center items-center pr-5 mobiles-max:flex-col-reverse'>
                             <FaVolumeLow
                              color={`${theme === 'dark' ? '#E0E0E0' : 'rgb(17 24 39)'}`}
                                 className='mr-4'
@@ -361,7 +369,7 @@ export const MusicPlayerProvider = () => {
                                 onChange={handleVolumeChange}
                             />
 
-                        </div>
+                        </div> */}
 
                     </div>
 
@@ -370,7 +378,7 @@ export const MusicPlayerProvider = () => {
 
                 {/* Cross Button */}
 
-                <div className='absolute top-0 right-0 '>
+                <div className='absolute top-0 right-0 mobiles-max:-top-5 '>
                     <RxCross2 className={`hover:cursor-pointer  `}
                      color={`${theme === 'dark' ? '#E0E0E0' : 'rgb(17 24 39)'}`}
                         fontSize={'20px'}
