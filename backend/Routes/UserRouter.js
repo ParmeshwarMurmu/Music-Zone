@@ -153,7 +153,7 @@ userRouter.get('/playlist/:playlistName', auth, async(req, res)=>{
     }
 })
 
-userRouter.delete('/deletePlaylistSong/:_id', async(req, res)=>{
+userRouter.delete('/deletePlaylistSong/:_id',auth, async(req, res)=>{
     try {
         const { _id } = req.params;
         await UserPlaylistModel.findByIdAndDelete({_id})

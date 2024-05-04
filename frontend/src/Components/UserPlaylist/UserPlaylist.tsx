@@ -13,6 +13,7 @@ import DeleteUserSong from './DeleteUserSong';
 import { getAllUserPlaylistSong } from '../../Redux/PlaylistReducer/Function';
 import { Navbar } from '../../Routes/Navbar';
 import styled from 'styled-components'
+import UserPlaylistLoader from './UserPlaylistLoader';
 
 
 
@@ -44,7 +45,7 @@ const UserPlaylist = () => {
   console.log('userPlaylist', userPlaylist)
 
   return (
-    <DIV className='border-4 border-red-600 h-screen sm:bg-red overflow-y-auto' >
+    <DIV className='h-screen  overflow-y-auto' >
 
       {/* <div className='flex border-4 justify-end fixed z-50 2xl:justify-end xl:justify-end lg:justify-end md:justify-end w-full'>
         <Navbar />
@@ -52,13 +53,13 @@ const UserPlaylist = () => {
 
 
       {
-        isLoading ? <div>Loading</div> :
-          <div className=' grid 2xl:grid-cols-7 gap-y-6  border-black border-4 mt-12
+        isLoading ? <UserPlaylistLoader /> :
+          <div className=' grid 2xl:grid-cols-7 gap-y-6  mt-12
           xl:grid-cols-7 lg:grid-cols-6 md:grid-cols-5 sm:grid-cols-4 mobiles-max:grid-cols-3 small:grid-cols-2
           '>
             {
               userPlaylist.map((music, index) => (
-                <div key={index} className='border-4 border-black '>
+                <div key={index} className=''>
 
                   <div id='musicContainer' className='mb-1  p-2 hover:scale-95 '
 
@@ -91,7 +92,7 @@ const UserPlaylist = () => {
 
                   </div>
 
-                  <div className=' flex justify-center items-center border-4'>
+                  <div className=' flex justify-center items-center '>
                     <DeleteUserSong musicId={music.musicId} playlistName={music.playlistName}
                       _id={music._id}
                     />

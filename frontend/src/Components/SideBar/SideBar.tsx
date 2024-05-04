@@ -159,13 +159,18 @@ export const SideBar = () => {
 
       {/* Search Bar */}
 
-      <div className='flex mb-2'>
+      <div className='flex mb-2 justify-center items-center'>
         <div className='mr-6'>
           <ImSearch fontSize={'20px'} color={`${theme === 'dark' ? '#E0E0E0' : 'rgb(17 24 39)'}`}  />
         </div>
 
         <div className={`text-14 lg:text-16 xl:text-16 2xl:text-16  font-normal ${theme === 'dark' ? 'text-neutral-headingDarkThemeColor' : 'text-neutral-lightThemeHeadingColor'}`}>
-          <Link to={'/'}>Search</Link>
+          {/* <Link to={'/'}>Search</Link> */}
+          <Input placeholder='Search'
+          className={`${theme === 'dark' ? 'text-neutral-headingDarkThemeColor' : 'text-neutral-lightThemeHeadingColor'}`}
+          type='text'
+           />
+          
         </div>
       </div>
 
@@ -197,7 +202,7 @@ export const SideBar = () => {
               <div>
 
                 <Input type='text'
-                  className='mr-2 h-3'
+                  className={`mr-2 h-3  ${theme === 'dark' ? 'text-neutral-headingDarkThemeColor' : 'text-neutral-lightThemeHeadingColor'}`}
                   placeholder='New Playlist'
                   ref={(el) => (inputRef.current = el)}
                   onChange={newPlaylistFolderName}
@@ -247,8 +252,8 @@ export const SideBar = () => {
                         color={`${theme === 'dark' ? '#E0E0E0' : 'rgb(17 24 39)'}`} 
                         />
 
-                        <p className='ml-2'
-                          style={{ color: activePlaylist === el.playlistName ? 'red' : 'black' }}
+                        <p className={`ml-2  ${theme === 'dark' ? 'text-neutral-headingDarkThemeColor' : 'text-neutral-lightThemeHeadingColor'}`}
+                          
 
                         >{el.playlistName}</p>
                       </div>

@@ -20,7 +20,20 @@ module.exports = {
          'textDarkThemeColor': '#A0A0A0',
          'lightThemeTextColor': 'rgb(75 85 99)',
          'lightThemeHeadingColor':'rgb(17 24 39)',
-         'playerBackground': 'rgb(209 213 219)'
+         'playerBackground': 'rgb(209 213 219)',
+         'try': '#F2F2F2',
+         'try2': '#EAEAEA',
+         'try3': '#000428',
+         'try4': '#302b63',
+         'try5': '#004e92',
+         'try6': '#000000',
+         'try7': '#ffffff',
+         'try9': '#ffffff',
+         'showMusic1': '#0f0c29',
+         'showMusic2': '#302b63',
+         'showMusic3': '#24243e',
+         'navbarBg1': '#8e9eab',
+         'navbarBg2': '#eef2f3',
       },
       shades: {
         '100': '#43A046',
@@ -95,8 +108,10 @@ module.exports = {
         '16': '300px',
         '21': '-18px',
         '52': '140px',
-        '53': '-6px'
-
+        '53': '-6px',
+        '99': '30px',
+        '98': '10px',
+        '97': '179px'
       },
 
       height: {

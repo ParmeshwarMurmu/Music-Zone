@@ -32,12 +32,14 @@ export const Main = () => {
 
 
       {
-        showMusicPlayer && <div className={`fixed bottom-0 left-0 right-0 shadow-2xl shadow-green-700 opacity-100 p-2  z-50  ${theme === 'dark' ? 'bg-neutral-darkThemeBackground' : 'bg-neutral-lightThemeBackground'}`}>
+        showMusicPlayer && <div className={`fixed bottom-0 left-0 right-0 shadow-2xl shadow-green-700 opacity-100 p-2  z-50  ${theme === 'dark' ? 'bg-gradient-to-r from-neutral-showMusic1 via-neutral-showMusic2 to-neutral-showMusic3' : 'bg-neutral-lightThemeBackground'}`}>
           <MusicPlayerProvider />
         </div>
       }
 
-      <div className= {`w-full pb-12  ${theme === 'dark' ? 'bg-neutral-darkThemeBackground' : 'bg-neutral-lightThemeBackground'}`}>
+      <div className= {`w-full pb-12
+      
+        `}>
         <Footer />
       </div>
 

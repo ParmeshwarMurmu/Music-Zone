@@ -12,6 +12,7 @@ import { appContent } from '../../ContextApi/ContextApi';
 import { useAppSelector } from '../../Redux/Store/Hook';
 import { isAuthValueFromReduxStore } from '../../Redux/isAuthReducer/reducer';
 import { useNavigate } from 'react-router-dom';
+import { themeValueFromReduxStore } from '../../Redux/ThemeReducer/reducer';
 
 
 
@@ -21,7 +22,8 @@ export const CreatePlaylist = () => {
     const toast = useToast();
     const navigate = useNavigate();
     const { createPlaylist, setCreatePlaylist } = useContext(appContent)
-    const isAuth = useAppSelector(isAuthValueFromReduxStore)
+    const isAuth = useAppSelector(isAuthValueFromReduxStore);
+    const theme = useAppSelector(themeValueFromReduxStore);
 
     // Function to handle Create New Playlist
 
@@ -47,7 +49,11 @@ export const CreatePlaylist = () => {
         <div>
 
             <Menu>
-                <MenuButton><IoMdAdd fontSize={'20px'} /></MenuButton>
+                <MenuButton>
+                    <IoMdAdd fontSize={'20px'}
+                     color={`${theme === 'dark' ? '#E0E0E0' : 'rgb(17 24 39)'}`} 
+                     />
+                </MenuButton>
                 <Portal>
                     <MenuList zIndex={10}>
                         <MenuItem onClick={createNewPlaylist}>New Playlist</MenuItem>

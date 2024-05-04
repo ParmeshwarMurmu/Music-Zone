@@ -28,8 +28,12 @@ const Hamberg = () => {
             </Button>
             <Drawer placement={'left'} onClose={onClose} isOpen={isOpen}>
                 <DrawerOverlay />
-                <DrawerContent>
-                    <DrawerCloseButton />
+                <DrawerContent
+                backgroundColor={`${theme === 'dark' ? 'rgb(17 24 39)' : 'white'}`}
+                >
+                    <DrawerCloseButton
+                    color={`${theme === 'dark' ? 'white' : 'rgb(17 24 39)' }`}
+                     />
                     <SideBar />
                 </DrawerContent>
             </Drawer>

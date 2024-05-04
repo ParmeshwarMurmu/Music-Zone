@@ -35,9 +35,14 @@ const DeleteUserSong: React.FC<DeleteUserSongProps> = ({ musicId, playlistName, 
     const cancelRef = React.useRef<HTMLButtonElement | null>(null);
     const dispatch = useAppDispatch();
     const deleteSongHandler = ()=>{
-      console.log(_id, "id");
+    console.log(_id, "id");
+    const token = localStorage.getItem('musicToken')
       
-      axios.delete(`${APP_URL}${USER_PLAYLIST_SONG_DELETE_ENDPONT}/${_id}`)
+      axios.delete(`${APP_URL}${USER_PLAYLIST_SONG_DELETE_ENDPONT}/${_id}`, {
+        headers:{
+            Authorization: `bearer ${token}`
+        }
+      })
       .then((res)=>{
         console.log(res);
         dispatch(getAllUserPlaylistSong(playlistName));

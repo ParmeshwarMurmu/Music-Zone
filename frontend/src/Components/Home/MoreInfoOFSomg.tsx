@@ -31,12 +31,12 @@ interface MoreInfoOfSongProps {
 const MoreInfoOFSomg: React.FC<MoreInfoOfSongProps> = ({ currentTrackInfo }) => {
 
     const { isOpen, onOpen, onClose } = useDisclosure()
-    
+
 
     const { currentTrack, setCurrentTrack, setShowMusicPlyer, setUserDetail } = useContext(appContent)
     const dispatch = useAppDispatch();
-     const theme = useAppSelector(themeValueFromReduxStore)
-     const [clicked, setClicked] = useState<boolean>(false)
+    const theme = useAppSelector(themeValueFromReduxStore)
+    const [clicked, setClicked] = useState<boolean>(false)
     const moreAlbums = useAppSelector(moreSongFromArtistAllSongsValueFromReduxStore)
     const moreYears = useAppSelector(moreSongFromYearValueFromReduxStore);
     const isLoading = useAppSelector(moreSongFromArtistIsLoadingValueFromReduxStore)
@@ -48,12 +48,12 @@ const MoreInfoOFSomg: React.FC<MoreInfoOfSongProps> = ({ currentTrackInfo }) => 
 
     }
 
-    const clickedHandler = ()=>{
+    const clickedHandler = () => {
         onOpen();
         // setClicked(true)
     }
 
-    const crossHandler = ()=>{
+    const crossHandler = () => {
         onClose();
         // setClicked(false)
     }
@@ -73,7 +73,7 @@ const MoreInfoOFSomg: React.FC<MoreInfoOfSongProps> = ({ currentTrackInfo }) => 
                 <MdKeyboardArrowUp fontSize={'30px'} color='black' />
             </Button> */}
 
-{/* <FaAngleLeft
+            {/* <FaAngleLeft
 
 className='absolute inset-y-0 left-0 top-1/2 transform -translate-y-1/2 cursor-pointer bg-neutral-silver
 lg:text-30
@@ -87,13 +87,13 @@ onClick={() => sliderRef.current?.slickPrev()}
 /> */}
 
             <div onClick={clickedHandler}
-            //  className={`absolute  top-53 mobiles-max:left-52`}
-            id='moreInfo'
-             
+                //  className={`absolute  top-53 mobiles-max:left-52`}
+                id='moreInfo'
+
             //  style={{ position: 'absolute', left: '51%', top: '-6px' }} 
-             >
-            <FaAngleUp
-            className=' transform -translate-y-1/2 cursor-pointer bg-neutral-silver
+            >
+                <FaAngleUp
+                    className=' transform -translate-y-1/2 cursor-pointer bg-neutral-silver
             lg:text-30
             md:text-20
             sm:text-20
@@ -101,22 +101,22 @@ onClick={() => sliderRef.current?.slickPrev()}
             mobiles-max:text-20
             hover:text-blue-500'
 
-             />
+                />
 
             </div>
 
             <Drawer placement={'bottom'} onClose={onClose} isOpen={isOpen}
-        
+
             >
                 <DrawerOverlay />
                 <DrawerContent height={'100vh'} style={{ position: 'relative' }}
-                backgroundColor={`${theme === 'dark' ? 'rgb(17 24 39)' : 'white'}`}
+                    backgroundColor={`${theme === 'dark' ? 'rgb(17 24 39)' : 'white'}`}
                 >
 
                     {/* <DrawerHeader borderBottomWidth='1px'>Basi w-2/12c Drawerbgbhbh</DrawerHeader> */}
                     <DrawerBody p={0} m={0}>
                         <div className={`absolute top-0 right-0 pr-2 pt-2 bg-neutral-white cursor-pointer`} onClick={crossHandler}>
-                            <IoCloseSharp id='crossBtn' style={{ marginBottom: '6px', marginLeft: '6px'}} fontSize={'20px'}   />
+                            <IoCloseSharp id='crossBtn' style={{ marginBottom: '6px', marginLeft: '6px' }} fontSize={'20px'} />
                         </div>
 
                         <div className='w-2/5 small:w-full mobiles-max:w-5/12 sm:w-4/12 md:w-1/4'>
@@ -187,11 +187,11 @@ onClick={() => sliderRef.current?.slickPrev()}
 
                         </div> */}
 
-                      {/* {
+                        {/* {
                         clicked && <MusicPlayerProvider />
                       }    */}
 
-                        
+
 
 
                     </DrawerBody>
@@ -219,12 +219,26 @@ const DIV = styled.div`
     top: -6px;
 }
 
-@media screen(max-width: 639px) {
+
+@media screen and (max-width: 767px) {
+
     #moreInfo{
-        left: 30%
+    /* position: absolute; */
+    left: 45%;
+    /* top: -6px; */
     }
-    
 }
+
+@media screen and (max-width: 420px) {
+
+    #moreInfo{
+   left: 42%;
+}
+}
+
+
+
+
 
 
     

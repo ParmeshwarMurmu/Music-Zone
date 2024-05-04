@@ -16,6 +16,7 @@ import { useAppSelector } from '../../Redux/Store/Hook';
 import { usersPlaylistValueFromReduxStore } from '../../Redux/PlaylistReducer/reducer';
 import { isAuthValueFromReduxStore } from '../../Redux/isAuthReducer/reducer';
 import { useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
 import axios from 'axios';
 import MoreInfoOFSomg from './MoreInfoOFSomg';
 import { themeValueFromReduxStore } from '../../Redux/ThemeReducer/reducer';
@@ -32,6 +33,7 @@ export const MusicPlayerProvider = () => {
     const [volume, setVolume] = useState<number>(1);
     const [isVolumeControlVisible, setIsVolumeControlVisible] = useState<boolean>(false);
     const [repeat, setRepeat] = useState<boolean>(false);
+    const [isVolumeVisible, setIsVolumeVisible] = useState<boolean>(false);
     const toast = useToast();
     const navigate = useNavigate();
     const [currentTrackerLoading, setCurrentTrackerLoading] = useState<boolean>(false)
@@ -66,13 +68,13 @@ export const MusicPlayerProvider = () => {
 
 
     useEffect(() => {
-        
+
         if (currentTrack && audioRef.current) {
             // setCurrentTrackerLoading(true)
             audioRef.current.src = `${APP_URL}/home/singleMusic/${currentTrack.filename}`;
 
             audioRef.current.load(); // Reload the audio element
-           
+
             audioRef.current.play();
             setIsPlaying(true); // Pause the audio when changing the track
         }
@@ -218,16 +220,20 @@ export const MusicPlayerProvider = () => {
     }
 
     // console.log(currentTrack);
-    
+
+    const volumeHandler = () => {
+        setIsVolumeVisible(!isVolumeVisible)
+    }
+
 
     return (
 
-        <div className='w-full mobiles-max:h-51 mobiles-max:pt-4 '>
+        <DIV className='w-full mobiles-max:h-51 mobiles-max:pt-4 '>
 
 
 
             {
-                currentTrack && <MoreInfoOFSomg currentTrackInfo={currentTrack}  />
+                currentTrack && <MoreInfoOFSomg currentTrackInfo={currentTrack} />
             }
 
             {currentTrack && (<div className='flex relative '>
@@ -265,7 +271,7 @@ export const MusicPlayerProvider = () => {
 
                         <div className={`small:hidden mobiles-max:hidden`}>
                             <p className={`text-xl font-semibold  ${theme === 'dark' ? 'text-neutral-headingDarkThemeColor' : 'text-neutral-lightThemeHeadingColor'}`}
-                            
+
                             >{currentTrack.title}</p>
                             <p className={`text-sm ${theme === 'dark' ? 'text-neutral-textDarkThemeColor' : 'text-neutral-lightThemeHeadingColor'}`}
                             >{`${currentTrack.artist}`}</p>
@@ -273,8 +279,8 @@ export const MusicPlayerProvider = () => {
                                 {`${currentTrack.album} - ${currentTrack.releaseYear} `}</p>
                         </div>
 
-{/* cccc */}
-                        <div className={`w-1/6 flex absolute top-2 left-1/2 transform -translate-x-1/2 justify-center items-center pt-3 mobiles-max:top-21 `}>
+                        {/* cccc */}
+                        <div id='volController' className={` mobiles-max:mt-2 w-1/6 flex absolute top-2 left-1/2 transform -translate-x-1/2 justify-center items-center pt-3 mobiles-max:top-21 `}>
                             <audio ref={audioRef}
                                 onTimeUpdate={handleTimeUpdate}
                                 onEnded={() => setIsPlaying(false)}
@@ -300,25 +306,25 @@ export const MusicPlayerProvider = () => {
                                 }
 
                                 <IoPlaySkipBackSharp fontSize={'20px'} className='mr-2'
-                                color={`${theme === 'dark' ? '#E0E0E0' : 'rgb(17 24 39)'}`}
-                                 />
+                                    color={`${theme === 'dark' ? '#E0E0E0' : 'rgb(17 24 39)'}`}
+                                />
                                 {isPlaying ? (
-                                    <FaRegPauseCircle 
-                                    color={`${theme === 'dark' ? '#E0E0E0' : 'rgb(17 24 39)'}`}
-                                    onClick={handlePlayPause} 
-                                    fontSize={'40px'} 
-                                    className={`hover:text-blue-500 mr-2 cursor-pointer `}
-                                     />                                ) : (
-                                    <FaPlayCircle 
-                                    color={`${theme === 'dark' ? '#E0E0E0' : 'rgb(17 24 39)'}`}
-                                    onClick={handlePlayPause} fontSize={'40px'} 
-                                    className={`hover:text-blue-500 mr-2 cursor-pointer `}
-                                     />
+                                    <FaRegPauseCircle
+                                        color={`${theme === 'dark' ? '#E0E0E0' : 'rgb(17 24 39)'}`}
+                                        onClick={handlePlayPause}
+                                        fontSize={'40px'}
+                                        className={`hover:text-blue-500 mr-2 cursor-pointer `}
+                                    />) : (
+                                    <FaPlayCircle
+                                        color={`${theme === 'dark' ? '#E0E0E0' : 'rgb(17 24 39)'}`}
+                                        onClick={handlePlayPause} fontSize={'40px'}
+                                        className={`hover:text-blue-500 mr-2 cursor-pointer `}
+                                    />
                                 )}
 
                                 <IoPlaySkipForwardSharp
-                                color={`${theme === 'dark' ? '#E0E0E0' : 'rgb(17 24 39)'}`}
-                                 fontSize={'20px'} className='mr-4' />
+                                    color={`${theme === 'dark' ? '#E0E0E0' : 'rgb(17 24 39)'}`}
+                                    fontSize={'20px'} className='mr-4' />
 
                                 <div>
                                     <Menu>
@@ -351,25 +357,29 @@ export const MusicPlayerProvider = () => {
                         </div>
 
                         {/* Music Volume Controller */}
-                        {/* <div className='flex justify-center items-center pr-5 mobiles-max:flex-col-reverse'>
+                        <div className='flex justify-center items-center  pr-5 '>
                             <FaVolumeLow
-                             color={`${theme === 'dark' ? '#E0E0E0' : 'rgb(17 24 39)'}`}
-                                className='mr-4'
+                                color={`${theme === 'dark' ? '#E0E0E0' : 'rgb(17 24 39)'}`}
+                                className='mr-4 mobiles-max:mt-3 '
                                 fontSize={'20px'}
+                                onClick={volumeHandler}
 
                             />
 
-                            <input
-                                className='border-4'
-                                type="range"
-                                min={0}
-                                max={1}
-                                step={0.01}
-                                value={volume}
-                                onChange={handleVolumeChange}
-                            />
+                            <div className={`border-2  flex-row-reverse justify-items-end mobiles-max:left-99 mobiles-max:top-98
+                            mobiles-max:${isVolumeVisible ? 'block' : 'hidden'}`}>
+                                <input
+                                    className='border-4 '
+                                    type="range"
+                                    min={0}
+                                    max={1}
+                                    step={0.01}
+                                    value={volume}
+                                    onChange={handleVolumeChange}
+                                />
+                            </div>
 
-                        </div> */}
+                        </div>
 
                     </div>
 
@@ -380,7 +390,7 @@ export const MusicPlayerProvider = () => {
 
                 <div className='absolute top-0 right-0 mobiles-max:-top-5 '>
                     <RxCross2 className={`hover:cursor-pointer  `}
-                     color={`${theme === 'dark' ? '#E0E0E0' : 'rgb(17 24 39)'}`}
+                        color={`${theme === 'dark' ? '#E0E0E0' : 'rgb(17 24 39)'}`}
                         fontSize={'20px'}
                         onClick={closeMusicPlayer}
                     />
@@ -392,7 +402,26 @@ export const MusicPlayerProvider = () => {
 
 
             )}
-        </div>
+        </DIV>
 
     )
 }
+
+
+const DIV = styled.div`
+    
+@media screen and (max-width: 639px) {
+
+        #volController{
+           left: 50%;
+        }
+}
+
+/* @media screen and (max-width: 639px) {
+
+#volController{
+   left: 50%;
+}
+} */
+
+`

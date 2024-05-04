@@ -32,7 +32,7 @@ export const Navbar = () => {
 
   return (
     // justify-between flex w-full
-    <DIV  className={`z-50  mb-2 
+    <DIV className={`z-50  mb-2 
    
     flex 2xl:justify-end xl:justify-end lg:justify-end md:justify-end sm:justify-between small:justify-between mobiles-max:justify-between 
     `}
@@ -48,25 +48,25 @@ export const Navbar = () => {
 
       {/* */}
       <div className={` pt-1
-      ${isAuth ? '2xl:w-1/12 xl:w-1/12 lg:w-2/12 md:w-2/12 sm:w-2/12 small:w-1/4 mobiles-max:w-1/4': '2xl:w-1/6 xl:w-1/5 lg:w-1/4 md:w-1/3 sm:w-1/3 mobiles-max:w-2/5 small:w-3/5'} `}>
+      ${isAuth ? '2xl:w-1/12 xl:w-1/12 lg:w-2/12 md:w-2/12 sm:w-2/12 small:w-1/4 mobiles-max:w-1/4' : '2xl:w-1/6 xl:w-1/5 lg:w-1/4 md:w-1/3 sm:w-1/3 mobiles-max:w-2/5 small:w-3/5'} `}>
 
-        <div className='flex items-center p-1 justify-between '>
+        <div className='flex items-center p-1 justify-between bg-gradient-to-r from-neutral-navbarBg1 to-neutral-navbarBg2'>
 
           {
             theme === 'dark' ? <div className='cursor-pointer'>
               {/* <Tooltip hasArrow label='Light Theme' bg='gray.300' color='black'> */}
               <GoSun onClick={lightThemeHandler}
-               fontSize={'20px'}
-               color={`${theme === 'dark' ? '#E0E0E0' : 'rgb(17 24 39)'}`}
-               
-               />
+                fontSize={'20px'}
+                color={`${theme === 'dark' ? '#E0E0E0' : 'rgb(17 24 39)'}`}
+
+              />
               {/* </Tooltip> */}
             </div> : <div className='cursor-pointer'>
               {/* <Tooltip hasArrow label='Dark Theme' bg='gray.300' color='black'> */}
               <FiMoon onClick={darkthemHandler}
-               fontSize={'20px'}
-               color={`${theme === 'dark' ? '#E0E0E0' : 'rgb(17 24 39)'}`}
-              
+                fontSize={'20px'}
+                color={`${theme === 'dark' ? '#E0E0E0' : 'rgb(17 24 39)'}`}
+
               />
               {/* </Tooltip> */}
             </div>
@@ -74,25 +74,28 @@ export const Navbar = () => {
 
 
           {
-            !isAuth && <div className='mr-4'>
+            !isAuth && <div className='mr-4 z-50 '>
               <Link to={'/login'}
-              className={`text-16 hover:underline font-semibold cursor-pointer font-Inter ${theme === 'dark' ? 'text-neutral-headingDarkThemeColor' : 'text-neutral-lightThemeHeadingColor'} `}
+                className={`text-16 hover:underline font-semibold cursor-pointer font-Inter ${theme === 'dark' ? 'text-neutral-headingDarkThemeColor' : 'text-neutral-lightThemeHeadingColor'} `}
               >Login</Link>
             </div>
           }
 
-          {!isAuth && <div className='mr-4'>
+          {!isAuth && <div className='mr-4 z-50'>
             <Link to={'/signUp'}
-            className={`text-16 hover:underline font-semibold cursor-pointer font-Inter ${theme === 'dark' ? 'text-neutral-headingDarkThemeColor' : 'text-neutral-lightThemeHeadingColor'} `}
+              className={`text-16 hover:underline font-semibold cursor-pointer font-Inter ${theme === 'dark' ? 'text-neutral-headingDarkThemeColor' : 'text-neutral-lightThemeHeadingColor'} `}
             >Sign Up</Link>
           </div>
           }
+
+          
 
           {/* <div className=''>
             <Link to={'/uploadMusic'}
             className={`text-16  cursor-pointer font-Inter ${theme === 'dark' ? 'text-neutral-textDarkThemeColor' : 'text-neutral-lightThemeHeadingColor'} `}
             >Upload Music</Link>
           </div> */}
+
 
           {
             isAuth && <UserProfile />
